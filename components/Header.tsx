@@ -21,35 +21,45 @@ export default function Header() {
 
         {/* Navegación */}
         <nav className="hidden items-center gap-7 md:flex">
-          <a href="#inicio" className="text-sm font-medium text-[#A6192E]">
+          <a href="/" className="text-sm font-medium text-[#A6192E]">
             Inicio
           </a>
 
-          <a href="#" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
-            SEDEDE
-          </a>
-
-          <a href="#asociaciones" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
+          <a href="/asociaciones" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
             Asociaciones
           </a>
 
-          <a href="#deportistas" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
+          <a href="/deportistas" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
             Deportistas
           </a>
 
-          <a href="#noticias" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
+          <a href="/noticias" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
             Noticias
           </a>
 
-          <a href="#eventos" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
+          <a
+            href="/comunicados"
+            className="text-sm font-medium text-gray-600 hover:text-[#A6192E]"
+            >
+            Comunicados
+        </a>
+
+          <a href="/eventos" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
             Eventos
           </a>
         </nav>
-
-        {/* Contacto */}
-        <button className="hidden rounded-lg bg-[#A6192E] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#7F1424] md:block">
-          Contacto
-        </button>
+        <a
+            href="/documentos"
+            className="text-sm font-medium text-gray-600 hover:text-[#A6192E]"
+            >
+            Documentos
+        </a>
+        <a
+        href="/contacto"
+        className="hidden rounded-xl bg-[#A6192E] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#7F1424] hover:shadow-md md:block"
+        >
+        Contacto
+        </a>
 
       </div>
     </header>

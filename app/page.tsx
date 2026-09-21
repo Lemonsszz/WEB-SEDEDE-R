@@ -14,7 +14,7 @@ export default function Home() {
       <section id="inicio">
         <Hero />
       </section>
-
+{/* 
       <section id="comunicados">
         <Comunicados />
       </section>
@@ -33,8 +33,8 @@ export default function Home() {
 
       <section id="eventos">
         <Eventos />
-      </section>
-      
+      </section> */}
+
       <section id="contacto" />
       <Footer />
     </main>
