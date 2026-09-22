@@ -30,7 +30,7 @@ export default function Header() {
           </a>
 
           <a href="/deportistas" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
-            Deportistas
+            Élite 
           </a>
 
           <a href="/noticias" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">

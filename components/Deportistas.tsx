@@ -17,6 +17,12 @@ const deportistas = [
     logro: "Campeón departamental",
     imagen: "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&fit=crop&w=800&q=80",
   },
+  {
+      nombre: "Jeremy Carlos",
+    disciplina: "Natación",
+    logro: "Medallista nacional",
+    imagen: "https://images.unsplash.com/photo-1530549387789-4c1017266635?auto=format&fit=crop&w=800&q=80",
+  },
 ];
 
 export default function Deportistas() {
@@ -30,7 +36,7 @@ export default function Deportistas() {
           </p>
 
           <h2 className="mt-3 text-4xl font-bold text-gray-900 md:text-5xl">
-            Deportistas destacados
+            Deportistas de Élite
           </h2>
 
           <p className="mt-4 max-w-2xl text-gray-600">

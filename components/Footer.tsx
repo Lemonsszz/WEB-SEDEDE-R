@@ -31,16 +31,18 @@ export default function Footer() {
             <h3 className="font-semibold">Enlaces</h3>
 
             <div className="mt-5 space-y-3 text-sm text-gray-400">
-              <a href="#" className="block hover:text-white">Inicio</a>
-              <a href="#" className="block hover:text-white">SEDEDE</a>
-              <a href="#" className="block hover:text-white">Asociaciones</a>
-              <a href="#" className="block hover:text-white">Noticias</a>
-              <a href="#" className="block hover:text-white">Eventos</a>
+              <a href="../app/page" className="block hover:text-white">Inicio</a>
+              <a href="./asociaciones" className="block hover:text-white">Asociaciones</a>
+              <a href="/deportistas" className="block hover:text-white">Deportistas</a>
+              <a href="/noticias" className="block hover:text-white">Noticias</a>
+              <a href="/comunicados" className="block hover:text-white">Comunicados</a>
+              <a href="/eventos" className="block hover:text-white">Eventos</a>
+              
             </div>
           </div>
 
           {/* Información */}
-          <div>
+          <div> q
             <h3 className="font-semibold">Información</h3>
 
             <div className="mt-5 space-y-3 text-sm text-gray-400">
