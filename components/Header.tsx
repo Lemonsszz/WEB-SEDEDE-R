@@ -47,7 +47,7 @@ export default function Header() {
           <a href="/eventos" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
             Eventos
           </a>
-        </nav>
+        
         <a
             href="/documentos"
             className="text-sm font-medium text-gray-600 hover:text-[#A6192E]"
@@ -60,6 +60,7 @@ export default function Header() {
         >
         Contacto
         </a>
+        </nav>
 
       </div>
     </header>
