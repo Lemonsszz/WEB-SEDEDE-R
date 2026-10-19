@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="bg-gray-950 text-white">
@@ -31,18 +33,18 @@ export default function Footer() {
             <h3 className="font-semibold">Enlaces</h3>
 
             <div className="mt-5 space-y-3 text-sm text-gray-400">
-              <a href="../app/page" className="block hover:text-white">Inicio</a>
-              <a href="./asociaciones" className="block hover:text-white">Asociaciones</a>
-              <a href="/deportistas" className="block hover:text-white">Deportistas</a>
-              <a href="/noticias" className="block hover:text-white">Noticias</a>
-              <a href="/comunicados" className="block hover:text-white">Comunicados</a>
-              <a href="/eventos" className="block hover:text-white">Eventos</a>
+              <Link href="/" className="block hover:text-white">Inicio</Link>
+              <Link href="/asociaciones" className="block hover:text-white">Asociaciones</Link>
+              <Link href="/deportistas" className="block hover:text-white">Deportistas</Link>
+              <Link href="/noticias" className="block hover:text-white">Noticias</Link>
+              <Link href="/comunicados" className="block hover:text-white">Comunicados</Link>
+              <Link href="/eventos" className="block hover:text-white">Eventos</Link>
               
             </div>
           </div>
 
           {/* Información */}
-          <div> q
+          <div>
             <h3 className="font-semibold">Información</h3>
 
             <div className="mt-5 space-y-3 text-sm text-gray-400">

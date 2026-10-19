@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Header() {
   return (
     <header className="w-full border-b border-gray-200 bg-white">
@@ -21,45 +23,45 @@ export default function Header() {
 
         {/* Navegación */}
         <nav className="hidden items-center gap-7 md:flex">
-          <a href="/" className="text-sm font-medium text-[#A6192E]">
+          <Link href="/" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
             Inicio
-          </a>
+          </Link>
 
-          <a href="/asociaciones" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
+          <Link href="/asociaciones" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
             Asociaciones
-          </a>
+          </Link>
 
-          <a href="/deportistas" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
+          <Link href="/deportistas" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
             Élite 
-          </a>
+          </Link>
 
-          <a href="/noticias" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
+          <Link href="/noticias" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
             Noticias
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="/comunicados"
             className="text-sm font-medium text-gray-600 hover:text-[#A6192E]"
             >
             Comunicados
-        </a>
+        </Link>
 
-          <a href="/eventos" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
+          <Link href="/eventos" className="text-sm font-medium text-gray-600 hover:text-[#A6192E]">
             Eventos
-          </a>
+          </Link>
         
-        <a
+        <Link
             href="/documentos"
             className="text-sm font-medium text-gray-600 hover:text-[#A6192E]"
             >
             Documentos
-        </a>
-        <a
+        </Link>
+        <Link
         href="/contacto"
         className="hidden rounded-xl bg-[#A6192E] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#7F1424] hover:shadow-md md:block"
         >
         Contacto
-        </a>
+        </Link>
         </nav>
 
       </div>

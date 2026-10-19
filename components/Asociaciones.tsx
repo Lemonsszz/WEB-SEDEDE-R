@@ -54,8 +54,7 @@ export default function Asociaciones() {
             </h2>
 
             <p className="mt-4 max-w-2xl text-gray-400">
-              Conoce las asociaciones deportivas reconocidas por SEDEDE
-              y las disciplinas que representan.
+              Conoce las asociaciones departamentales
             </p>
           </div>
 

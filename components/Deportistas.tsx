@@ -57,7 +57,7 @@ export default function Deportistas() {
                   alt={deportista.nombre}
                   className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-[#A6192E]/0 transition duration-500 group-hover:bg-[#A6192E]/10" />
+                <div className="absolute inset-0 bg-[#A6192E]/0 transition duration-500 group-hover:bg-[#7F1424]/10" />
               </div>
 
               <div className="p-6">

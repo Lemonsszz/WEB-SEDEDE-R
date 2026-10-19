@@ -20,7 +20,7 @@ export default function Hero() {
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-[#F7F3EA]">
             Servicio Departamental de Deportes
           </p>
-          <div className="mb-5 h-1 w-16 rounded-full bg-[#A6192E]" />
+          <div className="mb-5 h-1 w-16 rounded-full bg-[#A6192E]" />php artisan --version
 
           <h2 className="text-5xl font-bold leading-tight md:text-7xl">
             Impulsando el deporte,

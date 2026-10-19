@@ -11,6 +11,9 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       <Header />
+        <section id="noticias">
+          <Noticias />
+        </section>
       <section id="inicio">
         <Hero />
       </section>
