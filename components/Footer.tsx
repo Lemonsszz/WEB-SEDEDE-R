@@ -34,11 +34,14 @@ export default function Footer() {
 
             <div className="mt-5 space-y-3 text-sm text-gray-400">
               <Link href="/" className="block hover:text-white">Inicio</Link>
+              <Link href="/sedede" className="block hover:text-white">SEDEDE</Link>
               <Link href="/asociaciones" className="block hover:text-white">Asociaciones</Link>
               <Link href="/deportistas" className="block hover:text-white">Deportistas</Link>
               <Link href="/noticias" className="block hover:text-white">Noticias</Link>
               <Link href="/comunicados" className="block hover:text-white">Comunicados</Link>
               <Link href="/eventos" className="block hover:text-white">Eventos</Link>
+              <Link href="/documentos" className="block hover:text-white">Documentos</Link>
+              <Link href="/contacto" className="block hover:text-white">Contacto</Link>
               
             </div>
           </div>

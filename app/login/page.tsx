@@ -62,7 +62,7 @@ export default function LoginPage() {
         className="w-full max-w-md space-y-5 rounded-2xl bg-white p-8 shadow-xl"
       >
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-red-800">
+          <h1 className="text-3xl font-bold text-[#A6192E]">
             SEDEDE
           </h1>
           <p className="mt-2 text-gray-600">
@@ -84,7 +84,7 @@ export default function LoginPage() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-red-700"
+            className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#A6192E]"
             placeholder="admin@sedede.bo"
           />
         </div>
@@ -103,7 +103,7 @@ export default function LoginPage() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-red-700"
+            className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#A6192E]"
             placeholder="Ingresa tu contraseña"
           />
         </div>
@@ -111,7 +111,7 @@ export default function LoginPage() {
         {error && (
           <p
             role="alert"
-            className="rounded-lg bg-red-50 p-3 text-sm text-red-700"
+            className="rounded-lg bg-[#A6192E]/10 p-3 text-sm text-[#A6192E]"
           >
             {error}
           </p>
@@ -120,7 +120,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={cargando}
-          className="w-full rounded-lg bg-red-800 px-4 py-3 font-semibold text-white transition hover:bg-red-900 disabled:opacity-60"
+          className="w-full rounded-lg bg-[#A6192E] px-4 py-3 font-semibold text-white transition hover:bg-[#7F1424] disabled:opacity-60"
         >
           {cargando ? "Verificando..." : "Iniciar sesión"}
         </button>

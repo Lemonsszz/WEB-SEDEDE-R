@@ -264,7 +264,7 @@ export default function GestionComunicadosPage() {
         <button
           type="button"
           onClick={() => router.push("/admin")}
-          className="mb-5 text-sm font-semibold text-red-800 hover:underline"
+          className="mb-5 text-sm font-semibold text-[#A6192E] hover:underline"
         >
           ← Volver al panel
         </button>
@@ -292,7 +292,7 @@ export default function GestionComunicadosPage() {
                 maxLength={255}
                 value={form.titulo}
                 onChange={(e) => cambiar("titulo", e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-red-700"
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#A6192E]"
                 placeholder="Título del comunicado"
               />
             </div>
@@ -304,7 +304,7 @@ export default function GestionComunicadosPage() {
                 rows={3}
                 value={form.resumen}
                 onChange={(e) => cambiar("resumen", e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-red-700"
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#A6192E]"
               />
             </div>
 
@@ -316,7 +316,7 @@ export default function GestionComunicadosPage() {
                 rows={7}
                 value={form.contenido}
                 onChange={(e) => cambiar("contenido", e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-red-700"
+                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#A6192E]"
               />
               <p className="mt-1 text-xs text-gray-500">
                 Opcional. Se mostrará en la página del comunicado, junto con el
@@ -365,7 +365,7 @@ export default function GestionComunicadosPage() {
                   type="checkbox"
                   checked={form.publicado}
                   onChange={(e) => cambiar("publicado", e.target.checked)}
-                  className="h-4 w-4 accent-red-700"
+                  className="h-4 w-4 accent-[#A6192E]"
                 />
                 Publicar inmediatamente en la web
               </label>
@@ -465,7 +465,7 @@ export default function GestionComunicadosPage() {
                     <button
                       type="button"
                       onClick={() => void eliminarComunicado(comunicado)}
-                      className="rounded-lg border border-red-200 px-4 py-2 text-sm font-semibold text-red-800 hover:bg-red-50"
+                      className="rounded-lg border border-[#A6192E]/30 px-4 py-2 text-sm font-semibold text-[#A6192E] hover:bg-[#A6192E]/5"
                     >
                       Eliminar
                     </button>

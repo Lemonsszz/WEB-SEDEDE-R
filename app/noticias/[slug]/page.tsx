@@ -35,7 +35,7 @@ export default async function DetalleNoticia({
 
       <div className="px-5 py-12">
         <article className="mx-auto max-w-4xl rounded-2xl bg-white p-6 shadow-sm md:p-10">
-          <p className="mb-3 font-semibold text-red-800">
+          <p className="mb-3 font-semibold text-[#A6192E]">
             {noticia.categoria}
           </p>
 
@@ -65,7 +65,7 @@ export default async function DetalleNoticia({
 
           <Link
             href="/noticias"
-            className="mt-10 inline-block font-semibold text-red-800 hover:underline"
+            className="mt-10 inline-block font-semibold text-[#A6192E] hover:underline"
           >
             ← Volver a noticias
           </Link>

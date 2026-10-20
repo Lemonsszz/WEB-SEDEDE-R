@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Hero() {
   return (
     <section className="relative min-h-[620px] overflow-hidden">
@@ -20,7 +22,7 @@ export default function Hero() {
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-[#F7F3EA]">
             Servicio Departamental de Deportes
           </p>
-          <div className="mb-5 h-1 w-16 rounded-full bg-[#A6192E]" />php artisan --version
+          <div className="mb-5 h-1 w-16 rounded-full bg-[#A6192E]" />
 
           <h2 className="text-5xl font-bold leading-tight md:text-7xl">
             Impulsando el deporte,
@@ -35,13 +37,19 @@ export default function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
-            <button className="rounded-lg bg-[#A6192E] px-6 py-3 font-semibold text-white transition hover:bg-[#7F1424]">
+            <Link
+              href="/sedede"
+              className="rounded-lg bg-[#A6192E] px-6 py-3 font-semibold text-white transition hover:bg-[#7F1424]"
+            >
               Conoce SEDEDE
-            </button>
+            </Link>
 
-            <button className="rounded-lg border border-white/50 bg-white/10 px-6 py-3 font-semibold text-white backdrop-blur-sm transition hover:bg-white/20">
+            <Link
+              href="/asociaciones"
+              className="rounded-lg border border-white/50 bg-white/10 px-6 py-3 font-semibold text-white backdrop-blur-sm transition hover:bg-white/20"
+            >
               Ver asociaciones
-            </button>
+            </Link>
           </div>
 
         </div>
