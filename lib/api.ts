@@ -59,6 +59,41 @@ export interface Evento {
 
 export const getNoticias = () => consultarAPI<Noticia>("noticias");
 
+export async function getNoticia(slug: string): Promise<Noticia> {
+  if (!API_URL) {
+    throw new Error("Falta configurar API_URL en .env.local");
+  }
+
+  const respuesta = await fetch(
+    `${API_URL}/noticias/${encodeURIComponent(slug)}`,
+    { cache: "no-store" }
+  );
+
+  if (!respuesta.ok) {
+    throw new Error(`Error al consultar la noticia: ${respuesta.status}`);
+  }
+
+  const resultado: { success: boolean; noticia?: Noticia } =
+    await respuesta.json();
+
+  if (!resultado.success || !resultado.noticia) {
+    throw new Error("No se pudo obtener la noticia");
+  }
+
+  return resultado.noticia;
+}
+
+export function formatearFecha(fecha: string | null): string {
+  if (!fecha) return "Sin fecha";
+
+  return new Date(fecha).toLocaleDateString("es-BO", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "America/La_Paz",
+  });
+}
+
 export const getComunicados = () =>
   consultarAPI<Comunicado>("comunicados");
 

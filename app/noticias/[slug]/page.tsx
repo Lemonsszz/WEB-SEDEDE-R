@@ -1,16 +1,8 @@
-
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "@/components/Header";
-
-type Noticia = {
-  titulo: string;
-  resumen: string;
-  contenido: string;
-  imagen_url?: string | null;
-  categoria: string;
-  fecha_publicacion: string;
-};
+import { getNoticia, formatearFecha } from "@/lib/api";
 
 export default async function DetalleNoticia({
   params,
@@ -19,15 +11,7 @@ export default async function DetalleNoticia({
 }) {
   const { slug } = await params;
 
-  const respuesta = await fetch(
-    `${process.env.API_URL || "http://127.0.0.1:8000/api"}/noticias/${encodeURIComponent(slug)}`,
-    { cache: "no-store" }
-  );
-
-  if (!respuesta.ok) notFound();
-
-  const datos = await respuesta.json();
-  const noticia: Noticia = datos.noticia ?? datos;
+  const noticia = await getNoticia(slug).catch(() => notFound());
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -36,7 +20,7 @@ export default async function DetalleNoticia({
       <div className="px-5 py-12">
         <article className="mx-auto max-w-4xl rounded-2xl bg-white p-6 shadow-sm md:p-10">
           <p className="mb-3 font-semibold text-[#A6192E]">
-            {noticia.categoria}
+            {noticia.categoria || "Institucional"}
           </p>
 
           <h1 className="text-3xl font-bold md:text-4xl">
@@ -48,15 +32,18 @@ export default async function DetalleNoticia({
           </p>
 
           {noticia.imagen_url && (
-            <img
+            <Image
               src={noticia.imagen_url}
               alt={noticia.titulo}
-              className="mt-8 max-h-[500px] w-full rounded-xl object-cover"
+              width={1600}
+              height={1000}
+              priority
+              className="mt-8 h-auto max-h-[500px] w-full rounded-xl object-cover"
             />
           )}
 
           <p className="mt-4 text-sm text-gray-500">
-            {new Date(noticia.fecha_publicacion).toLocaleDateString("es-BO")}
+            {formatearFecha(noticia.fecha_publicacion)}
           </p>
 
           <div className="mt-8 whitespace-pre-line leading-8 text-gray-700">

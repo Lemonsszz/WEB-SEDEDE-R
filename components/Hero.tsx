@@ -15,6 +15,9 @@ export default function Hero() {
       {/* Capa oscura */}
       <div className="absolute inset-0 bg-black/55" />
 
+      {/* Transición suave desde el bloque de noticias (#101318) */}
+      <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#101318] to-transparent" />
+
       {/* Contenido */}
       <div className="relative mx-auto flex min-h-[620px] max-w-7xl items-center px-6">
         <div className="max-w-3xl text-white">

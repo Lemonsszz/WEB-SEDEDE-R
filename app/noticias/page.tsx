@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import Noticias from "@/components/Noticias";
+import ListadoNoticias from "@/components/ListadoNoticias";
 import Footer from "@/components/Footer";
 
 export default function NoticiasPage() {
@@ -23,7 +23,7 @@ export default function NoticiasPage() {
         </div>
       </section>
 
-      <Noticias />
+      <ListadoNoticias />
 
       <Footer />
     </main>
