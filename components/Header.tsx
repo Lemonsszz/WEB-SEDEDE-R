@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const enlaces = [
   { href: "/", texto: "Inicio" },
@@ -16,6 +17,12 @@ const enlaces = [
 
 export default function Header() {
   const [abierto, setAbierto] = useState(false);
+  const pathname = usePathname();
+
+  function activo(href: string) {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(`${href}/`);
+  }
 
   return (
     <header className="w-full border-b border-gray-200 bg-white">
@@ -43,7 +50,12 @@ export default function Header() {
             <Link
               key={enlace.href}
               href={enlace.href}
-              className="text-sm font-medium text-gray-600 hover:text-[#A6192E]"
+              aria-current={activo(enlace.href) ? "page" : undefined}
+              className={`relative py-1 text-sm font-medium transition after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-left after:bg-[#A6192E] after:transition-transform after:duration-300 ${
+                activo(enlace.href)
+                  ? "text-[#A6192E] after:scale-x-100"
+                  : "text-gray-600 after:scale-x-0 hover:text-[#A6192E]"
+              }`}
             >
               {enlace.texto}
             </Link>
@@ -51,7 +63,10 @@ export default function Header() {
 
           <Link
             href="/contacto"
-            className="rounded-xl bg-[#A6192E] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#7F1424] hover:shadow-md"
+            aria-current={activo("/contacto") ? "page" : undefined}
+            className={`rounded-xl bg-[#A6192E] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#7F1424] hover:shadow-md ${
+              activo("/contacto") ? "ring-2 ring-[#A6192E] ring-offset-2" : ""
+            }`}
           >
             Contacto
           </Link>
@@ -78,7 +93,12 @@ export default function Header() {
               key={enlace.href}
               href={enlace.href}
               onClick={() => setAbierto(false)}
-              className="block border-b border-gray-100 py-3 text-sm font-medium text-gray-700 transition hover:text-[#A6192E]"
+              aria-current={activo(enlace.href) ? "page" : undefined}
+              className={`block border-b border-gray-100 py-3 text-sm font-medium transition ${
+                activo(enlace.href)
+                  ? "border-l-4 border-l-[#A6192E] pl-3 text-[#A6192E]"
+                  : "text-gray-700 hover:text-[#A6192E]"
+              }`}
             >
               {enlace.texto}
             </Link>
@@ -87,7 +107,10 @@ export default function Header() {
           <Link
             href="/contacto"
             onClick={() => setAbierto(false)}
-            className="mt-4 block rounded-xl bg-[#A6192E] px-5 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#7F1424]"
+            aria-current={activo("/contacto") ? "page" : undefined}
+            className={`mt-4 block rounded-xl bg-[#A6192E] px-5 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#7F1424] ${
+              activo("/contacto") ? "ring-2 ring-[#A6192E] ring-offset-2" : ""
+            }`}
           >
             Contacto
           </Link>

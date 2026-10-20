@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Comunicados from "@/components/Comunicados";
 import Noticias from "@/components/Noticias";
+import Separador from "@/components/Separador";
 import Asociaciones from "@/components/Asociaciones";
 import Deportistas from "@/components/Deportistas";
 import Eventos from "@/components/Eventos";
@@ -14,6 +15,7 @@ export default function Home() {
         <section id="noticias">
           <Noticias />
         </section>
+        <Separador />
       <section id="inicio">
         <Hero />
       </section>
