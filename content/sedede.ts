@@ -112,6 +112,83 @@ export const ruda = {
   ctaSecundario: { texto: "Descargar convocatoria", href: "/documentos" },
 };
 
+export const direccion = {
+  cargo: "Dirección Departamental de Deportes",
+  entidad: "Gobierno Autónomo Departamental de Oruro",
+  descripcion:
+    "Entidad rectora del desarrollo deportivo departamental, custodia de la infraestructura atlética histórica y promotora del talento competitivo de Oruro hacia los escenarios nacionales e internacionales.",
+  etiquetas: ["Gestión departamental", "Alta competencia", "Medicina deportiva"],
+  provisional: true,
+};
+
+export type Unidad = {
+  titulo: string;
+  descripcion: string;
+  icono: "altoRendimiento" | "infraestructura" | "asociaciones" | "juridica";
+};
+
+export const unidades: Unidad[] = [
+  {
+    titulo: "Unidad de Alto Rendimiento",
+    descripcion:
+      "Monitoreo biomecánico, nutricional y técnico de seleccionados orureños rumbo a Juegos Plurinacionales y torneos federativos.",
+    icono: "altoRendimiento",
+  },
+  {
+    titulo: "Infraestructura y Mantenimiento",
+    descripcion:
+      "Supervisión de césped natural, sistemas de iluminación LED, calderas para natación y mantenimiento correctivo de coliseos.",
+    icono: "infraestructura",
+  },
+  {
+    titulo: "Asociaciones y Fomento",
+    descripcion:
+      "Asistencia para la personería jurídica de asociaciones departamentales, asignación horaria de escenarios y gestión de pasajes de delegación.",
+    icono: "asociaciones",
+  },
+  {
+    titulo: "Unidad Jurídica y Convenios",
+    descripcion:
+      "Fiscalización reglamentaria, formalización de comodatos y convenios de cooperación interinstitucional con universidades e institutos.",
+    icono: "juridica",
+  },
+];
+
+export type Norma = {
+  titulo: string;
+  etiqueta: string;
+  descripcion: string;
+  tono: "primario" | "neutro" | "dorado";
+  href: string;
+};
+
+export const normativa: Norma[] = [
+  {
+    titulo: "Ley de Fomento Deportivo del Departamento",
+    etiqueta: "Ley departamental",
+    descripcion:
+      "Establece el régimen de asignación de recursos, viajes a torneos nacionales y becas para deportistas de élite.",
+    tono: "primario",
+    href: "/documentos",
+  },
+  {
+    titulo: "Uso y alquiler de escenarios públicos",
+    etiqueta: "Reglamento",
+    descripcion:
+      "Tabla de aranceles, exenciones para selecciones de base y protocolos de seguridad para eventos masivos.",
+    tono: "neutro",
+    href: "/documentos",
+  },
+  {
+    titulo: "Memoria y rendición pública de cuentas",
+    etiqueta: "Transparencia",
+    descripcion:
+      "Detalle presupuestario ejecutado en mantenimiento, adquisición de indumentaria y apoyo a torneos intermunicipales.",
+    tono: "dorado",
+    href: "/documentos",
+  },
+];
+
 export type Complejo = {
   slug: string;
   nombre: string;
