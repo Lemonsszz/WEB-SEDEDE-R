@@ -32,7 +32,7 @@ export default function ListadoAsociaciones() {
         </div>
 
         {listado.length === 0 ? (
-          <p className="rounded-2xl bg-white/5 p-space-lg text-center font-body-md text-white/70">
+          <p className="rounded-2xl bg-white/5 p-space-lg text-center text-body-md text-white/70">
             No hay asociaciones registradas en esta categoría.
           </p>
         ) : (

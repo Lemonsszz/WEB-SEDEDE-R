@@ -23,7 +23,7 @@ export default function Deportistas() {
             <h2 className="font-display text-headline-xl font-black tracking-tight text-tinta">
               Deportistas de élite
             </h2>
-            <p className="max-w-xl font-body-md text-tinta-2">
+            <p className="max-w-xl text-body-md text-tinta-2">
               Conoce a los atletas orureños de alto rendimiento que representan
               y destacan en escenarios nacionales e internacionales.
             </p>
@@ -62,7 +62,7 @@ export default function Deportistas() {
               {ruda.destacado}
             </h3>
 
-            <p className="font-body-md leading-relaxed text-primary-soft">
+            <p className="text-body-md leading-relaxed text-primary-soft">
               {ruda.descripcion}
             </p>
 

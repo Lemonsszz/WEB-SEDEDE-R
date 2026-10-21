@@ -13,7 +13,7 @@ export default function CtaVinculacion() {
           <h2 className="font-display text-headline-xl font-black tracking-tight text-white">
             ¿Representas a una disciplina o buscas afiliación?
           </h2>
-          <p className="font-body-md leading-relaxed text-white/90">
+          <p className="text-body-md leading-relaxed text-white/90">
             Nuestra ventanilla técnica asesora a clubes y asociaciones en procesos de
             homologación, reservas de canchas y acceso al Registro Único del Deportista
             (RUDA).

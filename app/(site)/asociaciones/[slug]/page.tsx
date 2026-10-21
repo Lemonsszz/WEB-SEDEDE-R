@@ -68,7 +68,7 @@ export default async function DetalleAsociacion({ params }: Props) {
       <section className="w-full py-space-xl">
         <div className="mx-auto flex max-w-4xl flex-col gap-space-md px-margin">
           <article className="rounded-2xl bg-white p-space-lg shadow-tarjeta">
-            <p className="font-body-md leading-relaxed text-tinta-2">
+            <p className="text-body-md leading-relaxed text-tinta-2">
               {asociacion.descripcion}
             </p>
           </article>
@@ -100,7 +100,7 @@ export default async function DetalleAsociacion({ params }: Props) {
                       <p className="font-display text-headline-sm font-extrabold text-tinta transition-colors group-hover:text-primary">
                         {deportista.nombre}
                       </p>
-                      <p className="font-body-sm text-tinta-2">{deportista.logro}</p>
+                      <p className="text-body-sm text-tinta-2">{deportista.logro}</p>
                     </div>
 
                     <ArrowRight

@@ -22,7 +22,7 @@ export default function Kicker({
 }) {
   return (
     <span
-      className={`font-display text-kicker uppercase tracking-[0.2em] ${TONOS[tono]} ${className}`}
+      className={`font-display text-kicker uppercase ${TONOS[tono]} ${className}`}
     >
       {children}
     </span>

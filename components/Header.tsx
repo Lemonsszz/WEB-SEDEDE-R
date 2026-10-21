@@ -52,13 +52,17 @@ export default function Header() {
               key={enlace.href}
               href={enlace.href}
               aria-current={activo(enlace.href) ? "page" : undefined}
-              className={`flex h-full items-center px-space-xs transition-colors ${
-                activo(enlace.href)
-                  ? "border-b-2 border-primary font-display text-headline-sm font-bold text-primary"
-                  : "font-display text-label-md text-tinta-2 hover:text-tinta"
-              }`}
+              className="flex h-full items-center px-space-xs transition-colors"
             >
-              {enlace.texto}
+              <span
+                className={`border-b-2 pb-1 transition-colors ${
+                  activo(enlace.href)
+                    ? "border-primary font-display text-headline-sm font-bold text-primary"
+                    : "border-transparent font-display text-label-md text-tinta-2 hover:text-tinta"
+                }`}
+              >
+                {enlace.texto}
+              </span>
             </Link>
           ))}
 
@@ -90,9 +94,9 @@ export default function Header() {
               href={enlace.href}
               onClick={() => setAbierto(false)}
               aria-current={activo(enlace.href) ? "page" : undefined}
-              className={`block border-b border-hueso-3 py-space-sm font-display text-label-md transition-colors ${
+              className={`block border-b border-hueso-3 py-space-sm pl-space-sm font-display text-label-md transition-colors ${
                 activo(enlace.href)
-                  ? "border-l-2 border-primary pl-space-sm font-bold text-primary"
+                  ? "border-l-2 border-primary font-bold text-primary"
                   : "text-tinta-2 hover:text-primary"
               }`}
             >

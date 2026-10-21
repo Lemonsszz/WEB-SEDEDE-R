@@ -27,7 +27,7 @@ export default function DocumentosPage() {
             <h2 className="font-display text-headline-xl font-extrabold tracking-tight text-tinta">
               Documentos oficiales
             </h2>
-            <p className="max-w-2xl font-body-md text-tinta-2">
+            <p className="max-w-2xl text-body-md text-tinta-2">
               Próximamente encontrarás aquí resoluciones, reglamentos, convocatorias y
               otros documentos institucionales.
             </p>
@@ -51,7 +51,7 @@ export default function DocumentosPage() {
                   <h3 className="pt-space-xs font-display text-headline-sm font-bold text-tinta">
                     {norma.titulo}
                   </h3>
-                  <p className="font-body-sm text-tinta-2">{norma.descripcion}</p>
+                  <p className="text-body-sm text-tinta-2">{norma.descripcion}</p>
                 </div>
 
                 <p className="rounded-full bg-hueso-2 px-space-sm py-1 text-center font-display text-label-sm font-semibold uppercase text-tinta-3">
@@ -66,7 +66,7 @@ export default function DocumentosPage() {
               <Info aria-hidden className="h-4 w-4 text-primary" />
               ¿Solicitas un documento que no aparece aquí?
             </span>
-            <p className="font-body-sm text-tinta-2">
+            <p className="text-body-sm text-tinta-2">
               Escribe a la ventanilla de atención de SEDEDE indicando la unidad
               responsable y el tipo de información requerida.
             </p>

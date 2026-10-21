@@ -46,10 +46,10 @@ export default function HeroInstitucional() {
         <div className="flex flex-col justify-between gap-space-lg lg:flex-row lg:items-end">
           <div className="flex max-w-3xl flex-col gap-space-xs">
             <div className="mb-space-xs h-1 w-12 rounded-full bg-gold-soft" />
-            <h1 className="font-display text-display-hero font-black uppercase leading-none tracking-tight text-white">
+            <h1 className="text-balance font-display text-headline-xl font-black uppercase leading-[1.08] tracking-tight text-white lg:text-display-hero lg:leading-none">
               Sobre el SEDEDE
             </h1>
-            <p className="max-w-2xl pt-space-xs font-body-lg leading-relaxed text-white/90">
+            <p className="max-w-2xl pt-space-xs text-body-lg leading-relaxed text-white/90">
               {direccion.descripcion}
             </p>
           </div>
@@ -84,7 +84,7 @@ export default function HeroInstitucional() {
                   <span className="block font-display text-stat-display font-black text-white">
                     {metrica.valor}
                   </span>
-                  <span className="font-body-sm text-white/80">{metrica.detalle}</span>
+                  <span className="text-body-sm text-white/80">{metrica.detalle}</span>
                 </dd>
               </div>
             );

@@ -71,7 +71,7 @@ export default function ListadoNoticias() {
     return (
       <section className="w-full bg-surface py-space-xl">
         <div className="mx-auto max-w-contenido px-margin">
-          <p className="animate-pulse text-center font-body-md text-tinta-2">
+          <p className="animate-pulse text-center text-body-md text-tinta-2">
             Cargando noticias...
           </p>
         </div>
@@ -86,7 +86,7 @@ export default function ListadoNoticias() {
           <h2 className="font-display text-headline-md font-extrabold text-tinta">
             No se pudieron cargar las noticias
           </h2>
-          <p className="font-body-md text-tinta-2">
+          <p className="text-body-md text-tinta-2">
             Revisa la conexión con el servidor e inténtalo de nuevo.
           </p>
           <Boton onClick={reintentar} className="mt-2">
@@ -105,7 +105,7 @@ export default function ListadoNoticias() {
           <h2 className="font-display text-headline-md font-extrabold text-tinta">
             No hay noticias publicadas
           </h2>
-          <p className="font-body-md text-tinta-2">
+          <p className="text-body-md text-tinta-2">
             Las noticias publicadas aparecerán aquí.
           </p>
         </div>
@@ -121,7 +121,7 @@ export default function ListadoNoticias() {
             <h2 className="font-display text-headline-md font-extrabold tracking-tight text-tinta">
               Todas las noticias
             </h2>
-            <p className="mt-1 font-body-sm text-tinta-2">
+            <p className="mt-1 text-body-sm text-tinta-2">
               {filtradas.length} de {noticias.length} noticias
             </p>
           </div>
@@ -139,7 +139,7 @@ export default function ListadoNoticias() {
                 type="date"
                 value={fecha}
                 onChange={(evento) => setFecha(evento.target.value)}
-                className="mt-1 rounded-lg border border-hueso-4 bg-white px-3 py-2 font-body-sm text-tinta focus:outline-none focus:ring-2 focus:ring-primary"
+                className="mt-1 rounded-lg border border-hueso-4 bg-white px-3 py-2 text-base text-tinta focus:outline-none sm:text-body-md focus:ring-2 focus:ring-primary"
               />
             </div>
 
@@ -159,7 +159,7 @@ export default function ListadoNoticias() {
             <h2 className="font-display text-headline-md font-extrabold text-tinta">
               No hay noticias en esa fecha
             </h2>
-            <p className="font-body-md text-tinta-2">
+            <p className="text-body-md text-tinta-2">
               Prueba con otra fecha o limítate el filtro.
             </p>
             <Boton onClick={() => setFecha("")}>Ver todas las noticias</Boton>
@@ -194,7 +194,7 @@ export default function ListadoNoticias() {
                   </h3>
 
                   {noticia.resumen ? (
-                    <p className="mt-3 line-clamp-3 font-body-sm leading-relaxed text-tinta-2">
+                    <p className="mt-3 line-clamp-3 text-body-sm leading-relaxed text-tinta-2">
                       {noticia.resumen}
                     </p>
                   ) : null}

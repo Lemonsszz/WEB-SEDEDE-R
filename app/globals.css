@@ -45,7 +45,7 @@
   /* Escala tipográfica */
   --text-kicker: 0.75rem;
   --text-kicker--line-height: 1rem;
-  --text-kicker--letter-spacing: 0.14em;
+  --text-kicker--letter-spacing: 0.18em;
   --text-kicker--font-weight: 700;
 
   --text-label-sm: 0.6875rem;
@@ -60,6 +60,15 @@
 
   --text-body-sm: 0.8125rem;
   --text-body-sm--line-height: 1.125rem;
+
+  /* Pie de página (escala reducida) */
+  --text-foot-xs: 0.6875rem;
+  --text-foot-xs--line-height: 1rem;
+  --text-foot-xs--letter-spacing: 0.16em;
+  --text-foot-xs--font-weight: 700;
+
+  --text-foot-sm: 0.75rem;
+  --text-foot-sm--line-height: 1.125rem;
 
   --text-body-md: 0.9375rem;
   --text-body-md--line-height: 1.5rem;
@@ -123,6 +132,7 @@
   --shadow-boton: 0 8px 24px rgb(155 11 36 / 0.35);
   --shadow-boton-fuerte: 0 12px 32px rgb(155 11 36 / 0.55);
   --shadow-brillo: 0 0 12px rgb(155 17 36 / 0.8);
+  --shadow-flotante: 0 24px 60px -20px rgb(14 17 22 / 0.35);
 }
 
 @theme inline {

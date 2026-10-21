@@ -70,7 +70,7 @@ function TarjetaEvento({
           {evento.titulo}
         </h3>
 
-        <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1 font-body-sm text-tinta-2">
+        <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-body-sm text-tinta-2">
           <span className="inline-flex items-center gap-1.5">
             <CalendarDays aria-hidden className="h-4 w-4 text-tinta-3" />
             {formatearFechaCompleta(evento.fecha)}
@@ -92,7 +92,7 @@ function TarjetaEvento({
         </div>
 
         {evento.descripcion ? (
-          <p className="mt-3 font-body-sm leading-relaxed text-tinta-2">
+          <p className="mt-3 text-body-sm leading-relaxed text-tinta-2">
             {evento.descripcion}
           </p>
         ) : null}
@@ -145,7 +145,7 @@ export default async function Eventos() {
         </div>
 
         {proximos.length === 0 ? (
-          <p className="rounded-2xl border border-hueso-5 bg-white p-space-lg text-center font-body-md text-tinta-2">
+          <p className="rounded-2xl border border-hueso-5 bg-white p-space-lg text-center text-body-md text-tinta-2">
             No hay próximos eventos publicados por el momento.
           </p>
         ) : (
@@ -164,7 +164,7 @@ export default async function Eventos() {
         </div>
 
         {realizados.length === 0 ? (
-          <p className="rounded-2xl border border-hueso-5 bg-white p-space-lg text-center font-body-md text-tinta-2">
+          <p className="rounded-2xl border border-hueso-5 bg-white p-space-lg text-center text-body-md text-tinta-2">
             Todavía no hay eventos realizados registrados.
           </p>
         ) : (

@@ -23,7 +23,7 @@ function TarjetaComunicado({ comunicado }: { comunicado: Comunicado }) {
         </h3>
 
         {comunicado.resumen ? (
-          <p className="font-body-sm leading-relaxed text-tinta-2">
+          <p className="text-body-sm leading-relaxed text-tinta-2">
             {comunicado.resumen}
           </p>
         ) : null}
@@ -80,7 +80,7 @@ export default async function Comunicados({
               <h2 className="font-display text-headline-xl font-black tracking-tight text-tinta">
                 Comunicados
               </h2>
-              <p className="max-w-xl font-body-md text-tinta-2">
+              <p className="max-w-xl text-body-md text-tinta-2">
                 Conoce las últimas comunicaciones oficiales de SEDEDE.
               </p>
             </div>
@@ -96,7 +96,7 @@ export default async function Comunicados({
         ) : null}
 
         {comunicados.length === 0 ? (
-          <p className="rounded-2xl border border-hueso-5 bg-white p-space-lg text-center font-body-md text-tinta-2">
+          <p className="rounded-2xl border border-hueso-5 bg-white p-space-lg text-center text-body-md text-tinta-2">
             No hay comunicados publicados por el momento.
           </p>
         ) : (

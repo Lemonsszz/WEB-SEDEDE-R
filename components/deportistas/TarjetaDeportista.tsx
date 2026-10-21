@@ -39,7 +39,7 @@ export default function TarjetaDeportista({
           <h3 className="mt-1 font-display text-headline-md font-black tracking-tight text-tinta transition-colors group-hover:text-primary">
             {deportista.nombre}
           </h3>
-          <p className="mt-2 font-body-sm text-tinta-2">{deportista.bio}</p>
+          <p className="mt-2 text-body-sm text-tinta-2">{deportista.bio}</p>
         </div>
 
         <div className="flex items-center justify-between border-t border-hueso-5 pt-space-sm">

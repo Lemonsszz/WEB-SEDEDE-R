@@ -105,7 +105,7 @@ export default function LoginForm() {
           <h1 className="font-display text-display-hero font-black uppercase leading-none tracking-tight text-white">
             Gestión de contenido
           </h1>
-          <p className="max-w-md font-body-lg leading-relaxed text-white/85">
+          <p className="max-w-md text-body-lg leading-relaxed text-white/85">
             Publica noticias, comunicados y eventos del Servicio Departamental de
             Deportes desde un único panel.
           </p>
@@ -118,7 +118,7 @@ export default function LoginForm() {
             ].map((item) => (
               <li
                 key={item}
-                className="flex items-center gap-2 font-body-sm text-white/80"
+                className="flex items-center gap-2 text-body-sm text-white/80"
               >
                 <ShieldCheck aria-hidden className="h-4 w-4 text-gold-soft" />
                 {item}
@@ -144,7 +144,7 @@ export default function LoginForm() {
             <h2 className="font-display text-headline-lg font-black tracking-tight text-tinta">
               Inicia sesión
             </h2>
-            <p className="font-body-sm text-tinta-2">
+            <p className="text-body-sm text-tinta-2">
               Panel administrativo del Servicio Departamental de Deportes.
             </p>
           </div>
@@ -169,7 +169,7 @@ export default function LoginForm() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-xl border border-hueso-4 bg-white py-3 pl-10 pr-4 font-body-sm text-tinta outline-none transition-colors focus:border-primary"
+                  className="w-full rounded-xl border border-hueso-4 bg-white py-3 pl-10 pr-4 text-base text-tinta outline-none sm:text-body-md transition-colors focus:border-primary"
                   placeholder="admin@sedede.bo"
                 />
               </div>
@@ -194,7 +194,7 @@ export default function LoginForm() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full rounded-xl border border-hueso-4 bg-white py-3 pl-10 pr-4 font-body-sm text-tinta outline-none transition-colors focus:border-primary"
+                  className="w-full rounded-xl border border-hueso-4 bg-white py-3 pl-10 pr-4 text-base text-tinta outline-none sm:text-body-md transition-colors focus:border-primary"
                   placeholder="Ingresa tu contraseña"
                 />
               </div>
@@ -203,7 +203,7 @@ export default function LoginForm() {
             {error ? (
               <p
                 role="alert"
-                className="rounded-xl bg-primary/10 p-3 font-body-sm text-primary"
+                className="rounded-xl bg-primary/10 p-3 text-body-sm text-primary"
               >
                 {error}
               </p>
@@ -221,7 +221,7 @@ export default function LoginForm() {
             </button>
           </div>
 
-          <p className="mt-space-md text-center font-body-sm text-tinta-3">
+          <p className="mt-space-md text-center text-body-sm text-tinta-3">
             Acceso exclusivo para personal autorizado.
           </p>
         </form>

@@ -6,7 +6,7 @@ export default function LoginPage() {
     <Suspense
       fallback={
         <main className="flex min-h-screen items-center justify-center bg-hueso-2">
-          <p className="font-body-md text-tinta-2">Cargando...</p>
+          <p className="text-body-md text-tinta-2">Cargando...</p>
         </main>
       }
     >

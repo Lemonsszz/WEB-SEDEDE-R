@@ -70,7 +70,7 @@ export default async function DetalleDeportista({ params }: Props) {
                 </Badge>
               </div>
 
-              <p className="font-body-md leading-relaxed text-tinta-2">
+              <p className="text-body-md leading-relaxed text-tinta-2">
                 {deportista.bio}
               </p>
 

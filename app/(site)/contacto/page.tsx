@@ -22,7 +22,7 @@ export default function ContactoPage() {
             <h2 className="font-display text-headline-xl font-extrabold tracking-tight text-tinta">
               ¿En qué podemos ayudarte?
             </h2>
-            <p className="max-w-2xl font-body-md text-tinta-2">
+            <p className="max-w-2xl text-body-md text-tinta-2">
               Atendemos consultas de atletas, asociaciones y ciudadanos sobre
               trámites, escenarios, programas de alto rendimiento y transparencia
               institucional.
@@ -37,7 +37,7 @@ export default function ContactoPage() {
               <h3 className="font-display text-headline-sm font-bold text-tinta">
                 Dirección
               </h3>
-              <p className="font-body-sm leading-relaxed text-tinta-2">
+              <p className="text-body-sm leading-relaxed text-tinta-2">
                 {sede.direccion}
                 <br />
                 {sede.ciudad}
@@ -51,7 +51,7 @@ export default function ContactoPage() {
               <h3 className="font-display text-headline-sm font-bold text-tinta">
                 Teléfono
               </h3>
-              <p className="font-body-sm leading-relaxed text-tinta-2">
+              <p className="text-body-sm leading-relaxed text-tinta-2">
                 {sede.telefono}
               </p>
             </article>
@@ -63,7 +63,7 @@ export default function ContactoPage() {
               <h3 className="font-display text-headline-sm font-bold text-tinta">
                 Correo
               </h3>
-              <p className="font-body-sm leading-relaxed text-tinta-2">
+              <p className="text-body-sm leading-relaxed text-tinta-2">
                 {sede.email}
               </p>
             </article>
@@ -75,7 +75,7 @@ export default function ContactoPage() {
               <h3 className="font-display text-headline-sm font-bold text-tinta">
                 Horario
               </h3>
-              <p className="font-body-sm leading-relaxed text-tinta-2">
+              <p className="text-body-sm leading-relaxed text-tinta-2">
                 {sede.horario}
               </p>
             </article>
@@ -87,7 +87,7 @@ export default function ContactoPage() {
               <h3 className="font-display text-headline-lg font-black tracking-tight text-white">
                 ¿Eres deportista federado de Oruro?
               </h3>
-              <p className="font-body-md text-white/90">
+              <p className="text-body-md text-white/90">
                 El programa RUDA coordina cobertura biomédica, nutrición y pasajes
                 competitivos para atletas del departamento.
               </p>
@@ -103,7 +103,7 @@ export default function ContactoPage() {
             </div>
           </div>
 
-          <p className="font-body-sm text-tinta-3">
+          <p className="text-body-sm text-tinta-3">
             {direccion.entidad} · Los datos de contacto son provisorios y se
             actualizarán con la información oficial.
           </p>

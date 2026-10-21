@@ -15,7 +15,7 @@ export default function Pilares() {
               Pilares de nuestra vocación
             </h2>
           </div>
-          <p className="max-w-md font-body-md text-tinta-2">
+          <p className="max-w-md text-body-md text-tinta-2">
             Líneas maestras orientadas al fomento de la actividad física comunitaria y
             la preparación olímpica departamental.
           </p>
@@ -30,7 +30,7 @@ export default function Pilares() {
               <h3 className="font-display text-headline-md font-bold text-tinta">
                 {mision.titulo}
               </h3>
-              <p className="font-body-md leading-relaxed text-tinta-2">{mision.texto}</p>
+              <p className="text-body-md leading-relaxed text-tinta-2">{mision.texto}</p>
             </div>
             <div className="flex items-center gap-space-xs rounded-xl bg-hueso-2 p-space-sm">
               <BadgeCheck aria-hidden className="h-[18px] w-[18px] text-primary" />
@@ -48,7 +48,7 @@ export default function Pilares() {
               <h3 className="font-display text-headline-md font-bold text-tinta">
                 {vision.titulo}
               </h3>
-              <p className="font-body-md leading-relaxed text-tinta-2">{vision.texto}</p>
+              <p className="text-body-md leading-relaxed text-tinta-2">{vision.texto}</p>
             </div>
             <div className="flex items-center gap-space-xs rounded-xl bg-hueso-2 p-space-sm">
               <Mountain aria-hidden className="h-[18px] w-[18px] text-gold-deep" />
@@ -70,7 +70,7 @@ export default function Pilares() {
                 {valores.map((valor) => (
                   <li
                     key={valor.titulo}
-                    className="flex items-start gap-2 font-body-sm text-tinta-2"
+                    className="flex items-start gap-2 text-body-sm text-tinta-2"
                   >
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
                     <span>

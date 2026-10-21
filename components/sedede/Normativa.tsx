@@ -20,7 +20,7 @@ export default function Normativa() {
           <h2 className="font-display text-headline-xl font-extrabold tracking-tight text-tinta">
             Marco jurídico e institucional
           </h2>
-          <p className="max-w-2xl font-body-md text-tinta-2">
+          <p className="max-w-2xl text-body-md text-tinta-2">
             Acceso público e inmediato a reglamentos, resoluciones departamentales y
             memorias de gestión que garantizan el ejercicio transparente de las funciones
             deportivas.
@@ -45,7 +45,7 @@ export default function Normativa() {
                 <h3 className="pt-space-xs font-display text-headline-sm font-bold text-tinta">
                   {norma.titulo}
                 </h3>
-                <p className="font-body-sm text-tinta-2">{norma.descripcion}</p>
+                <p className="text-body-sm text-tinta-2">{norma.descripcion}</p>
               </div>
 
               <div className="pt-space-md">

@@ -107,7 +107,7 @@ export default function AdminPage() {
   if (cargando || !usuario) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-hueso-2">
-        <p className="font-body-md text-tinta-2">Verificando acceso...</p>
+        <p className="text-body-md text-tinta-2">Verificando acceso...</p>
       </main>
     );
   }
@@ -123,7 +123,7 @@ export default function AdminPage() {
             <h1 className="mt-1 font-display text-headline-xl font-black tracking-tight text-white">
               Gestión SEDEDE
             </h1>
-            <p className="mt-1 font-body-md text-white/80">
+            <p className="mt-1 text-body-md text-white/80">
               Bienvenido, {usuario.name} · {usuario.email}
             </p>
           </div>
@@ -164,7 +164,7 @@ export default function AdminPage() {
               <h2 className="font-display text-headline-md font-extrabold text-tinta">
                 {seccion.titulo}
               </h2>
-              <p className="font-body-sm text-tinta-2">{seccion.descripcion}</p>
+              <p className="text-body-sm text-tinta-2">{seccion.descripcion}</p>
 
               <span className="mt-auto inline-flex items-center gap-1 font-display text-label-md font-semibold text-primary">
                 Administrar {seccion.titulo.toLowerCase()}

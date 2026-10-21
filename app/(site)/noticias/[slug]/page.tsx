@@ -30,7 +30,7 @@ export default async function DetalleNoticia({
         </h1>
 
         {noticia.resumen ? (
-          <p className="border-l-4 border-primary pl-space-md font-body-lg font-medium leading-relaxed text-tinta">
+          <p className="border-l-4 border-primary pl-space-md text-body-lg font-medium leading-relaxed text-tinta">
             {noticia.resumen}
           </p>
         ) : null}
@@ -47,7 +47,7 @@ export default async function DetalleNoticia({
         ) : null}
 
         {noticia.contenido ? (
-          <div className="mt-space-sm whitespace-pre-line font-body-md leading-relaxed text-tinta-2">
+          <div className="mt-space-sm whitespace-pre-line text-body-md leading-relaxed text-tinta-2">
             {noticia.contenido}
           </div>
         ) : null}

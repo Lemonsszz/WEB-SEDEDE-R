@@ -10,8 +10,8 @@ export default function Hero() {
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/img/hero-deportes.jpg')" }}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-noche via-noche/80 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-noche via-transparent to-noche/60" />
+      <div className="absolute inset-0 bg-gradient-to-r from-noche via-noche/75 to-noche/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-noche/90 via-transparent to-noche/20" />
 
       <div className="relative mx-auto flex min-h-[560px] max-w-contenido flex-col justify-center px-margin py-24 lg:py-32">
         <div className="z-10 flex max-w-3xl flex-col gap-space-md">
@@ -20,12 +20,12 @@ export default function Hero() {
             <Kicker tono="rosa">Servicio Departamental de Deportes</Kicker>
           </div>
 
-          <h2 className="font-display text-display-hero uppercase leading-none tracking-tight text-white">
+          <h2 className="text-balance font-display text-headline-xl uppercase leading-[1.08] tracking-tight text-white lg:text-display-hero lg:leading-none">
             Impulsando el deporte, <br />
             <span className="text-gold-soft">construyendo futuro.</span>
           </h2>
 
-          <p className="max-w-xl font-body-lg leading-relaxed text-hueso-3">
+          <p className="max-w-xl text-body-lg leading-relaxed text-hueso-3">
             Conoce las actividades, asociaciones deportivas federadas, eventos
             oficiales y el ecosistema integral de apoyo al atleta orureño.
           </p>
@@ -44,14 +44,13 @@ export default function Hero() {
             {metricas.slice(0, 3).map((metrica) => (
               <div
                 key={metrica.label}
-                className="rounded-xl bg-black/40 p-space-sm backdrop-blur-md"
+                className="flex flex-col rounded-xl bg-black/40 p-space-sm backdrop-blur-md"
               >
-                <dt className="sr-only">{metrica.label}</dt>
-                <dd className="font-display text-stat-display font-black leading-none text-gold-soft">
-                  {metrica.valor}
-                </dd>
-                <dd className="mt-1 block font-display text-label-sm uppercase tracking-wider text-white/70">
+                <dt className="order-2 mt-1 font-display text-label-sm uppercase tracking-wider text-white/70">
                   {metrica.label}
+                </dt>
+                <dd className="order-1 font-display text-stat-display font-black leading-none text-gold-soft">
+                  {metrica.valor}
                 </dd>
               </div>
             ))}

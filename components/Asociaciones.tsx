@@ -21,7 +21,7 @@ export default function Asociaciones() {
             <h2 className="font-display text-headline-xl font-extrabold tracking-tight text-white">
               Asociaciones deportivas
             </h2>
-            <p className="font-body-md text-white/70">
+            <p className="text-body-md text-white/70">
               Conoce las asociaciones departamentales legalmente constituidas y
               federadas.
             </p>

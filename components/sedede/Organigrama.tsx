@@ -20,7 +20,7 @@ export default function Organigrama() {
           <h2 className="font-display text-headline-xl font-extrabold tracking-tight text-tinta">
             Dirección y unidades operativas
           </h2>
-          <p className="max-w-2xl font-body-md text-tinta-2">
+          <p className="max-w-2xl text-body-md text-tinta-2">
             Estructura descentralizada bajo tuición del Gobierno Departamental,
             organizada por especialidades técnicas para brindar atención inmediata al
             atleta y a las asociaciones.
@@ -36,10 +36,10 @@ export default function Organigrama() {
               <h3 className="font-display text-headline-md font-bold leading-tight text-white">
                 {direccion.cargo}
               </h3>
-              <p className="font-body-sm text-white/80">{direccion.entidad}</p>
+              <p className="text-body-sm text-white/80">{direccion.entidad}</p>
             </div>
 
-            <p className="font-body-sm leading-relaxed text-tinta-2">
+            <p className="text-body-sm leading-relaxed text-tinta-2">
               Nuestra premisa es democratizar los campos de juego y convertir la altura
               de Oruro en una ventaja científica y táctica para nuestros representantes
               departamentales.
@@ -71,7 +71,7 @@ export default function Organigrama() {
                   <h3 className="pt-1 font-display text-headline-sm font-bold text-tinta">
                     {unidad.titulo}
                   </h3>
-                  <p className="font-body-sm leading-relaxed text-tinta-2">
+                  <p className="text-body-sm leading-relaxed text-tinta-2">
                     {unidad.descripcion}
                   </p>
                 </article>

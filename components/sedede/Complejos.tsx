@@ -44,7 +44,7 @@ export default function Complejos() {
                   <h3 className="font-display text-headline-sm font-bold text-tinta">
                     {complejo.nombre}
                   </h3>
-                  <p className="mt-1 font-body-sm leading-relaxed text-tinta-2">
+                  <p className="mt-1 text-body-sm leading-relaxed text-tinta-2">
                     {complejo.descripcion}
                   </p>
                 </div>

@@ -44,13 +44,13 @@ export default async function DetalleComunicado({
 
           <article className="rounded-2xl border border-hueso-5 bg-white p-space-lg shadow-tarjeta">
             {comunicado.resumen ? (
-              <p className="border-l-4 border-primary pl-space-md font-body-lg font-medium leading-relaxed text-tinta">
+              <p className="border-l-4 border-primary pl-space-md text-body-lg font-medium leading-relaxed text-tinta">
                 {comunicado.resumen}
               </p>
             ) : null}
 
             {comunicado.contenido ? (
-              <div className="mt-space-md whitespace-pre-line font-body-md leading-relaxed text-tinta-2">
+              <div className="mt-space-md whitespace-pre-line text-body-md leading-relaxed text-tinta-2">
                 {comunicado.contenido}
               </div>
             ) : null}
