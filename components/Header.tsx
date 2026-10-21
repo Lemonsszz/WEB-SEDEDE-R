@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import Boton from "@/components/ui/Boton";
 
 const enlaces = [
   { href: "/", texto: "Inicio" },
@@ -25,95 +27,82 @@ export default function Header() {
   }
 
   return (
-    <header className="w-full border-b border-gray-200 bg-white">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#A6192E] text-white font-bold">
-            S
+    <header className="fixed inset-x-0 top-0 z-50 w-full bg-surface/90 shadow-header backdrop-blur-md">
+      <div className="mx-auto flex h-20 max-w-contenido items-center justify-between gap-space-md px-margin">
+        <Link href="/" className="group flex items-center gap-space-sm focus:outline-none">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary shadow-[0_4px_12px_rgba(155,11,36,0.2)] transition-transform duration-300 group-hover:scale-105">
+            <span className="font-display text-headline-md font-black leading-none text-white">
+              S
+            </span>
           </div>
 
-          <div>
-            <h1 className="text-xl font-bold tracking-tight text-gray-900">
+          <div className="flex flex-col">
+            <span className="font-display text-headline-sm font-extrabold uppercase leading-tight tracking-tight text-tinta">
               SEDEDE
-            </h1>
-            <p className="text-xs text-gray-500">
+            </span>
+            <span className="font-display text-label-sm font-semibold uppercase tracking-wider text-tinta-2">
               Servicio Departamental de Deportes
-            </p>
+            </span>
           </div>
         </Link>
 
-        {/* Navegación escritorio */}
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden h-full items-center gap-space-md lg:flex">
           {enlaces.map((enlace) => (
             <Link
               key={enlace.href}
               href={enlace.href}
               aria-current={activo(enlace.href) ? "page" : undefined}
-              className={`relative py-1 text-sm font-medium transition after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:origin-left after:bg-[#A6192E] after:transition-transform after:duration-300 ${
+              className={`flex h-full items-center px-space-xs transition-colors ${
                 activo(enlace.href)
-                  ? "text-[#A6192E] after:scale-x-100"
-                  : "text-gray-600 after:scale-x-0 hover:text-[#A6192E]"
+                  ? "border-b-2 border-primary font-display text-headline-sm font-bold text-primary"
+                  : "font-display text-label-md text-tinta-2 hover:text-tinta"
               }`}
             >
               {enlace.texto}
             </Link>
           ))}
 
-          <Link
-            href="/contacto"
-            aria-current={activo("/contacto") ? "page" : undefined}
-            className={`rounded-xl bg-[#A6192E] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#7F1424] hover:shadow-md ${
-              activo("/contacto") ? "ring-2 ring-[#A6192E] ring-offset-2" : ""
-            }`}
-          >
+          <Boton href="/contacto" tamano="sm" className="ml-space-xs">
             Contacto
-          </Link>
+          </Boton>
         </nav>
 
-        {/* Botón menú móvil */}
         <button
           type="button"
           onClick={() => setAbierto((valor) => !valor)}
           aria-label={abierto ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={abierto}
-          className="flex h-11 w-11 items-center justify-center rounded-xl border border-gray-200 text-gray-700 transition hover:text-[#A6192E] md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full text-tinta-2 transition-colors hover:bg-hueso-3 hover:text-tinta lg:hidden"
         >
-          <span className="text-xl leading-none">{abierto ? "✕" : "☰"}</span>
+          {abierto ? (
+            <X aria-hidden className="h-5 w-5" />
+          ) : (
+            <Menu aria-hidden className="h-5 w-5" />
+          )}
         </button>
-
       </div>
 
-      {/* Menú móvil (drawer) */}
       {abierto && (
-        <nav className="border-t border-gray-200 bg-white px-6 pb-6 pt-2 md:hidden">
+        <nav className="border-t border-hueso-4 bg-surface px-margin pb-space-md pt-space-sm shadow-header lg:hidden">
           {enlaces.map((enlace) => (
             <Link
               key={enlace.href}
               href={enlace.href}
               onClick={() => setAbierto(false)}
               aria-current={activo(enlace.href) ? "page" : undefined}
-              className={`block border-b border-gray-100 py-3 text-sm font-medium transition ${
+              className={`block border-b border-hueso-3 py-space-sm font-display text-label-md transition-colors ${
                 activo(enlace.href)
-                  ? "border-l-4 border-l-[#A6192E] pl-3 text-[#A6192E]"
-                  : "text-gray-700 hover:text-[#A6192E]"
+                  ? "border-l-2 border-primary pl-space-sm font-bold text-primary"
+                  : "text-tinta-2 hover:text-primary"
               }`}
             >
               {enlace.texto}
             </Link>
           ))}
 
-          <Link
-            href="/contacto"
-            onClick={() => setAbierto(false)}
-            aria-current={activo("/contacto") ? "page" : undefined}
-            className={`mt-4 block rounded-xl bg-[#A6192E] px-5 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#7F1424] ${
-              activo("/contacto") ? "ring-2 ring-[#A6192E] ring-offset-2" : ""
-            }`}
-          >
+          <Boton href="/contacto" tamano="sm" className="mt-space-md w-full">
             Contacto
-          </Link>
+          </Boton>
         </nav>
       )}
     </header>

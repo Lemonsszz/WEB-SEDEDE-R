@@ -1,5 +1,61 @@
 import Link from "next/link";
+import { ArrowRight, CalendarDays, Download, Megaphone } from "lucide-react";
 import { formatearFecha, getComunicados, type Comunicado } from "@/lib/api";
+import Badge from "@/components/ui/Badge";
+import Kicker from "@/components/ui/Kicker";
+
+function TarjetaComunicado({ comunicado }: { comunicado: Comunicado }) {
+  return (
+    <article className="group flex flex-col gap-space-md rounded-2xl border border-hueso-5 bg-white p-space-md shadow-tarjeta transition-all duration-300 hover:-translate-y-1 hover:shadow-tarjeta-hover">
+      <div className="flex items-start justify-between gap-space-sm">
+        <Badge tono="primario" icono={Megaphone}>
+          Comunicado oficial
+        </Badge>
+        <span className="inline-flex items-center gap-1.5 whitespace-nowrap font-display text-label-sm text-tinta-2">
+          <CalendarDays aria-hidden className="h-4 w-4 text-tinta-3" />
+          {formatearFecha(comunicado.fecha_publicacion)}
+        </span>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <h3 className="font-display text-headline-sm font-extrabold leading-snug tracking-tight text-tinta transition-colors group-hover:text-primary">
+          {comunicado.titulo}
+        </h3>
+
+        {comunicado.resumen ? (
+          <p className="font-body-sm leading-relaxed text-tinta-2">
+            {comunicado.resumen}
+          </p>
+        ) : null}
+      </div>
+
+      <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-hueso-5 pt-space-sm">
+        <Link
+          href={`/comunicados/${comunicado.id}`}
+          className="inline-flex items-center gap-1 font-display text-label-md font-semibold text-primary transition-colors hover:text-primary-dark"
+        >
+          Leer comunicado
+          <ArrowRight
+            aria-hidden
+            className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+          />
+        </Link>
+
+        {comunicado.archivo_url ? (
+          <a
+            href={comunicado.archivo_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 font-display text-label-md font-semibold text-tinta transition-colors hover:text-primary"
+          >
+            <Download aria-hidden className="h-4 w-4" />
+            Ver documento
+          </a>
+        ) : null}
+      </div>
+    </article>
+  );
+}
 
 export default async function Comunicados({
   esListado = false,
@@ -15,93 +71,40 @@ export default async function Comunicados({
   }
 
   return (
-    <section className={esListado ? "bg-[#F7F3EA] py-16" : "bg-[#F7F3EA] py-20"}>
-      <div className="mx-auto max-w-7xl px-6">
-        {!esListado && (
-          <div className="mb-10 flex items-end justify-between">
-            <div>
-              <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-[#A6192E]">
-                Información oficial
-              </p>
-
-              <h2 className="text-3xl font-bold text-gray-900 md:text-4xl">
+    <section className="w-full bg-hueso py-space-xl">
+      <div className="mx-auto flex max-w-contenido flex-col gap-space-lg px-margin">
+        {!esListado ? (
+          <div className="flex flex-col justify-between gap-space-md md:flex-row md:items-end">
+            <div className="flex flex-col gap-space-xs">
+              <Kicker tono="primario">Información oficial</Kicker>
+              <h2 className="font-display text-headline-xl font-black tracking-tight text-tinta">
                 Comunicados
               </h2>
-
-              <p className="mt-3 max-w-2xl text-gray-600">
+              <p className="max-w-xl font-body-md text-tinta-2">
                 Conoce las últimas comunicaciones oficiales de SEDEDE.
               </p>
             </div>
 
             <Link
               href="/comunicados"
-              className="hidden text-sm font-semibold text-[#A6192E] hover:text-[#7F1424] md:block"
+              className="inline-flex items-center gap-space-xs self-start rounded-full bg-white px-space-md py-space-xs font-display text-label-md text-tinta shadow-tarjeta transition-colors hover:text-primary md:self-auto"
             >
-              Ver todos →
+              <span>Ver todos</span>
+              <ArrowRight aria-hidden className="h-4 w-4" />
             </Link>
           </div>
-        )}
+        ) : null}
 
         {comunicados.length === 0 ? (
-          <p className="rounded-xl border border-[#E5DED2] bg-white p-8 text-center text-gray-600">
+          <p className="rounded-2xl border border-hueso-5 bg-white p-space-lg text-center font-body-md text-tinta-2">
             No hay comunicados publicados por el momento.
           </p>
         ) : (
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-gutter-lg md:grid-cols-2 lg:grid-cols-3">
             {comunicados.map((comunicado) => (
-              <article
-                key={comunicado.id}
-                className="group rounded-2xl border border-[#E5DED2] bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-              >
-                <p className="text-xs font-bold uppercase tracking-wider text-[#A6192E]">
-                  Comunicado oficial
-                </p>
-
-                <h3 className="mt-4 text-xl font-bold leading-snug text-gray-900">
-                  {comunicado.titulo}
-                </h3>
-
-                {comunicado.resumen && (
-                  <p className="mt-3 text-sm leading-relaxed text-gray-600">
-                    {comunicado.resumen}
-                  </p>
-                )}
-
-                <p className="mt-5 text-sm text-gray-500">
-                  {formatearFecha(comunicado.fecha_publicacion)}
-                </p>
-
-                <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
-                  <Link
-                    href={`/comunicados/${comunicado.id}`}
-                    className="text-sm font-semibold text-[#A6192E] transition hover:text-[#7F1424]"
-                  >
-                    Leer comunicado completo →
-                  </Link>
-
-                  {comunicado.archivo_url && (
-                    <a
-                      href={comunicado.archivo_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm font-semibold text-gray-900 transition hover:text-[#A6192E]"
-                    >
-                      Ver documento ↗
-                    </a>
-                  )}
-                </div>
-              </article>
+              <TarjetaComunicado key={comunicado.id} comunicado={comunicado} />
             ))}
           </div>
-        )}
-
-        {!esListado && (
-          <Link
-            href="/comunicados"
-            className="mt-8 inline-block text-sm font-semibold text-[#A6192E] md:hidden"
-          >
-            Ver todos →
-          </Link>
         )}
       </div>
     </section>

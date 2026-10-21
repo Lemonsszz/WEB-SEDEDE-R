@@ -2,10 +2,19 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import { ArrowRight, CalendarDays, ChevronRight, Clock } from "lucide-react";
 import { getNoticias, formatearFecha, type Noticia } from "@/lib/api";
 import ImagenNoticia from "@/components/ImagenNoticia";
+import Boton from "@/components/ui/Boton";
+import Kicker from "@/components/ui/Kicker";
 
 const INTERVALO_ROTACION = 6500;
+const MAXIMO_SECUNDARIAS = 3;
+
+function minutosLectura(noticia: Noticia) {
+  const palabras = (noticia.contenido ?? "").split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(palabras / 200));
+}
 
 function Fondo({ noticia, activa }: { noticia: Noticia; activa: boolean }) {
   return (
@@ -14,8 +23,8 @@ function Fondo({ noticia, activa }: { noticia: Noticia; activa: boolean }) {
       alt={noticia.titulo}
       decorativa
       eager={activa}
-      className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-        activa ? "opacity-100" : "opacity-0"
+      className={`absolute inset-0 h-full w-full scale-105 object-cover mix-blend-luminosity transition-opacity duration-700 ${
+        activa ? "opacity-25" : "opacity-0"
       }`}
     />
   );
@@ -32,23 +41,28 @@ function TarjetaSecundaria({
     <button
       type="button"
       onClick={onSelect}
-      className="group flex gap-3 rounded-xl bg-white/10 p-3 text-left ring-1 ring-white/15 backdrop-blur-sm transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-[#A6192E]"
+      className="group flex w-full items-center gap-space-md rounded-2xl bg-noche-3/80 p-space-sm text-left shadow-vidrio backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:bg-noche-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
     >
-      <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-lg bg-black/40">
+      <div className="relative h-20 w-24 shrink-0 overflow-hidden rounded-xl bg-noche-2">
         <ImagenNoticia
           src={noticia.imagen_url}
           alt={noticia.titulo}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
       </div>
 
-      <div className="min-w-0">
-        <p className="line-clamp-2 text-sm font-semibold leading-5 group-hover:text-[#F7F3EA]">
+      <div className="min-w-0 flex flex-col">
+        <span className="font-display text-label-sm font-bold uppercase tracking-wider text-gold-soft">
+          {noticia.categoria || "Institucional"}
+        </span>
+        <span className="truncate font-display text-headline-sm font-bold text-white transition-colors group-hover:text-primary-soft-dim">
           {noticia.titulo}
-        </p>
-        <p className="mt-1 text-xs text-white/70">
+        </span>
+        <span className="mt-1 flex items-center gap-2 font-display text-label-sm text-tinta-3">
+          <CalendarDays aria-hidden className="h-3.5 w-3.5" />
           {formatearFecha(noticia.fecha_publicacion)}
-        </p>
+        </span>
       </div>
     </button>
   );
@@ -64,9 +78,7 @@ export default function Noticias() {
   const totalCarrusel = Math.min(4, noticias.length);
 
   useEffect(() => {
-    if (totalCarrusel < 2) {
-      return;
-    }
+    if (totalCarrusel < 2) return;
 
     const id = window.setInterval(() => {
       setActivo((indice) => (indice + 1) % totalCarrusel);
@@ -107,32 +119,26 @@ export default function Noticias() {
 
   if (cargando) {
     return (
-      <section className="flex min-h-[480px] items-center justify-center bg-[#111827] text-white">
-        <p className="animate-pulse text-lg">Cargando noticias...</p>
+      <section className="flex min-h-[480px] items-center justify-center bg-noche text-white">
+        <p className="animate-pulse font-display text-body-lg">Cargando noticias...</p>
       </section>
     );
   }
 
   if (error) {
     return (
-      <section className="flex min-h-[350px] items-center justify-center bg-[#111827] px-6 text-center text-white">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#A6192E]">
-            Actualidad SEDEDE
-          </p>
-          <h2 className="mt-3 text-2xl font-bold">
+      <section className="flex min-h-[350px] items-center justify-center bg-noche px-margin text-center text-white">
+        <div className="flex flex-col items-center gap-space-sm">
+          <Kicker tono="rosa">Actualidad SEDEDE</Kicker>
+          <h2 className="font-display text-headline-lg font-bold text-white">
             No se pudieron cargar las noticias
           </h2>
-          <p className="mt-2 text-white/75">
+          <p className="font-body-md text-tinta-3">
             Revisa la conexión con el servidor e inténtalo de nuevo.
           </p>
-          <button
-            type="button"
-            onClick={reintentar}
-            className="mt-6 rounded-lg bg-[#A6192E] px-6 py-3 font-semibold transition hover:bg-[#7F1424]"
-          >
+          <Boton onClick={reintentar} className="mt-space-sm">
             Reintentar
-          </button>
+          </Boton>
         </div>
       </section>
     );
@@ -140,15 +146,13 @@ export default function Noticias() {
 
   if (noticias.length === 0) {
     return (
-      <section className="flex min-h-[350px] items-center justify-center bg-gray-100 px-6 text-center">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#A6192E]">
-            Actualidad SEDEDE
-          </p>
-          <h2 className="mt-3 text-2xl font-bold text-gray-900">
+      <section className="flex min-h-[350px] items-center justify-center bg-hueso px-margin text-center">
+        <div className="flex flex-col items-center gap-space-sm">
+          <Kicker tono="primario">Actualidad SEDEDE</Kicker>
+          <h2 className="font-display text-headline-lg font-bold text-tinta">
             No hay noticias publicadas
           </h2>
-          <p className="mt-2 text-gray-600">
+          <p className="font-body-md text-tinta-2">
             Las noticias publicadas aparecerán aquí.
           </p>
         </div>
@@ -163,12 +167,16 @@ export default function Noticias() {
   ].slice(0, 4);
   const indice = activo < carrusel.length ? activo : 0;
   const principal = carrusel[indice];
-  const minis = carrusel
+  const secundarias = carrusel
     .map((noticia, posicion) => ({ noticia, posicion }))
-    .filter(({ posicion }) => posicion !== indice);
+    .filter(({ posicion }) => posicion !== indice)
+    .slice(0, MAXIMO_SECUNDARIAS);
 
   return (
-    <section className="relative overflow-hidden bg-[#101318] text-white">
+    <section className="relative w-full overflow-hidden bg-noche text-white">
+      <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-primary/20 blur-[128px]" />
+      <div className="pointer-events-none absolute -right-24 top-1/2 h-[30rem] w-[30rem] rounded-full bg-gold/10 blur-[140px]" />
+
       <div className="absolute inset-0">
         {carrusel.map((noticia, posicion) => (
           <Fondo
@@ -179,71 +187,108 @@ export default function Noticias() {
         ))}
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/35" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-noche via-noche/85 to-noche/95" />
+      <div className="absolute inset-0 bg-gradient-to-t from-noche via-transparent to-noche/40" />
 
-      <div className="relative mx-auto flex min-h-[620px] max-w-[1800px] flex-col justify-center gap-10 px-6 py-16 sm:px-10 lg:flex-row lg:items-center lg:px-16">
-        <div
-          key={principal.id}
-          className="max-w-5xl flex-1 animate-[fadeIn_0.6s_ease-out]"
-        >
-          <div className="mb-6 flex items-center gap-3">
-            <span className="h-1 w-12 rounded-full bg-[#A6192E]" />
-            <span className="text-sm font-bold uppercase tracking-[0.2em] text-white sm:text-base">
-              {principal.destacada ? "Noticia destacada" : "Actualidad SEDEDE"}
-            </span>
+      <div className="relative mx-auto flex min-h-[640px] max-w-contenido flex-col justify-center px-margin py-space-xl">
+        <div className="grid grid-cols-1 items-center gap-gutter-lg lg:grid-cols-12">
+          <div className="z-10 flex flex-col gap-space-md lg:col-span-7">
+            <div className="flex items-center gap-space-sm">
+              <span className="inline-block h-[3px] w-10 rounded-full bg-primary shadow-brillo" />
+              <Kicker tono="rosa">
+                {principal.destacada ? "Noticia destacada" : "Actualidad SEDEDE"}
+              </Kicker>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-space-xs font-display text-label-sm uppercase tracking-wider text-tinta-3">
+              <span className="rounded-full bg-white/10 px-space-xs py-0.5 text-white backdrop-blur-sm">
+                {principal.categoria || "Institucional"}
+              </span>
+              <span aria-hidden>•</span>
+              <span>{formatearFecha(principal.fecha_publicacion)}</span>
+            </div>
+
+            <h1 className="text-balance font-display text-headline-xl font-black uppercase leading-[1.12] tracking-tight text-white lg:text-[44px] lg:leading-[50px]">
+              {principal.titulo}
+            </h1>
+
+            {principal.resumen && (
+              <p className="max-w-2xl font-body-lg leading-relaxed text-tinta-3">
+                {principal.resumen}
+              </p>
+            )}
+
+            <div className="flex flex-wrap items-center gap-space-md pt-space-xs">
+              <Boton href={`/noticias/${principal.slug}`}>
+                Leer noticia completa
+                <ArrowRight
+                  aria-hidden
+                  className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </Boton>
+
+              <div className="flex items-center gap-space-sm font-display text-label-md text-tinta-3">
+                <span className="inline-flex items-center gap-1">
+                  <Clock aria-hidden className="h-4 w-4 text-white" />
+                  {minutosLectura(principal)} min lectura
+                </span>
+                <span className="h-1 w-1 rounded-full bg-tinta-3" />
+                <Link
+                  href="/noticias"
+                  className="font-medium text-white transition-colors hover:text-primary-soft-dim"
+                >
+                  Ver todas las noticias
+                </Link>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-space-sm pt-space-sm">
+              {carrusel.map((noticia, posicion) => (
+                <button
+                  key={noticia.id}
+                  type="button"
+                  onClick={() => elegir(posicion)}
+                  aria-label={`Ver noticia: ${noticia.titulo}`}
+                  className={`h-1 rounded-full transition-colors ${
+                    posicion === indice
+                      ? "w-12 bg-primary"
+                      : "w-6 bg-white/20 hover:bg-white/40"
+                  }`}
+                />
+              ))}
+              <span className="ml-space-xs font-display text-label-sm text-tinta-3">
+                {String(indice + 1).padStart(2, "0")} /{" "}
+                {String(carrusel.length).padStart(2, "0")} actualizaciones
+              </span>
+            </div>
           </div>
 
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.15em] text-white/75 sm:text-sm">
-            {principal.categoria || "Institucional"} ·{" "}
-            {formatearFecha(principal.fecha_publicacion)}
-          </p>
-
-          <h2 className="max-w-5xl text-3xl font-extrabold uppercase leading-[1.12] tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-            {principal.titulo}
-          </h2>
-
-          {principal.resumen && (
-            <p className="mt-6 max-w-3xl text-base leading-7 text-white/90 sm:text-lg sm:leading-8 md:text-xl">
-              {principal.resumen}
-            </p>
-          )}
-
-          <Link
-            href={`/noticias/${principal.slug}`}
-            className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#A6192E] px-7 py-4 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-[#7F1424] focus:outline-none focus:ring-2 focus:ring-white sm:px-10 sm:text-base"
-          >
-            Leer noticia completa
-            <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-
-        {minis.length > 0 && (
-          <>
-            <aside className="hidden w-80 shrink-0 flex-col gap-4 lg:flex">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/70">
-                Otras noticias
-              </p>
-              {minis.map(({ noticia, posicion }) => (
-                <TarjetaSecundaria
-                  key={noticia.id}
-                  noticia={noticia}
-                  onSelect={() => elegir(posicion)}
-                />
-              ))}
-            </aside>
-
-            <div className="grid gap-3 sm:grid-cols-3 lg:hidden">
-              {minis.map(({ noticia, posicion }) => (
-                <TarjetaSecundaria
-                  key={noticia.id}
-                  noticia={noticia}
-                  onSelect={() => elegir(posicion)}
-                />
-              ))}
+          <aside className="z-10 mt-space-md flex flex-col gap-space-sm lg:col-span-5 lg:mt-0">
+            <div className="flex items-center justify-between pb-space-xs">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-gold-soft" />
+                <span className="font-display text-label-sm font-bold uppercase tracking-[0.16em] text-tinta-3">
+                  Otras noticias relevantes
+                </span>
+              </div>
+              <Link
+                href="/noticias"
+                className="flex items-center gap-1 font-display text-label-sm text-gold-soft hover:underline"
+              >
+                Ver todas
+                <ChevronRight aria-hidden className="h-3.5 w-3.5" />
+              </Link>
             </div>
-          </>
-        )}
+
+            {secundarias.map(({ noticia, posicion }) => (
+              <TarjetaSecundaria
+                key={noticia.id}
+                noticia={noticia}
+                onSelect={() => elegir(posicion)}
+              />
+            ))}
+          </aside>
+        </div>
       </div>
     </section>
   );

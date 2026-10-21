@@ -182,3 +182,40 @@ export function getAsociacionBySlug(slug: string): Asociacion | undefined {
 export function getAsociacionesDestacadas(cantidad: number): Asociacion[] {
   return asociaciones.slice(0, cantidad);
 }
+
+export type Familia = {
+  slug: string;
+  nombre: string;
+  disciplinas: string[] | null;
+};
+
+/** Familias de disciplinas usadas para filtrar el listado de asociaciones. */
+export const familias: Familia[] = [
+  { slug: "todas", nombre: "Todas", disciplinas: null },
+  {
+    slug: "balon-y-cancha",
+    nombre: "Balón y cancha",
+    disciplinas: ["Fútbol", "Básquetbol", "Voleibol", "Béisbol y Sóftbol", "Microfútbol"],
+  },
+  {
+    slug: "contacto-y-combate",
+    nombre: "Contacto y combate",
+    disciplinas: ["Boxeo", "Taekwondo", "Lucha", "Judo", "Karate"],
+  },
+  {
+    slug: "acuaticas-y-tiempo",
+    nombre: "Acuáticas y tiempo",
+    disciplinas: ["Natación", "Ciclismo", "Atletismo"],
+  },
+  {
+    slug: "fuerza-y-precision",
+    nombre: "Fuerza y precisión",
+    disciplinas: ["Halterofilia", "Gimnasia", "Tenis de mesa", "Bolos", "Ajedrez"],
+  },
+];
+
+export function getAsociacionesPorFamilia(slugFamilia: string): Asociacion[] {
+  const familia = familias.find((f) => f.slug === slugFamilia);
+  if (!familia || !familia.disciplinas) return asociaciones;
+  return asociaciones.filter((a) => familia.disciplinas!.includes(a.disciplina));
+}
