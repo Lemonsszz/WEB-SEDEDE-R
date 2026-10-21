@@ -120,9 +120,9 @@ export default function Noticias() {
 
   if (cargando) {
     return (
-      <section className="w-full bg-gradient-to-b from-hueso-3 via-hueso-2 to-surface py-space-lg">
+      <section className="w-full bg-gradient-to-b from-primary via-primary-deep to-primary py-space-lg">
         <div className="mx-auto w-full max-w-contenido px-margin">
-          <div className="flex min-h-[420px] items-center justify-center rounded-[2rem] bg-noche text-white">
+          <div className="flex min-h-[420px] items-center justify-center rounded-[2rem] bg-white/5 text-white shadow-flotante ring-1 ring-white/10">
             <p className="animate-pulse font-display text-body-lg">
               Cargando noticias...
             </p>
@@ -134,9 +134,9 @@ export default function Noticias() {
 
   if (error) {
     return (
-      <section className="w-full bg-gradient-to-b from-hueso-3 via-hueso-2 to-surface py-space-lg">
+      <section className="w-full bg-gradient-to-b from-primary via-primary-deep to-primary py-space-lg">
         <div className="mx-auto w-full max-w-contenido px-margin">
-          <div className="flex min-h-[320px] items-center justify-center rounded-[2rem] bg-noche px-space-lg text-center text-white">
+          <div className="flex min-h-[320px] items-center justify-center rounded-[2rem] bg-white/5 px-space-lg text-center text-white shadow-flotante ring-1 ring-white/10">
             <div className="flex flex-col items-center gap-space-sm">
               <Kicker tono="rosa">Actualidad SEDEDE</Kicker>
               <h2 className="font-display text-headline-lg font-bold text-white">
@@ -157,15 +157,15 @@ export default function Noticias() {
 
   if (noticias.length === 0) {
     return (
-      <section className="w-full bg-gradient-to-b from-hueso-3 via-hueso-2 to-surface py-space-lg">
+      <section className="w-full bg-gradient-to-b from-primary via-primary-deep to-primary py-space-lg">
         <div className="mx-auto w-full max-w-contenido px-margin">
-          <div className="flex min-h-[320px] items-center justify-center rounded-[2rem] bg-hueso px-space-lg text-center">
+          <div className="flex min-h-[320px] items-center justify-center rounded-[2rem] bg-white/5 px-space-lg text-center shadow-flotante ring-1 ring-white/10">
             <div className="flex flex-col items-center gap-space-sm">
-              <Kicker tono="primario">Actualidad SEDEDE</Kicker>
-              <h2 className="font-display text-headline-lg font-bold text-tinta">
+              <Kicker tono="rosa">Actualidad SEDEDE</Kicker>
+              <h2 className="font-display text-headline-lg font-bold text-white">
                 No hay noticias publicadas
               </h2>
-              <p className="text-body-md text-tinta-2">
+              <p className="text-body-md text-white/70">
                 Las noticias publicadas aparecerán aquí.
               </p>
             </div>
@@ -188,8 +188,8 @@ export default function Noticias() {
     .slice(0, MAXIMO_SECUNDARIAS);
 
   return (
-    <section className="relative w-full bg-gradient-to-b from-hueso-3 via-hueso-2 to-surface py-space-lg">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-tinta/5 to-transparent" />
+    <section className="relative w-full bg-gradient-to-b from-primary via-primary-deep to-primary py-space-lg">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/10 to-transparent" />
       <div className="mx-auto w-full max-w-contenido px-margin">
         <div className="relative overflow-hidden rounded-[2rem] bg-noche text-white shadow-flotante ring-1 ring-black/5">
           <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-primary/25 blur-[120px]" />

@@ -87,11 +87,24 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-space-md border-t border-white/10 pt-space-sm">
+        <div className="mt-space-md flex flex-col items-center justify-between gap-space-xs border-t border-white/10 pt-space-sm md:flex-row">
           <p className="text-foot-sm text-white/45">
             © {new Date().getFullYear()} {institucion.nombre} —{" "}
             {institucion.nombreCompleto}. Todos los derechos reservados.
           </p>
+          <nav className="flex flex-wrap items-center gap-space-xs text-foot-sm text-white/45 md:gap-space-sm">
+            <Link href="/terminos-de-uso" className="transition-colors hover:text-white">
+              Términos de uso
+            </Link>
+            <span className="hidden text-white/25 md:inline">|</span>
+            <Link href="/transparencia-institucional" className="transition-colors hover:text-white">
+              Transparencia institucional
+            </Link>
+            <span className="hidden text-white/25 md:inline">|</span>
+            <Link href="/contacto" className="transition-colors hover:text-white">
+              Contacto directo
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>
