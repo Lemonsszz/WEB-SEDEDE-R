@@ -253,28 +253,28 @@ export default function GestionEventosPage() {
   const hoy = fechaHoyBolivia();
 
   return (
-    <main className="min-h-screen bg-gray-100 px-4 py-8 text-gray-900 sm:px-6">
+    <main className="min-h-screen bg-hueso-2 px-4 py-8 text-tinta sm:px-6">
       <div className="mx-auto max-w-6xl">
         <button
           type="button"
           onClick={() => router.push("/admin")}
-          className="mb-5 text-sm font-semibold text-[#A6192E] hover:underline"
+          className="mb-5 inline-flex items-center gap-2 font-display text-label-md font-semibold text-primary transition-colors hover:text-primary-dark"
         >
           ← Volver al panel
         </button>
 
-        <header className="mb-8 rounded-2xl bg-[#A6192E] p-6 text-white sm:p-8">
-          <p className="text-sm font-semibold uppercase tracking-widest text-white/80">
+        <header className="mb-8 rounded-3xl bg-gradient-to-b from-primary to-primary-deep p-6 text-white shadow-tarjeta sm:p-8">
+          <p className="font-display text-kicker uppercase tracking-[0.2em] text-gold-soft">
             Administración SEDEDE
           </p>
-          <h1 className="mt-2 text-3xl font-bold">Gestión de eventos</h1>
+          <h1 className="mt-2 font-display text-headline-md font-extrabold">Gestión de eventos</h1>
           <p className="mt-2 text-sm text-white/90">
             Crea, edita y administra la agenda deportiva.
           </p>
         </header>
 
-        <section className="mb-8 rounded-2xl bg-white p-5 shadow-sm sm:p-8">
-          <h2 className="text-xl font-bold">
+        <section className="mb-8 rounded-2xl bg-white p-5 shadow-tarjeta sm:p-8">
+          <h2 className="font-display text-headline-sm font-bold">
             {editando ? "Editar evento" : "Crear evento"}
           </h2>
 
@@ -282,7 +282,7 @@ export default function GestionEventosPage() {
             <div>
               <label
                 htmlFor="evento-titulo"
-                className="mb-2 block text-sm font-semibold"
+                className="mb-2 block font-display text-label-sm font-semibold uppercase tracking-wider text-tinta-2"
               >
                 Título
               </label>
@@ -292,7 +292,7 @@ export default function GestionEventosPage() {
                 maxLength={255}
                 value={form.titulo}
                 onChange={(e) => cambiar("titulo", e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#A6192E]"
+                className="w-full rounded-lg border border-hueso-4 px-4 py-3 outline-none focus:border-primary"
                 placeholder="Título del evento"
               />
             </div>
@@ -300,7 +300,7 @@ export default function GestionEventosPage() {
             <div>
               <label
                 htmlFor="evento-descripcion"
-                className="mb-2 block text-sm font-semibold"
+                className="mb-2 block font-display text-label-sm font-semibold uppercase tracking-wider text-tinta-2"
               >
                 Descripción
               </label>
@@ -309,7 +309,7 @@ export default function GestionEventosPage() {
                 rows={4}
                 value={form.descripcion}
                 onChange={(e) => cambiar("descripcion", e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#A6192E]"
+                className="w-full rounded-lg border border-hueso-4 px-4 py-3 outline-none focus:border-primary"
               />
             </div>
 
@@ -317,7 +317,7 @@ export default function GestionEventosPage() {
               <div>
                 <label
                   htmlFor="evento-fecha"
-                  className="mb-2 block text-sm font-semibold"
+                  className="mb-2 block font-display text-label-sm font-semibold uppercase tracking-wider text-tinta-2"
                 >
                   Fecha
                 </label>
@@ -327,14 +327,14 @@ export default function GestionEventosPage() {
                   required
                   value={form.fecha}
                   onChange={(e) => cambiar("fecha", e.target.value)}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#A6192E]"
+                  className="w-full rounded-lg border border-hueso-4 px-4 py-3 outline-none focus:border-primary"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="evento-hora"
-                  className="mb-2 block text-sm font-semibold"
+                  className="mb-2 block font-display text-label-sm font-semibold uppercase tracking-wider text-tinta-2"
                 >
                   Hora (opcional)
                 </label>
@@ -343,7 +343,7 @@ export default function GestionEventosPage() {
                   type="time"
                   value={form.hora}
                   onChange={(e) => cambiar("hora", e.target.value)}
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#A6192E]"
+                  className="w-full rounded-lg border border-hueso-4 px-4 py-3 outline-none focus:border-primary"
                 />
               </div>
             </div>
@@ -351,7 +351,7 @@ export default function GestionEventosPage() {
             <div>
               <label
                 htmlFor="evento-lugar"
-                className="mb-2 block text-sm font-semibold"
+                className="mb-2 block font-display text-label-sm font-semibold uppercase tracking-wider text-tinta-2"
               >
                 Lugar (opcional)
               </label>
@@ -361,7 +361,7 @@ export default function GestionEventosPage() {
                 maxLength={255}
                 value={form.lugar}
                 onChange={(e) => cambiar("lugar", e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#A6192E]"
+                className="w-full rounded-lg border border-hueso-4 px-4 py-3 outline-none focus:border-primary"
                 placeholder="Estadio, coliseo o dirección"
               />
             </div>
@@ -369,7 +369,7 @@ export default function GestionEventosPage() {
             <div>
               <label
                 htmlFor="evento-imagen-url"
-                className="mb-2 block text-sm font-semibold"
+                className="mb-2 block font-display text-label-sm font-semibold uppercase tracking-wider text-tinta-2"
               >
                 Imagen (opcional)
               </label>
@@ -379,15 +379,15 @@ export default function GestionEventosPage() {
                 value={form.imagenUrl}
                 onChange={(e) => cambiar("imagenUrl", e.target.value)}
                 placeholder="Pega una URL de imagen"
-                className="w-full rounded-lg border border-gray-300 px-4 py-3"
+                className="w-full rounded-lg border border-hueso-4 px-4 py-3"
               />
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-tinta-3">
                 Por ahora solo se admite una URL. La subida de archivos se
                 añadirá más adelante.
               </p>
             </div>
 
-            <div className="rounded-lg bg-gray-50 p-4">
+            <div className="rounded-lg bg-hueso-2 p-4">
               <label
                 htmlFor="evento-publicado"
                 className="flex items-center gap-3 text-sm"
@@ -397,7 +397,7 @@ export default function GestionEventosPage() {
                   type="checkbox"
                   checked={form.publicado}
                   onChange={(e) => cambiar("publicado", e.target.checked)}
-                  className="h-4 w-4 accent-[#A6192E]"
+                  className="h-4 w-4 accent-primary"
                 />
                 Publicar inmediatamente en la web
               </label>
@@ -407,7 +407,7 @@ export default function GestionEventosPage() {
               <p
                 role="status"
                 aria-live="polite"
-                className="rounded-lg bg-gray-100 p-3 text-sm"
+                className="rounded-lg bg-hueso-2 p-3 text-sm"
               >
                 {mensaje}
               </p>
@@ -417,7 +417,7 @@ export default function GestionEventosPage() {
               <button
                 type="submit"
                 disabled={cargando}
-                className="rounded-lg bg-[#A6192E] px-6 py-3 font-semibold text-white hover:bg-[#7F1424] disabled:opacity-50"
+                className="rounded-lg bg-primary px-6 py-3 font-semibold text-white hover:bg-primary-dark disabled:opacity-50"
               >
                 {cargando
                   ? "Guardando..."
@@ -430,7 +430,7 @@ export default function GestionEventosPage() {
                 <button
                   type="button"
                   onClick={cancelarEdicion}
-                  className="rounded-lg border border-gray-300 px-6 py-3 font-semibold hover:bg-gray-50"
+                  className="rounded-lg border border-hueso-4 px-6 py-3 font-semibold hover:bg-hueso-2"
                 >
                   Cancelar edición
                 </button>
@@ -439,27 +439,27 @@ export default function GestionEventosPage() {
           </form>
         </section>
 
-        <section className="rounded-2xl bg-white p-5 shadow-sm sm:p-8">
+        <section className="rounded-2xl bg-white p-5 shadow-tarjeta sm:p-8">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-xl font-bold">Eventos registrados</h2>
+            <h2 className="font-display text-headline-sm font-bold">Eventos registrados</h2>
             <button
               type="button"
               onClick={() => void refrescarLista()}
               disabled={cargandoLista}
-              className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold hover:bg-gray-50 disabled:opacity-50"
+              className="rounded-lg border border-hueso-4 px-4 py-2 text-sm font-semibold hover:bg-hueso-2 disabled:opacity-50"
             >
               {cargandoLista ? "Actualizando..." : "Actualizar lista"}
             </button>
           </div>
 
           {cargandoLista ? (
-            <p className="py-8 text-gray-500">Cargando eventos...</p>
+            <p className="py-8 text-tinta-3">Cargando eventos...</p>
           ) : eventos.length === 0 ? (
-            <p className="py-8 text-gray-500">
+            <p className="py-8 text-tinta-3">
               Todavía no hay eventos registrados.
             </p>
           ) : (
-            <div className="mt-5 divide-y divide-gray-200">
+            <div className="mt-5 divide-y divide-hueso-5">
               {eventos.map((evento) => (
                 <article
                   key={evento.id}
@@ -467,7 +467,7 @@ export default function GestionEventosPage() {
                 >
                   <div className="min-w-0 flex-1">
                     <h3 className="font-bold">{evento.titulo}</h3>
-                    <p className="mt-1 text-sm text-gray-500">
+                    <p className="mt-1 text-sm text-tinta-3">
                       {formatearFechaSoloDia(evento.fecha)}
                       {evento.hora && ` · ${evento.hora.slice(0, 5)}`}
                       {evento.lugar && ` · ${evento.lugar}`}
@@ -477,12 +477,12 @@ export default function GestionEventosPage() {
                         className={`rounded-full px-3 py-1 text-xs font-semibold ${
                           evento.publicado
                             ? "bg-green-100 text-green-800"
-                            : "bg-gray-100 text-gray-700"
+                            : "bg-hueso-2 text-tinta-2"
                         }`}
                       >
                         {evento.publicado ? "Publicado" : "Borrador"}
                       </span>
-                      <span className="rounded-full bg-[#A6192E]/10 px-3 py-1 text-xs font-semibold text-[#A6192E]">
+                      <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
                         {evento.fecha.slice(0, 10) >= hoy
                           ? "Próximo"
                           : "Realizado"}
@@ -494,14 +494,14 @@ export default function GestionEventosPage() {
                     <button
                       type="button"
                       onClick={() => prepararEdicion(evento)}
-                      className="rounded-lg bg-[#A6192E] px-4 py-2 text-sm font-semibold text-white hover:bg-[#7F1424]"
+                      className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-dark"
                     >
                       Editar
                     </button>
                     <button
                       type="button"
                       onClick={() => void eliminarEvento(evento)}
-                      className="rounded-lg border border-[#A6192E]/30 px-4 py-2 text-sm font-semibold text-[#A6192E] hover:bg-[#A6192E]/5"
+                      className="rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary hover:bg-primary/5"
                     >
                       Eliminar
                     </button>

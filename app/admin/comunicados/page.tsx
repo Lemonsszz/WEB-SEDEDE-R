@@ -280,28 +280,28 @@ export default function GestionComunicadosPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 px-4 py-8 text-gray-900 sm:px-6">
+    <main className="min-h-screen bg-hueso-2 px-4 py-8 text-tinta sm:px-6">
       <div className="mx-auto max-w-6xl">
         <button
           type="button"
           onClick={() => router.push("/admin")}
-          className="mb-5 text-sm font-semibold text-[#A6192E] hover:underline"
+          className="mb-5 inline-flex items-center gap-2 font-display text-label-md font-semibold text-primary transition-colors hover:text-primary-dark"
         >
           ← Volver al panel
         </button>
 
-        <header className="mb-8 rounded-2xl bg-[#A6192E] p-6 text-white sm:p-8">
-          <p className="text-sm font-semibold uppercase tracking-widest text-white/80">
+        <header className="mb-8 rounded-3xl bg-gradient-to-b from-primary to-primary-deep p-6 text-white shadow-tarjeta sm:p-8">
+          <p className="font-display text-kicker uppercase tracking-[0.2em] text-gold-soft">
             Administración SEDEDE
           </p>
-          <h1 className="mt-2 text-3xl font-bold">Gestión de comunicados</h1>
+          <h1 className="mt-2 font-display text-headline-md font-extrabold">Gestión de comunicados</h1>
           <p className="mt-2 text-sm text-white/90">
             Crea, edita y administra los comunicados oficiales.
           </p>
         </header>
 
-        <section className="mb-8 rounded-2xl bg-white p-5 shadow-sm sm:p-8">
-          <h2 className="text-xl font-bold">
+        <section className="mb-8 rounded-2xl bg-white p-5 shadow-tarjeta sm:p-8">
+          <h2 className="font-display text-headline-sm font-bold">
             {editando ? "Editar comunicado" : "Crear comunicado"}
           </h2>
 
@@ -309,7 +309,7 @@ export default function GestionComunicadosPage() {
             <div>
               <label
                 htmlFor="comunicado-titulo"
-                className="mb-2 block text-sm font-semibold"
+                className="mb-2 block font-display text-label-sm font-semibold uppercase tracking-wider text-tinta-2"
               >
                 Título
               </label>
@@ -319,7 +319,7 @@ export default function GestionComunicadosPage() {
                 maxLength={255}
                 value={form.titulo}
                 onChange={(e) => cambiar("titulo", e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#A6192E]"
+                className="w-full rounded-lg border border-hueso-4 px-4 py-3 outline-none focus:border-primary"
                 placeholder="Título del comunicado"
               />
             </div>
@@ -327,7 +327,7 @@ export default function GestionComunicadosPage() {
             <div>
               <label
                 htmlFor="comunicado-resumen"
-                className="mb-2 block text-sm font-semibold"
+                className="mb-2 block font-display text-label-sm font-semibold uppercase tracking-wider text-tinta-2"
               >
                 Resumen
               </label>
@@ -337,14 +337,14 @@ export default function GestionComunicadosPage() {
                 rows={3}
                 value={form.resumen}
                 onChange={(e) => cambiar("resumen", e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#A6192E]"
+                className="w-full rounded-lg border border-hueso-4 px-4 py-3 outline-none focus:border-primary"
               />
             </div>
 
             <div>
               <label
                 htmlFor="comunicado-contenido"
-                className="mb-2 block text-sm font-semibold"
+                className="mb-2 block font-display text-label-sm font-semibold uppercase tracking-wider text-tinta-2"
               >
                 Contenido completo
               </label>
@@ -353,9 +353,9 @@ export default function GestionComunicadosPage() {
                 rows={7}
                 value={form.contenido}
                 onChange={(e) => cambiar("contenido", e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-[#A6192E]"
+                className="w-full rounded-lg border border-hueso-4 px-4 py-3 outline-none focus:border-primary"
               />
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-tinta-3">
                 Opcional. Se mostrará en la página del comunicado, junto con el
                 documento adjunto (si lo hay).
               </p>
@@ -364,7 +364,7 @@ export default function GestionComunicadosPage() {
             <div>
               <label
                 htmlFor="comunicado-archivo-url"
-                className="mb-2 block text-sm font-semibold"
+                className="mb-2 block font-display text-label-sm font-semibold uppercase tracking-wider text-tinta-2"
               >
                 Documento adjunto
               </label>
@@ -375,7 +375,7 @@ export default function GestionComunicadosPage() {
                 value={form.archivoUrl}
                 onChange={(e) => cambiar("archivoUrl", e.target.value)}
                 placeholder="O pega una URL de documento"
-                className="mb-3 w-full rounded-lg border border-gray-300 px-4 py-3"
+                className="mb-3 w-full rounded-lg border border-hueso-4 px-4 py-3"
               />
 
               <input
@@ -387,22 +387,22 @@ export default function GestionComunicadosPage() {
                   const archivo = e.target.files?.[0] ?? null;
                   setArchivoLocal(archivo);
                 }}
-                className="w-full rounded-lg border border-gray-300 p-3"
+                className="w-full rounded-lg border border-hueso-4 p-3"
               />
 
               {archivoLocal && (
-                <p className="mt-2 rounded-lg bg-gray-50 p-3 text-sm text-gray-700">
+                <p className="mt-2 rounded-lg bg-hueso-2 p-3 text-sm text-tinta-2">
                   Archivo seleccionado: {archivoLocal.name}
                 </p>
               )}
 
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-tinta-3">
                 PDF, Word o Excel. Máximo 15 MB. Si eliges un archivo local,
                 reemplazará la URL anterior.
               </p>
             </div>
 
-            <div className="rounded-lg bg-gray-50 p-4">
+            <div className="rounded-lg bg-hueso-2 p-4">
               <label
                 htmlFor="comunicado-publicado"
                 className="flex items-center gap-3 text-sm"
@@ -412,7 +412,7 @@ export default function GestionComunicadosPage() {
                   type="checkbox"
                   checked={form.publicado}
                   onChange={(e) => cambiar("publicado", e.target.checked)}
-                  className="h-4 w-4 accent-[#A6192E]"
+                  className="h-4 w-4 accent-primary"
                 />
                 Publicar inmediatamente en la web
               </label>
@@ -422,7 +422,7 @@ export default function GestionComunicadosPage() {
               <p
                 role="status"
                 aria-live="polite"
-                className="rounded-lg bg-gray-100 p-3 text-sm"
+                className="rounded-lg bg-hueso-2 p-3 text-sm"
               >
                 {mensaje}
               </p>
@@ -432,7 +432,7 @@ export default function GestionComunicadosPage() {
               <button
                 type="submit"
                 disabled={cargando}
-                className="rounded-lg bg-[#A6192E] px-6 py-3 font-semibold text-white hover:bg-[#7F1424] disabled:opacity-50"
+                className="rounded-lg bg-primary px-6 py-3 font-semibold text-white hover:bg-primary-dark disabled:opacity-50"
               >
                 {cargando
                   ? "Guardando..."
@@ -445,7 +445,7 @@ export default function GestionComunicadosPage() {
                 <button
                   type="button"
                   onClick={cancelarEdicion}
-                  className="rounded-lg border border-gray-300 px-6 py-3 font-semibold hover:bg-gray-50"
+                  className="rounded-lg border border-hueso-4 px-6 py-3 font-semibold hover:bg-hueso-2"
                 >
                   Cancelar edición
                 </button>
@@ -454,27 +454,27 @@ export default function GestionComunicadosPage() {
           </form>
         </section>
 
-        <section className="rounded-2xl bg-white p-5 shadow-sm sm:p-8">
+        <section className="rounded-2xl bg-white p-5 shadow-tarjeta sm:p-8">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-xl font-bold">Comunicados registrados</h2>
+            <h2 className="font-display text-headline-sm font-bold">Comunicados registrados</h2>
             <button
               type="button"
               onClick={() => void refrescarLista()}
               disabled={cargandoLista}
-              className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold hover:bg-gray-50 disabled:opacity-50"
+              className="rounded-lg border border-hueso-4 px-4 py-2 text-sm font-semibold hover:bg-hueso-2 disabled:opacity-50"
             >
               {cargandoLista ? "Actualizando..." : "Actualizar lista"}
             </button>
           </div>
 
           {cargandoLista ? (
-            <p className="py-8 text-gray-500">Cargando comunicados...</p>
+            <p className="py-8 text-tinta-3">Cargando comunicados...</p>
           ) : comunicados.length === 0 ? (
-            <p className="py-8 text-gray-500">
+            <p className="py-8 text-tinta-3">
               Todavía no hay comunicados registrados.
             </p>
           ) : (
-            <div className="mt-5 divide-y divide-gray-200">
+            <div className="mt-5 divide-y divide-hueso-5">
               {comunicados.map((comunicado) => (
                 <article
                   key={comunicado.id}
@@ -482,7 +482,7 @@ export default function GestionComunicadosPage() {
                 >
                   <div className="min-w-0 flex-1">
                     <h3 className="font-bold">{comunicado.titulo}</h3>
-                    <p className="mt-1 text-sm text-gray-500 line-clamp-2">
+                    <p className="mt-1 text-sm text-tinta-3 line-clamp-2">
                       {comunicado.resumen}
                     </p>
                     <div className="mt-2 flex flex-wrap gap-2">
@@ -490,7 +490,7 @@ export default function GestionComunicadosPage() {
                         className={`rounded-full px-3 py-1 text-xs font-semibold ${
                           comunicado.publicado
                             ? "bg-green-100 text-green-800"
-                            : "bg-gray-100 text-gray-700"
+                            : "bg-hueso-2 text-tinta-2"
                         }`}
                       >
                         {comunicado.publicado ? "Publicado" : "Borrador"}
@@ -507,14 +507,14 @@ export default function GestionComunicadosPage() {
                     <button
                       type="button"
                       onClick={() => prepararEdicion(comunicado)}
-                      className="rounded-lg bg-[#A6192E] px-4 py-2 text-sm font-semibold text-white hover:bg-[#7F1424]"
+                      className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-dark"
                     >
                       Editar
                     </button>
                     <button
                       type="button"
                       onClick={() => void eliminarComunicado(comunicado)}
-                      className="rounded-lg border border-[#A6192E]/30 px-4 py-2 text-sm font-semibold text-[#A6192E] hover:bg-[#A6192E]/5"
+                      className="rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary hover:bg-primary/5"
                     >
                       Eliminar
                     </button>

@@ -1,8 +1,9 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { ArrowRight, CalendarDays, LogOut, Megaphone, Newspaper } from "lucide-react";
 import { API_URL, expirarSesion } from "@/lib/admin";
 
 type Usuario = {
@@ -11,11 +12,31 @@ type Usuario = {
   rol: string;
 };
 
+const SECCIONES = [
+  {
+    titulo: "Noticias",
+    descripcion: "Crear, editar y eliminar noticias.",
+    href: "/admin/noticias",
+    icono: Newspaper,
+  },
+  {
+    titulo: "Comunicados",
+    descripcion: "Crear, editar y eliminar comunicados institucionales.",
+    href: "/admin/comunicados",
+    icono: Megaphone,
+  },
+  {
+    titulo: "Eventos",
+    descripcion: "Crear, editar y eliminar los eventos de la agenda deportiva.",
+    href: "/admin/eventos",
+    icono: CalendarDays,
+  },
+];
+
 export default function AdminPage() {
   const router = useRouter();
   const [usuario, setUsuario] = useState<Usuario | null>(null);
   const [cargando, setCargando] = useState(true);
-  
 
   useEffect(() => {
     let activo = true;
@@ -85,71 +106,76 @@ export default function AdminPage() {
 
   if (cargando || !usuario) {
     return (
-      <main className="flex min-h-screen items-center justify-center">
-        <p className="text-gray-600">Verificando acceso...</p>
+      <main className="flex min-h-screen items-center justify-center bg-hueso-2">
+        <p className="font-body-md text-tinta-2">Verificando acceso...</p>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-gray-100 p-6 md:p-10">
-      <header className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-[#A6192E]">
-            Panel administrativo SEDEDE
-          </h1>
-          <p className="mt-2 text-gray-600">
-            Bienvenido, {usuario.name}
-          </p>
-        </div>
+    <main className="min-h-screen bg-hueso-2">
+      <header className="bg-gradient-to-b from-primary to-primary-deep text-white">
+        <div className="mx-auto flex max-w-contenido flex-col gap-space-md px-margin py-space-lg md:flex-row md:items-end md:justify-between">
+          <div>
+            <span className="font-display text-kicker uppercase tracking-[0.2em] text-gold-soft">
+              Panel administrativo
+            </span>
+            <h1 className="mt-1 font-display text-headline-xl font-black tracking-tight text-white">
+              Gestión SEDEDE
+            </h1>
+            <p className="mt-1 font-body-md text-white/80">
+              Bienvenido, {usuario.name} · {usuario.email}
+            </p>
+          </div>
 
-        <button
-          onClick={cerrarSesion}
-          className="rounded-lg bg-[#A6192E] px-4 py-2 font-semibold text-white hover:bg-[#7F1424]"
-        >
-          Cerrar sesión
-        </button>
+          <div className="flex flex-wrap items-center gap-space-sm">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-space-md py-space-xs font-display text-label-md text-white transition-colors hover:bg-white/20"
+            >
+              Ver sitio público
+            </Link>
+            <button
+              type="button"
+              onClick={cerrarSesion}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-space-md py-space-xs font-display text-label-md font-semibold text-primary transition-colors hover:bg-hueso-2"
+            >
+              <LogOut aria-hidden className="h-4 w-4" />
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
       </header>
 
-      <section className="mt-10 grid gap-5 md:grid-cols-2">
-        <article
-          onClick={() => router.push("/admin/noticias")}
-          className="cursor-pointer rounded-xl border border-transparent bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[#A6192E]/40 hover:shadow-lg active:scale-[0.98]"
-        >
-          <h2 className="text-xl font-semibold">Noticias</h2>
-          <p className="mt-2 text-gray-600">
-            Crear, editar y eliminar noticias.
-          </p>
-          <p className="mt-4 text-sm font-semibold text-[#A6192E]">
-            Administrar noticias →
-          </p>
-        </article>
+      <section className="mx-auto grid max-w-contenido gap-gutter px-margin py-space-xl md:grid-cols-3">
+        {SECCIONES.map((seccion) => {
+          const Icono = seccion.icono;
 
-        <article
-          onClick={() => router.push("/admin/comunicados")}
-          className="cursor-pointer rounded-xl border border-transparent bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[#A6192E]/40 hover:shadow-lg active:scale-[0.98]"
-        >
-          <h2 className="text-xl font-semibold">Comunicados</h2>
-          <p className="mt-2 text-gray-600">
-            Crear, editar y eliminar comunicados institucionales.
-          </p>
-          <p className="mt-4 text-sm font-semibold text-[#A6192E]">
-            Administrar comunicados →
-          </p>
-        </article>
+          return (
+            <Link
+              key={seccion.titulo}
+              href={seccion.href}
+              className="group flex flex-col gap-space-sm rounded-2xl bg-white p-space-md shadow-tarjeta transition-all duration-300 hover:-translate-y-1.5 hover:shadow-tarjeta-hover"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <Icono aria-hidden className="h-6 w-6" />
+              </div>
 
-        <article
-          onClick={() => router.push("/admin/eventos")}
-          className="cursor-pointer rounded-xl border border-transparent bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[#A6192E]/40 hover:shadow-lg active:scale-[0.98]"
-        >
-          <h2 className="text-xl font-semibold">Eventos</h2>
-          <p className="mt-2 text-gray-600">
-            Crear, editar y eliminar los eventos de la agenda deportiva.
-          </p>
-          <p className="mt-4 text-sm font-semibold text-[#A6192E]">
-            Administrar eventos →
-          </p>
-        </article>
+              <h2 className="font-display text-headline-md font-extrabold text-tinta">
+                {seccion.titulo}
+              </h2>
+              <p className="font-body-sm text-tinta-2">{seccion.descripcion}</p>
+
+              <span className="mt-auto inline-flex items-center gap-1 font-display text-label-md font-semibold text-primary">
+                Administrar {seccion.titulo.toLowerCase()}
+                <ArrowRight
+                  aria-hidden
+                  className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </span>
+            </Link>
+          );
+        })}
       </section>
     </main>
   );
