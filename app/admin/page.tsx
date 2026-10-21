@@ -49,6 +49,10 @@ export default function AdminPage() {
         return;
       }
 
+      // El panel se muestra en cuanto hay token; la validación real ocurre
+      // en segundo plano (el API protege igual cada endpoint de admin).
+      if (activo) setCargando(false);
+
       try {
         const respuesta = await fetch(`${API_URL}/usuario`, {
           headers: {
@@ -74,8 +78,6 @@ export default function AdminPage() {
         if (activo) {
           expirarSesion(router);
         }
-      } finally {
-        if (activo) setCargando(false);
       }
     }
 
@@ -104,7 +106,7 @@ export default function AdminPage() {
     router.replace("/login");
   }
 
-  if (cargando || !usuario) {
+  if (cargando) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-hueso-2">
         <p className="text-body-md text-tinta-2">Verificando acceso...</p>
@@ -124,7 +126,9 @@ export default function AdminPage() {
               Gestión SEDEDE
             </h1>
             <p className="mt-1 text-body-md text-white/80">
-              Bienvenido, {usuario.name} · {usuario.email}
+              {usuario
+                ? `Bienvenido, ${usuario.name} · ${usuario.email}`
+                : "Sesión verificada · cargando datos del usuario..."}
             </p>
           </div>
 

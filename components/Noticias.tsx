@@ -120,7 +120,7 @@ export default function Noticias() {
 
   if (cargando) {
     return (
-      <section className="w-full bg-surface py-space-lg">
+      <section className="w-full bg-gradient-to-b from-hueso-3 via-hueso-2 to-surface py-space-lg">
         <div className="mx-auto w-full max-w-contenido px-margin">
           <div className="flex min-h-[420px] items-center justify-center rounded-[2rem] bg-noche text-white">
             <p className="animate-pulse font-display text-body-lg">
@@ -134,7 +134,7 @@ export default function Noticias() {
 
   if (error) {
     return (
-      <section className="w-full bg-surface py-space-lg">
+      <section className="w-full bg-gradient-to-b from-hueso-3 via-hueso-2 to-surface py-space-lg">
         <div className="mx-auto w-full max-w-contenido px-margin">
           <div className="flex min-h-[320px] items-center justify-center rounded-[2rem] bg-noche px-space-lg text-center text-white">
             <div className="flex flex-col items-center gap-space-sm">
@@ -157,7 +157,7 @@ export default function Noticias() {
 
   if (noticias.length === 0) {
     return (
-      <section className="w-full bg-surface py-space-lg">
+      <section className="w-full bg-gradient-to-b from-hueso-3 via-hueso-2 to-surface py-space-lg">
         <div className="mx-auto w-full max-w-contenido px-margin">
           <div className="flex min-h-[320px] items-center justify-center rounded-[2rem] bg-hueso px-space-lg text-center">
             <div className="flex flex-col items-center gap-space-sm">
@@ -188,7 +188,8 @@ export default function Noticias() {
     .slice(0, MAXIMO_SECUNDARIAS);
 
   return (
-    <section className="relative w-full bg-surface py-space-lg">
+    <section className="relative w-full bg-gradient-to-b from-hueso-3 via-hueso-2 to-surface py-space-lg">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-tinta/5 to-transparent" />
       <div className="mx-auto w-full max-w-contenido px-margin">
         <div className="relative overflow-hidden rounded-[2rem] bg-noche text-white shadow-flotante ring-1 ring-black/5">
           <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-primary/25 blur-[120px]" />
@@ -254,7 +255,7 @@ export default function Noticias() {
                       href="/noticias"
                       className="font-medium text-white transition-colors hover:text-primary-soft-dim"
                     >
-                      Ver todas las noticias
+                      Ver
                     </Link>
                   </div>
                 </div>
