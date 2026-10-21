@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowLeft, ArrowRight, Trophy } from "lucide-react";
 import {
   getDeportistaBySlug,
   getDeportistas,
 } from "@/content/deportistas";
 import { getAsociacionBySlug } from "@/content/asociaciones";
+import Kicker from "@/components/ui/Kicker";
+import Badge from "@/components/ui/Badge";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -39,12 +42,11 @@ export default async function DetalleDeportista({ params }: Props) {
   const asociacion = getAsociacionBySlug(deportista.asociacionSlug);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-
-      <section className="px-6 py-14">
-        <div className="mx-auto max-w-5xl overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-gray-200">
+    <div className="min-h-screen bg-hueso">
+      <section className="w-full py-space-xl">
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl bg-white shadow-tarjeta">
           <div className="grid md:grid-cols-[380px_1fr]">
-            <div className="relative h-80 bg-gray-200 md:h-full md:min-h-[460px]">
+            <div className="relative h-80 w-full bg-hueso-3 md:h-full md:min-h-[460px]">
               <Image
                 src={deportista.imagen}
                 alt={deportista.nombre}
@@ -55,48 +57,50 @@ export default async function DetalleDeportista({ params }: Props) {
               />
             </div>
 
-            <div className="p-6 md:p-10">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#A6192E]">
-                {deportista.disciplina}
-              </p>
+            <div className="flex flex-col gap-space-md p-space-lg">
+              <Kicker tono="primario">{deportista.disciplina}</Kicker>
 
-              <h1 className="mt-3 text-3xl font-bold text-gray-900 md:text-4xl">
+              <h1 className="font-display text-headline-xl font-black leading-tight tracking-tight text-tinta">
                 {deportista.nombre}
               </h1>
 
-              <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#F7F3EA] px-4 py-2 text-sm font-semibold text-[#7F1424] ring-1 ring-[#E5DED2]">
-                <span aria-hidden="true">★</span>
-                {deportista.logro}
+              <div>
+                <Badge tono="dorado" icono={Trophy}>
+                  {deportista.logro}
+                </Badge>
               </div>
 
-              <p className="mt-6 leading-8 text-gray-700">{deportista.bio}</p>
+              <p className="font-body-md leading-relaxed text-tinta-2">
+                {deportista.bio}
+              </p>
 
-              {asociacion && (
-                <div className="mt-8 rounded-xl bg-gray-50 p-5 ring-1 ring-gray-200">
-                  <p className="text-xs font-semibold uppercase tracking-[0.15em] text-gray-500">
+              {asociacion ? (
+                <div className="rounded-2xl bg-hueso-2 p-space-md">
+                  <p className="font-display text-label-sm uppercase tracking-wider text-tinta-3">
                     Asociación
                   </p>
 
                   <Link
                     href={`/asociaciones/${asociacion.slug}`}
-                    className="mt-2 inline-block font-semibold text-[#A6192E] hover:underline"
+                    className="mt-1 inline-flex items-center gap-1 font-display text-headline-sm font-bold text-primary transition-colors hover:text-primary-dark"
                   >
-                    {asociacion.nombre} →
+                    {asociacion.nombre}
+                    <ArrowRight aria-hidden className="h-4 w-4" />
                   </Link>
                 </div>
-              )}
+              ) : null}
 
               <Link
                 href="/deportistas"
-                className="mt-10 inline-block font-semibold text-[#A6192E] hover:underline"
+                className="inline-flex w-fit items-center gap-2 font-display text-label-md font-semibold text-primary transition-colors hover:text-primary-dark"
               >
-                ← Volver a deportistas
+                <ArrowLeft aria-hidden className="h-4 w-4" />
+                Volver a deportistas
               </Link>
             </div>
           </div>
         </div>
       </section>
-
     </div>
   );
 }

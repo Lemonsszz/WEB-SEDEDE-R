@@ -2,51 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import {
-  familias,
-  getAsociacionesPorFamilia,
-  type Asociacion,
-} from "@/content/asociaciones";
+import { familias, getAsociacionesPorFamilia } from "@/content/asociaciones";
 import Kicker from "@/components/ui/Kicker";
 import Chip from "@/components/ui/Chip";
-
-function TarjetaAsociacion({ asociacion }: { asociacion: Asociacion }) {
-  return (
-    <Link
-      href={`/asociaciones/${asociacion.slug}`}
-      className="group relative h-80 overflow-hidden rounded-2xl bg-noche-3 shadow-[0_8px_24px_rgba(0,0,0,0.3)] transition-transform duration-300 hover:-translate-y-1.5"
-    >
-      <Image
-        src={asociacion.imagen}
-        alt={asociacion.nombre}
-        fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-noche via-noche/50 to-transparent" />
-
-      <div className="absolute inset-0 flex flex-col justify-between p-space-md">
-        <div className="self-start">
-          <span className="rounded-full bg-black/60 px-space-sm py-1 font-display text-label-sm font-bold uppercase text-rosa backdrop-blur-md">
-            {asociacion.disciplina}
-          </span>
-        </div>
-
-        <div>
-          <h3 className="font-display text-headline-md font-extrabold tracking-tight text-white transition-colors group-hover:text-primary-soft-dim">
-            {asociacion.nombre}
-          </h3>
-          <p className="mt-space-xs inline-flex items-center gap-1 font-display text-label-sm text-gold-soft transition-transform duration-300 group-hover:translate-x-1">
-            Ver asociación
-            <ArrowRight aria-hidden className="h-4 w-4" />
-          </p>
-        </div>
-      </div>
-    </Link>
-  );
-}
+import TarjetaAsociacion from "@/components/asociaciones/TarjetaAsociacion";
 
 export default function Asociaciones() {
   const [familia, setFamilia] = useState("todas");

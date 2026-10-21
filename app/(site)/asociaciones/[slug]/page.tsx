@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import {
   getAsociacionBySlug,
   getAsociaciones,
 } from "@/content/asociaciones";
 import { getDeportistas } from "@/content/deportistas";
+import Kicker from "@/components/ui/Kicker";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -41,9 +43,8 @@ export default async function DetalleAsociacion({ params }: Props) {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
-
-      <section className="relative flex min-h-[340px] items-end overflow-hidden bg-[#101318]">
+    <div className="min-h-screen bg-hueso">
+      <section className="relative flex min-h-[380px] items-end overflow-hidden bg-noche">
         <Image
           src={asociacion.imagen}
           alt={asociacion.nombre}
@@ -53,71 +54,74 @@ export default async function DetalleAsociacion({ params }: Props) {
           className="object-cover opacity-60"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-noche via-noche/60 to-noche/20" />
 
-        <div className="relative mx-auto w-full max-w-7xl px-6 py-12">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#DFA3AD]">
-            {asociacion.disciplina}
-          </p>
+        <div className="relative mx-auto w-full max-w-contenido px-margin py-space-lg">
+          <Kicker tono="rosa">{asociacion.disciplina}</Kicker>
 
-          <h1 className="mt-3 max-w-4xl text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+          <h1 className="mt-2 max-w-4xl font-display text-headline-xl font-black leading-tight tracking-tight text-white">
             {asociacion.nombre}
           </h1>
         </div>
       </section>
 
-      <section className="px-6 py-12">
-        <div className="mx-auto max-w-4xl">
-          <article className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-gray-200 md:p-10">
-            <p className="leading-8 text-gray-700">{asociacion.descripcion}</p>
-
-            {deportistas.length > 0 && (
-              <>
-                <h2 className="mt-10 text-2xl font-bold text-gray-900">
-                  Deportistas de esta asociación
-                </h2>
-
-                <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                  {deportistas.map((deportista) => (
-                    <Link
-                      key={deportista.slug}
-                      href={`/deportistas/${deportista.slug}`}
-                      className="group flex items-center gap-4 rounded-xl bg-gray-50 p-4 ring-1 ring-gray-200 transition hover:bg-white hover:shadow-md"
-                    >
-                      <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-gray-200">
-                        <Image
-                          src={deportista.imagen}
-                          alt={deportista.nombre}
-                          fill
-                          sizes="56px"
-                          className="object-cover"
-                        />
-                      </div>
-
-                      <div className="min-w-0">
-                        <p className="font-semibold text-gray-900 group-hover:text-[#A6192E]">
-                          {deportista.nombre}
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          {deportista.logro}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </>
-            )}
-
-            <Link
-              href="/asociaciones"
-              className="mt-10 inline-block font-semibold text-[#A6192E] hover:underline"
-            >
-              ← Volver a asociaciones
-            </Link>
+      <section className="w-full py-space-xl">
+        <div className="mx-auto flex max-w-4xl flex-col gap-space-md px-margin">
+          <article className="rounded-2xl bg-white p-space-lg shadow-tarjeta">
+            <p className="font-body-md leading-relaxed text-tinta-2">
+              {asociacion.descripcion}
+            </p>
           </article>
+
+          {deportistas.length > 0 ? (
+            <section className="flex flex-col gap-space-md">
+              <h2 className="font-display text-headline-md font-extrabold tracking-tight text-tinta">
+                Deportistas de esta asociación
+              </h2>
+
+              <div className="grid grid-cols-1 gap-gutter-sm sm:grid-cols-2">
+                {deportistas.map((deportista) => (
+                  <Link
+                    key={deportista.slug}
+                    href={`/deportistas/${deportista.slug}`}
+                    className="group flex items-center gap-space-md rounded-2xl bg-white p-space-sm shadow-tarjeta transition-all duration-300 hover:-translate-y-1 hover:shadow-tarjeta-hover"
+                  >
+                    <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-hueso-3">
+                      <Image
+                        src={deportista.imagen}
+                        alt={deportista.nombre}
+                        fill
+                        sizes="64px"
+                        className="object-cover"
+                      />
+                    </div>
+
+                    <div className="min-w-0 flex-1">
+                      <p className="font-display text-headline-sm font-extrabold text-tinta transition-colors group-hover:text-primary">
+                        {deportista.nombre}
+                      </p>
+                      <p className="font-body-sm text-tinta-2">{deportista.logro}</p>
+                    </div>
+
+                    <ArrowRight
+                      aria-hidden
+                      className="h-5 w-5 shrink-0 text-tinta-3 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary"
+                    />
+                  </Link>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          <Link
+            href="/asociaciones"
+            className="inline-flex w-fit items-center gap-2 font-display text-label-md font-semibold text-primary transition-colors hover:text-primary-dark"
+          >
+            <ArrowLeft aria-hidden className="h-4 w-4" />
+            Volver a asociaciones
+          </Link>
         </div>
       </section>
-
     </div>
   );
 }
