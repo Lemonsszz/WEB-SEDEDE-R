@@ -3,8 +3,12 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
-const API = "http://127.0.0.1:8000/api";
+import {
+  API_URL as API,
+  expirarSesion,
+  mensajeDeError,
+  obtenerToken,
+} from "@/lib/admin";
 
 type Noticia = {
   id: number;
@@ -41,49 +45,58 @@ export default function GestionNoticiasPage() {
   const [imagenLocal, setImagenLocal] = useState<File | null>(null);
   const [vistaPrevia, setVistaPrevia] = useState("");
 
-  const cargarNoticias = useCallback(async () => {
-    const token = sessionStorage.getItem("sedede_token");
+  const cargarNoticias = useCallback(() => {
+    const token = obtenerToken();
 
     if (!token) {
-      router.push("/login");
-      return;
+      router.replace("/login");
+      return Promise.resolve();
     }
 
-    try {
-      const respuesta = await fetch(`${API}/admin/noticias`, {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        cache: "no-store",
+    return fetch(`${API}/admin/noticias`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    })
+      .then((respuesta) =>
+        respuesta.json().then((datos) => ({ respuesta, datos }))
+      )
+      .then(({ respuesta, datos }) => {
+        if (respuesta.status === 401 || respuesta.status === 403) {
+          expirarSesion(router);
+          return;
+        }
+
+        if (!respuesta.ok || !datos.success) {
+          throw new Error(
+            datos.message || "No se pudieron cargar las noticias."
+          );
+        }
+
+        setNoticias(datos.data);
+      })
+      .catch((error: unknown) => {
+        setMensaje(
+          error instanceof Error
+            ? error.message
+            : "No se pudieron cargar las noticias."
+        );
+      })
+      .finally(() => {
+        setCargandoLista(false);
       });
-
-      const datos = await respuesta.json();
-
-      if (respuesta.status === 401 || respuesta.status === 403) {
-        setMensaje("Tu sesión no está autorizada. Inicia sesión nuevamente.");
-        return;
-      }
-
-      if (!respuesta.ok || !datos.success) {
-        throw new Error(datos.message || "No se pudieron cargar las noticias.");
-      }
-
-      setNoticias(datos.data);
-    } catch (error) {
-      setMensaje(
-        error instanceof Error
-          ? error.message
-          : "No se pudieron cargar las noticias."
-      );
-    } finally {
-      setCargandoLista(false);
-    }
   }, [router]);
 
   useEffect(() => {
     void cargarNoticias();
   }, [cargarNoticias]);
+
+  function refrescarLista() {
+    setCargandoLista(true);
+    return cargarNoticias();
+  }
 
   function cambiar<K extends keyof typeof formularioInicial>(
     campo: K,
@@ -117,13 +130,14 @@ export default function GestionNoticiasPage() {
     setMensaje("");
   }
 
-  async function guardarNoticia(e: React.FormEvent<HTMLFormElement>) {e.preventDefault();
+  async function guardarNoticia(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     setMensaje("");
 
-    const token = sessionStorage.getItem("sedede_token");
+    const token = obtenerToken();
 
     if (!token) {
-      router.push("/login");
+      router.replace("/login");
       return;
     }
 
@@ -139,7 +153,31 @@ export default function GestionNoticiasPage() {
       formData.append("publicada", form.publicada ? "1" : "0");
 
       if (imagenLocal) {
-        formData.append("imagen", imagenLocal);
+        const subida = await fetch(`${API}/admin/noticias/subir-imagen`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: (() => {
+            const datos = new FormData();
+            datos.append("imagen", imagenLocal);
+            return datos;
+          })(),
+        });
+
+        if (subida.status === 401 || subida.status === 403) {
+          expirarSesion(router);
+          return;
+        }
+
+        const resultado = await subida.json();
+
+        if (!subida.ok || !resultado.success) {
+          throw new Error(resultado.message || "Error al subir la imagen");
+        }
+
+        formData.append("imagen_url", resultado.url);
       } else {
         formData.append("imagen_url", form.imagenUrl);
       }
@@ -148,38 +186,12 @@ export default function GestionNoticiasPage() {
         ? `${API}/admin/noticias/${editando}`
         : `${API}/admin/noticias`;
 
-      const method = editando ? "POST" : "POST";
       if (editando) {
         formData.append("_method", "PUT");
       }
- if (imagenLocal) {
-  const subida = await fetch(
-    `${API}/admin/noticias/subir-imagen`,
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: (() => {
-        const datos = new FormData();
-        datos.append("imagen", imagenLocal);
-        return datos;
-      })(),
-    }
-  );
-
-  const resultado = await subida.json();
-
-  if (!subida.ok || !resultado.success) {
-    throw new Error(resultado.message || "Error al subir la imagen");
-  }
-
-  formData.set("imagen_url", resultado.url);
-}
 
       const respuesta = await fetch(url, {
-        method,
+        method: "POST",
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${token}`,
@@ -187,14 +199,15 @@ export default function GestionNoticiasPage() {
         body: formData,
       });
 
+      if (respuesta.status === 401 || respuesta.status === 403) {
+        expirarSesion(router);
+        return;
+      }
+
       const datos = await respuesta.json();
 
-      if (!respuesta.ok) {
-        const errores = datos.errors
-          ? Object.values(datos.errors).flat().join(" ")
-          : datos.message || "No se pudo guardar la noticia.";
-
-        setMensaje(String(errores));
+      if (!respuesta.ok || !datos.success) {
+        setMensaje(mensajeDeError(datos, "No se pudo guardar la noticia."));
         return;
       }
 
@@ -208,16 +221,14 @@ export default function GestionNoticiasPage() {
       setForm({ ...formularioInicial });
       setImagenLocal(null);
       setVistaPrevia("");
-      setImagenLocal(null);
-      setVistaPrevia("");
-      await cargarNoticias();
+      await refrescarLista();
     } catch (error) {
-  setMensaje(
-    error instanceof Error
-      ? error.message
-      : "No se pudo conectar con Laravel."
-  );
-} finally {
+      setMensaje(
+        error instanceof Error
+          ? error.message
+          : "No se pudo conectar con Laravel."
+      );
+    } finally {
       setCargando(false);
     }
   }
@@ -231,10 +242,10 @@ export default function GestionNoticiasPage() {
       return;
     }
 
-    const token = sessionStorage.getItem("sedede_token");
+    const token = obtenerToken();
 
     if (!token) {
-      router.push("/login");
+      router.replace("/login");
       return;
     }
 
@@ -252,19 +263,26 @@ export default function GestionNoticiasPage() {
         }
       );
 
+      if (respuesta.status === 401 || respuesta.status === 403) {
+        expirarSesion(router);
+        return;
+      }
+
       const datos = await respuesta.json();
 
-      if (!respuesta.ok) {
-        throw new Error(datos.message || "No se pudo eliminar la noticia.");
+      if (!respuesta.ok || !datos.success) {
+        throw new Error(
+          mensajeDeError(datos, "No se pudo eliminar la noticia.")
+        );
       }
 
       if (editando === noticia.id) cancelarEdicion();
 
-setNoticias((actuales) =>
-  actuales.filter((n) => n.id !== noticia.id)
-);
+      setNoticias((actuales) =>
+        actuales.filter((n) => n.id !== noticia.id)
+      );
 
-setMensaje("Noticia eliminada correctamente.");
+      setMensaje("Noticia eliminada correctamente.");
     } catch (error) {
       setMensaje(
         error instanceof Error
@@ -302,8 +320,14 @@ setMensaje("Noticia eliminada correctamente.");
 
           <form onSubmit={guardarNoticia} className="mt-6 space-y-5">
             <div>
-              <label className="mb-2 block text-sm font-semibold">Título</label>
+              <label
+                htmlFor="noticia-titulo"
+                className="mb-2 block text-sm font-semibold"
+              >
+                Título
+              </label>
               <input
+                id="noticia-titulo"
                 required
                 maxLength={255}
                 value={form.titulo}
@@ -314,8 +338,14 @@ setMensaje("Noticia eliminada correctamente.");
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-semibold">Resumen</label>
+              <label
+                htmlFor="noticia-resumen"
+                className="mb-2 block text-sm font-semibold"
+              >
+                Resumen
+              </label>
               <textarea
+                id="noticia-resumen"
                 required
                 rows={3}
                 value={form.resumen}
@@ -325,10 +355,14 @@ setMensaje("Noticia eliminada correctamente.");
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-semibold">
+              <label
+                htmlFor="noticia-contenido"
+                className="mb-2 block text-sm font-semibold"
+              >
                 Contenido completo
               </label>
               <textarea
+                id="noticia-contenido"
                 required
                 rows={7}
                 value={form.contenido}
@@ -338,8 +372,14 @@ setMensaje("Noticia eliminada correctamente.");
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-semibold">Categoría</label>
+              <label
+                htmlFor="noticia-categoria"
+                className="mb-2 block text-sm font-semibold"
+              >
+                Categoría
+              </label>
               <select
+                id="noticia-categoria"
                 value={form.categoria}
                 onChange={(e) => cambiar("categoria", e.target.value)}
                 className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3"
@@ -352,11 +392,15 @@ setMensaje("Noticia eliminada correctamente.");
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-semibold">
+              <label
+                htmlFor="noticia-imagen-url"
+                className="mb-2 block text-sm font-semibold"
+              >
                 Fotografía de la noticia
               </label>
 
               <input
+                id="noticia-imagen-url"
                 type="url"
                 value={form.imagenUrl}
                 onChange={(e) => cambiar("imagenUrl", e.target.value)}
@@ -365,9 +409,11 @@ setMensaje("Noticia eliminada correctamente.");
               />
 
               <input
+                id="noticia-imagen-archivo"
                 type="file"
                 accept="image/jpeg,image/png,image/webp"
                 capture="environment"
+                aria-label="Subir fotografía desde el dispositivo"
                 onChange={(e) => {
                   const archivo = e.target.files?.[0] ?? null;
                   setImagenLocal(archivo);
@@ -391,8 +437,12 @@ setMensaje("Noticia eliminada correctamente.");
             </div>
 
             <div className="space-y-3 rounded-lg bg-gray-50 p-4">
-              <label className="flex items-center gap-3 text-sm">
+              <label
+                htmlFor="noticia-destacada"
+                className="flex items-center gap-3 text-sm"
+              >
                 <input
+                  id="noticia-destacada"
                   type="checkbox"
                   checked={form.destacada}
                   onChange={(e) => cambiar("destacada", e.target.checked)}
@@ -401,8 +451,12 @@ setMensaje("Noticia eliminada correctamente.");
                 Mostrar como noticia destacada
               </label>
 
-              <label className="flex items-center gap-3 text-sm">
+              <label
+                htmlFor="noticia-publicada"
+                className="flex items-center gap-3 text-sm"
+              >
                 <input
+                  id="noticia-publicada"
                   type="checkbox"
                   checked={form.publicada}
                   onChange={(e) => cambiar("publicada", e.target.checked)}
@@ -415,6 +469,7 @@ setMensaje("Noticia eliminada correctamente.");
             {mensaje && (
               <p
                 role="status"
+                aria-live="polite"
                 className="rounded-lg bg-gray-100 p-3 text-sm"
               >
                 {mensaje}
@@ -452,10 +507,11 @@ setMensaje("Noticia eliminada correctamente.");
             <h2 className="text-xl font-bold">Noticias registradas</h2>
             <button
               type="button"
-              onClick={() => void cargarNoticias()}
-              className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold hover:bg-gray-50"
+              onClick={() => void refrescarLista()}
+              disabled={cargandoLista}
+              className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold hover:bg-gray-50 disabled:opacity-50"
             >
-              Actualizar lista
+              {cargandoLista ? "Actualizando..." : "Actualizar lista"}
             </button>
           </div>
 

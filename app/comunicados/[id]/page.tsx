@@ -2,18 +2,11 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { getComunicado, type Comunicado } from "@/lib/api";
-
-function formatearFecha(fecha: string | null) {
-  if (!fecha) return "Fecha no disponible";
-
-  return new Date(fecha).toLocaleDateString("es-BO", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  });
-}
+import {
+  formatearFecha,
+  getComunicado,
+  type Comunicado,
+} from "@/lib/api";
 
 export default async function DetalleComunicado({
   params,

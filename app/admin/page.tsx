@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { API_URL, expirarSesion } from "@/lib/admin";
 
 type Usuario = {
   name: string;
@@ -28,35 +29,29 @@ export default function AdminPage() {
       }
 
       try {
-        const respuesta = await fetch(
-          "http://127.0.0.1:8000/api/usuario",
-          {
-            headers: {
-              Accept: "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const respuesta = await fetch(`${API_URL}/usuario`, {
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (!respuesta.ok) {
-          sessionStorage.removeItem("sedede_token");
-          router.replace("/login");
+          expirarSesion(router);
           return;
         }
 
         const datos = await respuesta.json();
 
         if (datos.user?.rol !== "admin") {
-          sessionStorage.removeItem("sedede_token");
-          router.replace("/login");
+          expirarSesion(router);
           return;
         }
 
         if (activo) setUsuario(datos.user);
       } catch {
         if (activo) {
-          sessionStorage.removeItem("sedede_token");
-          router.replace("/login");
+          expirarSesion(router);
         }
       } finally {
         if (activo) setCargando(false);
@@ -76,7 +71,7 @@ export default function AdminPage() {
     sessionStorage.removeItem("sedede_token");
 
     if (token) {
-      fetch("http://127.0.0.1:8000/api/logout", {
+      fetch(`${API_URL}/logout`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -143,10 +138,16 @@ export default function AdminPage() {
           </p>
         </article>
 
-        <article className="rounded-xl bg-white p-6 shadow-sm">
+        <article
+          onClick={() => router.push("/admin/eventos")}
+          className="cursor-pointer rounded-xl border border-transparent bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[#A6192E]/40 hover:shadow-lg active:scale-[0.98]"
+        >
           <h2 className="text-xl font-semibold">Eventos</h2>
           <p className="mt-2 text-gray-600">
-            Espacio para administrar los eventos.
+            Crear, editar y eliminar los eventos de la agenda deportiva.
+          </p>
+          <p className="mt-4 text-sm font-semibold text-[#A6192E]">
+            Administrar eventos →
           </p>
         </article>
       </section>

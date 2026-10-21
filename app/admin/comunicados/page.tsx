@@ -2,8 +2,12 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
-const API = "http://127.0.0.1:8000/api";
+import {
+  API_URL as API,
+  expirarSesion,
+  mensajeDeError,
+  obtenerToken,
+} from "@/lib/admin";
 
 type Comunicado = {
   id: number;
@@ -34,53 +38,58 @@ export default function GestionComunicadosPage() {
   const [cargandoLista, setCargandoLista] = useState(true);
   const [archivoLocal, setArchivoLocal] = useState<File | null>(null);
 
-  const cargarComunicados = useCallback(async () => {
-    const token = sessionStorage.getItem("sedede_token");
+  const cargarComunicados = useCallback(() => {
+    const token = obtenerToken();
 
     if (!token) {
-      router.push("/login");
-      return;
+      router.replace("/login");
+      return Promise.resolve();
     }
 
-    try {
-      const respuesta = await fetch(`${API}/admin/comunicados`, {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        cache: "no-store",
+    return fetch(`${API}/admin/comunicados`, {
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    })
+      .then((respuesta) =>
+        respuesta.json().then((datos) => ({ respuesta, datos }))
+      )
+      .then(({ respuesta, datos }) => {
+        if (respuesta.status === 401 || respuesta.status === 403) {
+          expirarSesion(router);
+          return;
+        }
+
+        if (!respuesta.ok || !datos.success) {
+          throw new Error(
+            datos.message || "No se pudieron cargar los comunicados."
+          );
+        }
+
+        setComunicados(datos.data);
+      })
+      .catch((error: unknown) => {
+        setMensaje(
+          error instanceof Error
+            ? error.message
+            : "No se pudieron cargar los comunicados."
+        );
+      })
+      .finally(() => {
+        setCargandoLista(false);
       });
-
-      const datos = await respuesta.json();
-
-      if (respuesta.status === 401 || respuesta.status === 403) {
-        setMensaje("Tu sesión no está autorizada. Inicia sesión nuevamente.");
-        return;
-      }
-
-      if (!respuesta.ok || !datos.success) {
-        throw new Error(datos.message || "No se pudieron cargar los comunicados.");
-      }
-
-      setComunicados(datos.data);
-    } catch (error) {
-      setMensaje(
-        error instanceof Error
-          ? error.message
-          : "No se pudieron cargar los comunicados."
-      );
-    } finally {
-      setCargandoLista(false);
-    }
   }, [router]);
 
   useEffect(() => {
-    async function cargarInicial() {
-      await cargarComunicados();
-    }
-
-    void cargarInicial();
+    void cargarComunicados();
   }, [cargarComunicados]);
+
+  function refrescarLista() {
+    setCargandoLista(true);
+    return cargarComunicados();
+  }
 
   function cambiar<K extends keyof typeof formularioInicial>(
     campo: K,
@@ -114,10 +123,10 @@ export default function GestionComunicadosPage() {
     e.preventDefault();
     setMensaje("");
 
-    const token = sessionStorage.getItem("sedede_token");
+    const token = obtenerToken();
 
     if (!token) {
-      router.push("/login");
+      router.replace("/login");
       return;
     }
 
@@ -140,6 +149,11 @@ export default function GestionComunicadosPage() {
           })(),
         });
 
+        if (subida.status === 401 || subida.status === 403) {
+          expirarSesion(router);
+          return;
+        }
+
         const resultado = await subida.json();
 
         if (!subida.ok || !resultado.success) {
@@ -160,13 +174,12 @@ export default function GestionComunicadosPage() {
         ? `${API}/admin/comunicados/${editando}`
         : `${API}/admin/comunicados`;
 
-      const method = editando ? "POST" : "POST";
       if (editando) {
         formData.append("_method", "PUT");
       }
 
       const respuesta = await fetch(url, {
-        method,
+        method: "POST",
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${token}`,
@@ -174,14 +187,15 @@ export default function GestionComunicadosPage() {
         body: formData,
       });
 
+      if (respuesta.status === 401 || respuesta.status === 403) {
+        expirarSesion(router);
+        return;
+      }
+
       const datos = await respuesta.json();
 
-      if (!respuesta.ok) {
-        const errores = datos.errors
-          ? Object.values(datos.errors).flat().join(" ")
-          : datos.message || "No se pudo guardar el comunicado.";
-
-        setMensaje(String(errores));
+      if (!respuesta.ok || !datos.success) {
+        setMensaje(mensajeDeError(datos, "No se pudo guardar el comunicado."));
         return;
       }
 
@@ -194,7 +208,7 @@ export default function GestionComunicadosPage() {
       setEditando(null);
       setForm({ ...formularioInicial });
       setArchivoLocal(null);
-      await cargarComunicados();
+      await refrescarLista();
     } catch (error) {
       setMensaje(
         error instanceof Error
@@ -215,10 +229,10 @@ export default function GestionComunicadosPage() {
       return;
     }
 
-    const token = sessionStorage.getItem("sedede_token");
+    const token = obtenerToken();
 
     if (!token) {
-      router.push("/login");
+      router.replace("/login");
       return;
     }
 
@@ -236,10 +250,17 @@ export default function GestionComunicadosPage() {
         }
       );
 
+      if (respuesta.status === 401 || respuesta.status === 403) {
+        expirarSesion(router);
+        return;
+      }
+
       const datos = await respuesta.json();
 
-      if (!respuesta.ok) {
-        throw new Error(datos.message || "No se pudo eliminar el comunicado.");
+      if (!respuesta.ok || !datos.success) {
+        throw new Error(
+          mensajeDeError(datos, "No se pudo eliminar el comunicado.")
+        );
       }
 
       if (editando === comunicado.id) cancelarEdicion();
@@ -286,8 +307,14 @@ export default function GestionComunicadosPage() {
 
           <form onSubmit={guardarComunicado} className="mt-6 space-y-5">
             <div>
-              <label className="mb-2 block text-sm font-semibold">Título</label>
+              <label
+                htmlFor="comunicado-titulo"
+                className="mb-2 block text-sm font-semibold"
+              >
+                Título
+              </label>
               <input
+                id="comunicado-titulo"
                 required
                 maxLength={255}
                 value={form.titulo}
@@ -298,8 +325,14 @@ export default function GestionComunicadosPage() {
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-semibold">Resumen</label>
+              <label
+                htmlFor="comunicado-resumen"
+                className="mb-2 block text-sm font-semibold"
+              >
+                Resumen
+              </label>
               <textarea
+                id="comunicado-resumen"
                 required
                 rows={3}
                 value={form.resumen}
@@ -309,10 +342,14 @@ export default function GestionComunicadosPage() {
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-semibold">
+              <label
+                htmlFor="comunicado-contenido"
+                className="mb-2 block text-sm font-semibold"
+              >
                 Contenido completo
               </label>
               <textarea
+                id="comunicado-contenido"
                 rows={7}
                 value={form.contenido}
                 onChange={(e) => cambiar("contenido", e.target.value)}
@@ -325,11 +362,15 @@ export default function GestionComunicadosPage() {
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-semibold">
+              <label
+                htmlFor="comunicado-archivo-url"
+                className="mb-2 block text-sm font-semibold"
+              >
                 Documento adjunto
               </label>
 
               <input
+                id="comunicado-archivo-url"
                 type="url"
                 value={form.archivoUrl}
                 onChange={(e) => cambiar("archivoUrl", e.target.value)}
@@ -338,8 +379,10 @@ export default function GestionComunicadosPage() {
               />
 
               <input
+                id="comunicado-archivo"
                 type="file"
                 accept=".pdf,.doc,.docx,.xls,.xlsx"
+                aria-label="Subir documento desde el dispositivo"
                 onChange={(e) => {
                   const archivo = e.target.files?.[0] ?? null;
                   setArchivoLocal(archivo);
@@ -360,8 +403,12 @@ export default function GestionComunicadosPage() {
             </div>
 
             <div className="rounded-lg bg-gray-50 p-4">
-              <label className="flex items-center gap-3 text-sm">
+              <label
+                htmlFor="comunicado-publicado"
+                className="flex items-center gap-3 text-sm"
+              >
                 <input
+                  id="comunicado-publicado"
                   type="checkbox"
                   checked={form.publicado}
                   onChange={(e) => cambiar("publicado", e.target.checked)}
@@ -374,6 +421,7 @@ export default function GestionComunicadosPage() {
             {mensaje && (
               <p
                 role="status"
+                aria-live="polite"
                 className="rounded-lg bg-gray-100 p-3 text-sm"
               >
                 {mensaje}
@@ -411,10 +459,11 @@ export default function GestionComunicadosPage() {
             <h2 className="text-xl font-bold">Comunicados registrados</h2>
             <button
               type="button"
-              onClick={() => void cargarComunicados()}
-              className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold hover:bg-gray-50"
+              onClick={() => void refrescarLista()}
+              disabled={cargandoLista}
+              className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold hover:bg-gray-50 disabled:opacity-50"
             >
-              Actualizar lista
+              {cargandoLista ? "Actualizando..." : "Actualizar lista"}
             </button>
           </div>
 

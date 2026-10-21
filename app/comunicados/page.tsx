@@ -23,7 +23,7 @@ export default function ComunicadosPage() {
         </div>
       </section>
 
-      <Comunicados />
+      <Comunicados esListado />
 
       <Footer />
     </main>

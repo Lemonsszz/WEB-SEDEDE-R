@@ -94,6 +94,28 @@ export function formatearFecha(fecha: string | null): string {
   });
 }
 
+// Devuelve la fecha de hoy en Bolivia (UTC-4) con formato AAAA-MM-DD.
+export function fechaHoyBolivia(): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/La_Paz",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+}
+
+// Formatea una fecha sin hora (AAAA-MM-DD) sin desplazarla de día.
+export function formatearFechaSoloDia(fecha: string): string {
+  const [anio, mes, dia] = fecha.slice(0, 10).split("-").map(Number);
+
+  return new Date(Date.UTC(anio, mes - 1, dia)).toLocaleDateString("es-BO", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
 export const getComunicados = () =>
   consultarAPI<Comunicado>("comunicados");
 

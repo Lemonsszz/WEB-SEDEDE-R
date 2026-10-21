@@ -1,19 +1,11 @@
-
 import Link from "next/link";
-import { getComunicados, type Comunicado } from "@/lib/api";
+import { formatearFecha, getComunicados, type Comunicado } from "@/lib/api";
 
-function formatearFecha(fecha: string | null) {
-  if (!fecha) return "Fecha no disponible";
-
-  return new Date(fecha).toLocaleDateString("es-BO", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  });
-}
-
-export default async function Comunicados() {
+export default async function Comunicados({
+  esListado = false,
+}: {
+  esListado?: boolean;
+}) {
   let comunicados: Comunicado[] = [];
 
   try {
@@ -23,30 +15,32 @@ export default async function Comunicados() {
   }
 
   return (
-    <section className="bg-[#F7F3EA] py-20">
+    <section className={esListado ? "bg-[#F7F3EA] py-16" : "bg-[#F7F3EA] py-20"}>
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-10 flex items-end justify-between">
-          <div>
-            <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-[#A6192E]">
-              Información oficial
-            </p>
+        {!esListado && (
+          <div className="mb-10 flex items-end justify-between">
+            <div>
+              <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-[#A6192E]">
+                Información oficial
+              </p>
 
-            <h2 className="text-3xl font-bold text-gray-900 md:text-4xl">
-              Comunicados
-            </h2>
+              <h2 className="text-3xl font-bold text-gray-900 md:text-4xl">
+                Comunicados
+              </h2>
 
-            <p className="mt-3 max-w-2xl text-gray-600">
-              Conoce las últimas comunicaciones oficiales de SEDEDE.
-            </p>
+              <p className="mt-3 max-w-2xl text-gray-600">
+                Conoce las últimas comunicaciones oficiales de SEDEDE.
+              </p>
+            </div>
+
+            <Link
+              href="/comunicados"
+              className="hidden text-sm font-semibold text-[#A6192E] hover:text-[#7F1424] md:block"
+            >
+              Ver todos →
+            </Link>
           </div>
-
-          <Link
-            href="/comunicados"
-            className="hidden text-sm font-semibold text-[#A6192E] hover:text-[#7F1424] md:block"
-          >
-            Ver todos →
-          </Link>
-        </div>
+        )}
 
         {comunicados.length === 0 ? (
           <p className="rounded-xl border border-[#E5DED2] bg-white p-8 text-center text-gray-600">
@@ -101,12 +95,14 @@ export default async function Comunicados() {
           </div>
         )}
 
-        <Link
-          href="/comunicados"
-          className="mt-8 inline-block text-sm font-semibold text-[#A6192E] md:hidden"
-        >
-          Ver todos →
-        </Link>
+        {!esListado && (
+          <Link
+            href="/comunicados"
+            className="mt-8 inline-block text-sm font-semibold text-[#A6192E] md:hidden"
+          >
+            Ver todos →
+          </Link>
+        )}
       </div>
     </section>
   );
