@@ -19,7 +19,7 @@ const prensa = [
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-noche-4 pt-space-xl pb-space-lg text-tinta-3">
+    <footer className="w-full bg-noche-4 pt-space-xl pb-space-lg text-white/60">
       <div className="mx-auto max-w-contenido px-margin">
         <div className="grid grid-cols-1 gap-gutter-lg md:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col gap-space-md">
@@ -33,13 +33,13 @@ export default function Footer() {
                 <span className="font-display text-headline-sm font-extrabold uppercase text-white">
                   {institucion.nombre}
                 </span>
-                <span className="font-display text-label-sm uppercase text-tinta-3">
+                <span className="font-display text-label-sm uppercase text-white/60">
                   {institucion.entidad}
                 </span>
               </div>
             </div>
 
-            <p className="font-body-sm leading-relaxed text-tinta-3">
+            <p className="font-body-sm leading-relaxed text-white/60">
               {institucion.descripcion}
             </p>
           </div>
@@ -53,7 +53,7 @@ export default function Footer() {
                 <Link
                   key={enlace.href}
                   href={enlace.href}
-                  className="font-body-sm text-tinta-3 transition-colors hover:text-white"
+                  className="font-body-sm text-white/60 transition-colors hover:text-white"
                 >
                   {enlace.texto}
                 </Link>
@@ -70,7 +70,7 @@ export default function Footer() {
                 <Link
                   key={enlace.href}
                   href={enlace.href}
-                  className="font-body-sm text-tinta-3 transition-colors hover:text-white"
+                  className="font-body-sm text-white/60 transition-colors hover:text-white"
                 >
                   {enlace.texto}
                 </Link>
@@ -82,26 +82,26 @@ export default function Footer() {
             <span className="font-display text-label-md font-bold uppercase tracking-wider text-white">
               Sede central
             </span>
-            <div className="flex flex-col gap-space-xs font-body-sm text-tinta-3">
+            <div className="flex flex-col gap-space-xs font-body-sm text-white/60">
               <div className="flex items-start gap-space-xs">
                 <MapPin
                   aria-hidden
-                  className="mt-0.5 h-4 w-4 shrink-0 text-tinta-3"
+                  className="mt-0.5 h-4 w-4 shrink-0 text-white/60"
                 />
                 <span>{sede.direccion}</span>
               </div>
               <div className="flex items-center gap-space-xs">
-                <Phone aria-hidden className="h-4 w-4 shrink-0 text-tinta-3" />
+                <Phone aria-hidden className="h-4 w-4 shrink-0 text-white/60" />
                 <a href={`tel:${sede.telefono.replace(/\s/g, "")}`} className="transition-colors hover:text-white">
                   {sede.telefono}
                 </a>
               </div>
               <div className="flex items-center gap-space-xs">
-                <Clock aria-hidden className="h-4 w-4 shrink-0 text-tinta-3" />
+                <Clock aria-hidden className="h-4 w-4 shrink-0 text-white/60" />
                 <span>{sede.horario}</span>
               </div>
               <div className="flex items-center gap-space-xs">
-                <Mail aria-hidden className="h-4 w-4 shrink-0 text-tinta-3" />
+                <Mail aria-hidden className="h-4 w-4 shrink-0 text-white/60" />
                 <a href={`mailto:${sede.email}`} className="transition-colors hover:text-white">
                   {sede.email}
                 </a>
@@ -110,7 +110,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-space-sm border-t border-white/10 pt-space-md font-body-sm text-tinta-3 md:flex-row">
+        <div className="flex flex-col items-center justify-between gap-space-sm border-t border-white/10 pt-space-md font-body-sm text-white/60 md:flex-row">
           <p>
             © {new Date().getFullYear()} {institucion.nombre} —{" "}
             {institucion.nombreCompleto}. Todos los derechos reservados.

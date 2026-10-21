@@ -36,7 +36,7 @@ export default function TarjetaAsociacion({
         </h3>
 
         {compacta ? null : (
-          <p className="line-clamp-2 font-body-sm leading-relaxed text-tinta-3">
+          <p className="line-clamp-2 font-body-sm leading-relaxed text-white/70">
             {asociacion.descripcion}
           </p>
         )}

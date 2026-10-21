@@ -36,6 +36,12 @@
   --color-surface: #f9f9ff;
   --color-linea: #e1bebd;
 
+  /* Estados (badges del panel admin) */
+  --color-exito: #1b5e3f;
+  --color-exito-suave: #d8f0e2;
+  --color-info: #1d4f7c;
+  --color-info-suave: #d9e8f7;
+
   /* Escala tipográfica */
   --text-kicker: 0.75rem;
   --text-kicker--line-height: 1rem;

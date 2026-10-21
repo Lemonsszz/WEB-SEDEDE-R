@@ -59,7 +59,7 @@ function TarjetaSecundaria({
         <span className="truncate font-display text-headline-sm font-bold text-white transition-colors group-hover:text-primary-soft-dim">
           {noticia.titulo}
         </span>
-        <span className="mt-1 flex items-center gap-2 font-display text-label-sm text-tinta-3">
+        <span className="mt-1 flex items-center gap-2 font-display text-label-sm text-white/70">
           <CalendarDays aria-hidden className="h-3.5 w-3.5" />
           {formatearFecha(noticia.fecha_publicacion)}
         </span>
@@ -133,7 +133,7 @@ export default function Noticias() {
           <h2 className="font-display text-headline-lg font-bold text-white">
             No se pudieron cargar las noticias
           </h2>
-          <p className="font-body-md text-tinta-3">
+          <p className="font-body-md text-white/70">
             Revisa la conexión con el servidor e inténtalo de nuevo.
           </p>
           <Boton onClick={reintentar} className="mt-space-sm">
@@ -200,7 +200,7 @@ export default function Noticias() {
               </Kicker>
             </div>
 
-            <div className="flex flex-wrap items-center gap-space-xs font-display text-label-sm uppercase tracking-wider text-tinta-3">
+            <div className="flex flex-wrap items-center gap-space-xs font-display text-label-sm uppercase tracking-wider text-white/70">
               <span className="rounded-full bg-white/10 px-space-xs py-0.5 text-white backdrop-blur-sm">
                 {principal.categoria || "Institucional"}
               </span>
@@ -213,7 +213,7 @@ export default function Noticias() {
             </h1>
 
             {principal.resumen && (
-              <p className="max-w-2xl font-body-lg leading-relaxed text-tinta-3">
+              <p className="max-w-2xl font-body-lg leading-relaxed text-white/75">
                 {principal.resumen}
               </p>
             )}
@@ -227,12 +227,12 @@ export default function Noticias() {
                 />
               </Boton>
 
-              <div className="flex items-center gap-space-sm font-display text-label-md text-tinta-3">
+              <div className="flex items-center gap-space-sm font-display text-label-md text-white/70">
                 <span className="inline-flex items-center gap-1">
                   <Clock aria-hidden className="h-4 w-4 text-white" />
                   {minutosLectura(principal)} min lectura
                 </span>
-                <span className="h-1 w-1 rounded-full bg-tinta-3" />
+                <span className="h-1 w-1 rounded-full bg-white/40" />
                 <Link
                   href="/noticias"
                   className="font-medium text-white transition-colors hover:text-primary-soft-dim"
@@ -256,7 +256,7 @@ export default function Noticias() {
                   }`}
                 />
               ))}
-              <span className="ml-space-xs font-display text-label-sm text-tinta-3">
+              <span className="ml-space-xs font-display text-label-sm text-white/70">
                 {String(indice + 1).padStart(2, "0")} /{" "}
                 {String(carrusel.length).padStart(2, "0")} actualizaciones
               </span>
@@ -267,7 +267,7 @@ export default function Noticias() {
             <div className="flex items-center justify-between pb-space-xs">
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-gold-soft" />
-                <span className="font-display text-label-sm font-bold uppercase tracking-[0.16em] text-tinta-3">
+                <span className="font-display text-label-sm font-bold uppercase tracking-[0.16em] text-white/70">
                   Otras noticias relevantes
                 </span>
               </div>

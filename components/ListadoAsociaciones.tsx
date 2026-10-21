@@ -25,14 +25,14 @@ export default function ListadoAsociaciones() {
             ))}
           </div>
 
-          <p className="font-display text-label-md text-tinta-3">
+          <p className="font-display text-label-md text-white/70">
             {listado.length}{" "}
             {listado.length === 1 ? "asociación" : "asociaciones"} en esta categoría
           </p>
         </div>
 
         {listado.length === 0 ? (
-          <p className="rounded-2xl bg-white/5 p-space-lg text-center font-body-md text-tinta-3">
+          <p className="rounded-2xl bg-white/5 p-space-lg text-center font-body-md text-white/70">
             No hay asociaciones registradas en esta categoría.
           </p>
         ) : (

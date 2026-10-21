@@ -489,14 +489,14 @@ export default function GestionComunicadosPage() {
                       <span
                         className={`rounded-full px-3 py-1 text-xs font-semibold ${
                           comunicado.publicado
-                            ? "bg-green-100 text-green-800"
+                            ? "bg-exito-suave text-exito"
                             : "bg-hueso-2 text-tinta-2"
                         }`}
                       >
                         {comunicado.publicado ? "Publicado" : "Borrador"}
                       </span>
                       {comunicado.archivo_url && (
-                        <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-800">
+                        <span className="rounded-full bg-info-suave px-3 py-1 text-xs font-semibold text-info">
                           Con documento
                         </span>
                       )}

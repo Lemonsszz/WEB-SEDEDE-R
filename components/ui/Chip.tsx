@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-/** Chip de filtro o de etiqueta navegable. */
+/** Chip de filtro o de etiqueta navegable. Pensado para fondos oscuros. */
 export default function Chip({
   children,
   activo = false,
@@ -18,7 +18,7 @@ export default function Chip({
   const clases = `inline-flex items-center rounded-full px-space-md py-1.5 font-display text-label-sm uppercase tracking-wider transition-colors ${
     activo
       ? "bg-primary text-white"
-      : "bg-white/5 text-tinta-3 hover:bg-white/10 hover:text-white"
+      : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
   } ${className}`;
 
   if (href) {

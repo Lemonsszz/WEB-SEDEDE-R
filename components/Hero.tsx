@@ -50,7 +50,7 @@ export default function Hero() {
                 <dd className="font-display text-stat-display font-black leading-none text-gold-soft">
                   {metrica.valor}
                 </dd>
-                <dd className="mt-1 block font-display text-label-sm uppercase tracking-wider text-tinta-3">
+                <dd className="mt-1 block font-display text-label-sm uppercase tracking-wider text-white/70">
                   {metrica.label}
                 </dd>
               </div>

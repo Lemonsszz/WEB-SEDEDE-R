@@ -549,7 +549,7 @@ export default function GestionNoticiasPage() {
                       <span
                         className={`rounded-full px-3 py-1 text-xs font-semibold ${
                           noticia.publicada
-                            ? "bg-green-100 text-green-800"
+                            ? "bg-exito-suave text-exito"
                             : "bg-hueso-2 text-tinta-2"
                         }`}
                       >
