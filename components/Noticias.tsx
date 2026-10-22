@@ -44,7 +44,7 @@ function TarjetaSecundaria({
       aria-label={`Ver noticia: ${noticia.titulo}`}
       className="group flex w-full items-center gap-space-sm rounded-xl bg-noche-3/70 p-space-xs text-left shadow-vidrio backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-noche-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
     >
-      <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-lg bg-noche-2">
+      <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-lg bg-noche-2 2xl:h-20 2xl:w-24">
         <ImagenNoticia
           src={noticia.imagen_url}
           alt={noticia.titulo}
@@ -208,7 +208,7 @@ export default function Noticias() {
           <div className="absolute inset-0 bg-gradient-to-r from-noche via-noche/80 to-noche/35" />
           <div className="absolute inset-0 bg-gradient-to-t from-noche/90 via-transparent to-noche/20" />
 
-          <div className="relative flex min-h-[560px] flex-col justify-center px-space-md py-space-lg lg:px-space-xl lg:py-space-xl">
+          <div className="relative flex min-h-[560px] flex-col justify-center px-space-md py-space-lg lg:px-space-xl lg:py-space-xl 2xl:min-h-[680px] 2xl:px-14 2xl:py-16">
             <div className="grid grid-cols-1 items-center gap-gutter-lg lg:grid-cols-12">
               <div className="z-10 flex flex-col gap-space-sm lg:col-span-8 lg:gap-space-md">
                 <div className="flex items-center gap-space-sm">
@@ -226,12 +226,12 @@ export default function Noticias() {
                   <span>{formatearFecha(principal.fecha_publicacion)}</span>
                 </div>
 
-                <h1 className="text-balance font-display text-headline-lg font-black uppercase leading-[1.12] tracking-tight text-white lg:text-[40px] lg:leading-[46px]">
+                <h1 className="text-balance font-display text-headline-lg font-black uppercase leading-[1.12] tracking-tight text-white lg:text-[40px] lg:leading-[46px] 2xl:text-[52px] 2xl:leading-[58px]">
                   {principal.titulo}
                 </h1>
 
                 {principal.resumen && (
-                  <p className="max-w-2xl text-body-lg leading-relaxed text-white/75">
+                  <p className="max-w-2xl text-body-lg leading-relaxed text-white/75 2xl:max-w-3xl">
                     {principal.resumen}
                   </p>
                 )}

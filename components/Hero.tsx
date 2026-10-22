@@ -13,14 +13,14 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-noche via-noche/75 to-noche/10" />
       <div className="absolute inset-0 bg-gradient-to-t from-noche/90 via-transparent to-noche/20" />
 
-      <div className="relative mx-auto flex min-h-[560px] max-w-contenido flex-col justify-center px-margin py-24 lg:py-32">
+      <div className="relative mx-auto flex min-h-[560px] max-w-contenido flex-col justify-center px-margin py-24 lg:py-32 2xl:min-h-[700px]">
         <div className="z-10 flex max-w-3xl flex-col gap-space-md">
           <div className="flex items-center gap-space-xs">
             <div className="h-1 w-8 rounded-full bg-primary" />
             <Kicker tono="rosa">Servicio Departamental de Deportes</Kicker>
           </div>
 
-          <h2 className="text-balance font-display text-headline-xl uppercase leading-[1.08] tracking-tight text-white lg:text-display-hero lg:leading-none">
+          <h2 className="text-balance font-display text-headline-xl uppercase leading-[1.08] tracking-tight text-white lg:text-display-hero lg:leading-none 2xl:text-[4.5rem] 2xl:leading-[1.02]">
             Impulsando el deporte, <br />
             <span className="text-gold-soft">construyendo futuro.</span>
           </h2>

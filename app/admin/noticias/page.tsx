@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   API_URL as API,
@@ -9,6 +9,7 @@ import {
   mensajeDeError,
   obtenerToken,
 } from "@/lib/admin";
+import { formatearPeso, prepararImagen } from "@/lib/imagenes";
 
 type Noticia = {
   id: number;
@@ -33,6 +34,33 @@ const formularioInicial = {
   publicada: false,
 };
 
+/**
+ * Borrador del formulario en `sessionStorage`.
+ *
+ * En el celular el navegador puede descartar la pestaña al abrir la cámara (o
+ * al cambiar de aplicación) y, al volver, recarga la página: sin esto se
+ * pierde todo lo escrito. `sessionStorage` sobrevive a esa recarga y se borra
+ * solo al cerrar la pestaña o al guardar la noticia.
+ */
+const CLAVE_BORRADOR = "sedede_borrador_noticia";
+
+function leerBorrador(): Partial<typeof formularioInicial> | null {
+  try {
+    const guardado = window.sessionStorage.getItem(CLAVE_BORRADOR);
+    return guardado ? JSON.parse(guardado) : null;
+  } catch {
+    return null;
+  }
+}
+
+function borrarBorrador() {
+  try {
+    window.sessionStorage.removeItem(CLAVE_BORRADOR);
+  } catch {
+    // Sin sessionStorage (modo privado estricto): no es un error.
+  }
+}
+
 export default function GestionNoticiasPage() {
   const router = useRouter();
 
@@ -44,6 +72,9 @@ export default function GestionNoticiasPage() {
   const [cargandoLista, setCargandoLista] = useState(true);
   const [imagenLocal, setImagenLocal] = useState<File | null>(null);
   const [vistaPrevia, setVistaPrevia] = useState("");
+  const [procesandoImagen, setProcesandoImagen] = useState(false);
+  const [avisoImagen, setAvisoImagen] = useState("");
+  const primerRender = useRef(true);
 
   const cargarNoticias = useCallback(() => {
     const token = obtenerToken();
@@ -93,6 +124,45 @@ export default function GestionNoticiasPage() {
     void cargarNoticias();
   }, [cargarNoticias]);
 
+  // Restaura el borrador tras una recarga del navegador (en el celular pasa al
+  // abrir la cámara o al cambiar de aplicación). Se hace en un efecto y no en
+  // el `useState` inicial para no romper la hidratación de React: el servidor
+  // no tiene `sessionStorage` y renderizaría un formulario distinto al cliente.
+  // Es la excepción que la regla `set-state-in-effect` contempla: un único
+  // setState de arranque, no un bucle de renders.
+  useEffect(() => {
+    const borrador = leerBorrador();
+    if (borrador) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setForm((actual) => ({ ...actual, ...borrador }));
+    }
+  }, []);
+
+  // Guarda el borrador en cada cambio, salvo al editar una noticia existente
+  // (ese texto ya está en la base de datos).
+  useEffect(() => {
+    if (primerRender.current) {
+      primerRender.current = false;
+      return;
+    }
+
+    if (editando !== null) return;
+
+    const sinCambios =
+      JSON.stringify(form) === JSON.stringify(formularioInicial);
+
+    if (sinCambios) {
+      borrarBorrador();
+      return;
+    }
+
+    try {
+      window.sessionStorage.setItem(CLAVE_BORRADOR, JSON.stringify(form));
+    } catch {
+      // Cuota llena o modo privado estricto: se ignora.
+    }
+  }, [form, editando]);
+
   function refrescarLista() {
     setCargandoLista(true);
     return cargarNoticias();
@@ -117,7 +187,9 @@ export default function GestionNoticiasPage() {
       publicada: noticia.publicada,
     });
     setImagenLocal(null);
+    if (vistaPrevia) URL.revokeObjectURL(vistaPrevia);
     setVistaPrevia("");
+    setAvisoImagen("");
     setMensaje("");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -126,8 +198,53 @@ export default function GestionNoticiasPage() {
     setEditando(null);
     setForm({ ...formularioInicial });
     setImagenLocal(null);
+    if (vistaPrevia) URL.revokeObjectURL(vistaPrevia);
     setVistaPrevia("");
+    setAvisoImagen("");
     setMensaje("");
+    borrarBorrador();
+  }
+
+  async function elegirImagen(evento: React.ChangeEvent<HTMLInputElement>) {
+    const archivo = evento.target.files?.[0] ?? null;
+
+    if (vistaPrevia) URL.revokeObjectURL(vistaPrevia);
+    setVistaPrevia("");
+    setImagenLocal(null);
+    setAvisoImagen("");
+
+    if (!archivo) return;
+
+    setProcesandoImagen(true);
+
+    try {
+      const preparada = await prepararImagen(archivo);
+
+      setImagenLocal(preparada.archivo);
+      setVistaPrevia(URL.createObjectURL(preparada.archivo));
+
+      // El servidor solo acepta JPG, PNG y WebP. Un HEIC de iPhone suele
+      // llegar ya convertido a JPG; si no, conviene avisar acá y no después
+      // de esperar la subida.
+      if (!/^image\/(jpeg|png|webp)$/.test(preparada.archivo.type)) {
+        setAvisoImagen(
+          "Ese formato no se puede subir. Usa una foto JPG, PNG o WebP."
+        );
+        return;
+      }
+
+      setAvisoImagen(
+        preparada.optimizada
+          ? `Foto optimizada de ${formatearPeso(
+              preparada.pesoOriginal
+            )} a ${formatearPeso(preparada.pesoFinal)}.`
+          : `${formatearPeso(preparada.pesoFinal)}: se sube tal cual.`
+      );
+    } catch {
+      setAvisoImagen("No se pudo preparar la imagen. Prueba con otra foto.");
+    } finally {
+      setProcesandoImagen(false);
+    }
   }
 
   async function guardarNoticia(e: React.FormEvent<HTMLFormElement>) {
@@ -171,10 +288,21 @@ export default function GestionNoticiasPage() {
           return;
         }
 
-        const resultado = await subida.json();
+        // Un 413 (cuerpo demasiado grande) llega como HTML, no como JSON: sin
+        // esto el panel mostraría "Unexpected token '<'".
+        const resultado = await subida.json().catch(() => null);
 
-        if (!subida.ok || !resultado.success) {
-          throw new Error(resultado.message || "Error al subir la imagen");
+        if (subida.status === 413) {
+          throw new Error(
+            "La foto es demasiado grande para el servidor. Prueba con una más liviana."
+          );
+        }
+
+        if (!subida.ok || !resultado?.success) {
+          throw new Error(
+            resultado?.message ??
+              `Error al subir la imagen (HTTP ${subida.status}).`
+          );
         }
 
         formData.append("imagen_url", resultado.url);
@@ -220,7 +348,10 @@ export default function GestionNoticiasPage() {
       setEditando(null);
       setForm({ ...formularioInicial });
       setImagenLocal(null);
+      if (vistaPrevia) URL.revokeObjectURL(vistaPrevia);
       setVistaPrevia("");
+      setAvisoImagen("");
+      borrarBorrador();
       await refrescarLista();
     } catch (error) {
       setMensaje(
@@ -411,16 +542,22 @@ export default function GestionNoticiasPage() {
               <input
                 id="noticia-imagen-archivo"
                 type="file"
-                accept="image/jpeg,image/png,image/webp"
-                capture="environment"
-                aria-label="Subir fotografía desde el dispositivo"
-                onChange={(e) => {
-                  const archivo = e.target.files?.[0] ?? null;
-                  setImagenLocal(archivo);
-                  setVistaPrevia(archivo ? URL.createObjectURL(archivo) : "");
-                }}
+                accept="image/*"
+                aria-label="Subir fotografía desde la galería o la cámara"
+                onChange={elegirImagen}
+                disabled={procesandoImagen}
                 className="w-full rounded-lg border border-hueso-4 p-3"
               />
+
+              {procesandoImagen && (
+                <p className="mt-1 text-xs text-tinta-3">
+                  Preparando la imagen…
+                </p>
+              )}
+
+              {avisoImagen && !procesandoImagen && (
+                <p className="mt-1 text-xs text-tinta-2">{avisoImagen}</p>
+              )}
 
               {(vistaPrevia || form.imagenUrl) && (
                 <img
@@ -431,8 +568,9 @@ export default function GestionNoticiasPage() {
               )}
 
               <p className="mt-1 text-xs text-tinta-3">
-                JPG, PNG o WebP. Máximo 10 MB. Si eliges una foto local,
-                reemplazará la URL anterior.
+                JPG, PNG o WebP. La foto se reduce sola antes de subirla, así
+                que también sirve una sacada con el celular. Si eliges una foto
+                local, reemplazará la URL anterior.
               </p>
             </div>
 
@@ -479,14 +617,16 @@ export default function GestionNoticiasPage() {
             <div className="flex flex-wrap gap-3">
               <button
                 type="submit"
-                disabled={cargando}
+                disabled={cargando || procesandoImagen}
                 className="rounded-lg bg-primary px-6 py-3 font-semibold text-white hover:bg-primary-dark disabled:opacity-50"
               >
-                {cargando
-                  ? "Guardando..."
-                  : editando
-                    ? "Guardar cambios"
-                    : "Crear noticia"}
+                {procesandoImagen
+                  ? "Preparando imagen..."
+                  : cargando
+                    ? "Guardando..."
+                    : editando
+                      ? "Guardar cambios"
+                      : "Crear noticia"}
               </button>
 
               {editando !== null && (

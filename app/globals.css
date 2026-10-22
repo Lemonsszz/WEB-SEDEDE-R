@@ -142,6 +142,28 @@
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
+/* ---------------------------------------------------------------------------
+   Ancho del contenido en monitores grandes.
+   1320 px es el ancho correcto para una laptop de 13-15", pero en un monitor
+   de 27" o más deja franjas vacías enormes y todo el sitio "se ve chico".
+   Se agranda el token (y el margen lateral, para que la proporción se
+   mantenga): como Header, hero, carrusel, secciones y footer usan
+   `max-w-contenido` / `px-margin`, crecen todos a la vez y siguen alineados.
+   --------------------------------------------------------------------------- */
+@media (min-width: 1536px) {
+  :root {
+    --container-contenido: 1480px;
+    --spacing-margin: 2rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --container-contenido: 1680px;
+    --spacing-margin: 2.5rem;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
