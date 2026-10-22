@@ -14,9 +14,7 @@ export default function CtaVinculacion() {
             ¿Representas a una disciplina o buscas afiliación?
           </h2>
           <p className="text-body-md leading-relaxed text-white/90">
-            Nuestra ventanilla técnica asesora a clubes y asociaciones en procesos de
-            homologación, reservas de canchas y acceso al Registro Único del Deportista
-            (RUDA).
+            Accede a atención médica deportiva de manera gratuita.
           </p>
         </div>
 
