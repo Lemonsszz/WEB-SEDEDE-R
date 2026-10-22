@@ -1,5 +1,7 @@
-export const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
+// Sin barra final: ver la nota de lib/api.ts.
+export const API_URL = (
+  process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api"
+).replace(/\/+$/, "");
 
 export function obtenerToken(): string | null {
   return sessionStorage.getItem("sedede_token");

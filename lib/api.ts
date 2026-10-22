@@ -1,7 +1,11 @@
-const API_URL =
+// La URL base se normaliza quitando la barra final: la app concatena el
+// recurso con "/", así que un valor como "https://api.example.com/api/"
+// produciría "/api//noticias" y la API respondería 404.
+const API_URL = (
   typeof window === "undefined"
     ? process.env.API_URL
-    : process.env.NEXT_PUBLIC_API_URL;
+    : process.env.NEXT_PUBLIC_API_URL
+)?.replace(/\/+$/, "");
 
 async function consultarAPI<T>(recurso: string): Promise<T[]> {
   if (!API_URL) {
