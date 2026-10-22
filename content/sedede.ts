@@ -74,19 +74,19 @@ export const metricas: Metrica[] = [
     icono: "diversity",
   },
   {
-    valor: "12",
+    valor: "+5",
     label: "Complejos",
     detalle: "Escenarios de alto rendimiento",
     icono: "stadium",
   },
   {
     valor: "+4,5K",
-    label: "Atletas RUDA",
+    label: "Atletas Inscritos",
     detalle: "Registrados y monitoreados",
     icono: "sprint",
   },
   {
-    valor: "75",
+    valor: "20",
     label: "Años",
     detalle: "De fomento ininterrumpido",
     icono: "medalla",
@@ -103,11 +103,11 @@ export const sede = {
 };
 
 export const ruda = {
-  etiqueta: "Programa de Alto Rendimiento",
-  titulo: "¿Eres deportista federado de Oruro?",
-  destacado: "Inscríbete en el RUDA 2026.",
+  etiqueta: "Programa de Inscripción de Deportistas",
+  titulo: "¿Eres deportista en Oruro?",
+  destacado: "Inscríbete a una Asociación en 2026.",
   descripcion:
-    "Accede a cobertura biomédica deportiva, nutrición especializada, pasajes competitivos y el programa departamental de becas para atletas destacados.",
+    "Accede a cobertura, sé parte de competiciones y muchos otros beneficios.",
   ctaPrimario: { texto: "Iniciar registro de atleta", href: "/contacto" },
   ctaSecundario: { texto: "Descargar convocatoria", href: "/documentos" },
 };
