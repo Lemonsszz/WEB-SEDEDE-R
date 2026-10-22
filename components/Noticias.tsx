@@ -188,9 +188,74 @@ export default function Noticias() {
     .slice(0, MAXIMO_SECUNDARIAS);
 
   return (
-    <section className="relative w-full bg-gradient-to-b from-primary via-primary-deep to-primary py-space-lg">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/10 to-transparent" />
-      <div className="mx-auto w-full max-w-contenido px-margin">
+    <section className="relative w-full bg-gradient-to-b from-primary via-primary-deep to-primary lg:py-space-lg">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-black/10 to-transparent" />
+
+      {/* ---------- Móvil / tablet (debajo de lg) ----------
+          Sin cajón flotante: la imagen cubre toda la sección y un degradado
+          lateral oscurece los bordes para dar énfasis al título. Solo se
+          muestran el título y el botón; las mini noticias quedan para lg+. */}
+      <div className="lg:hidden">
+        <div className="relative min-h-[calc(100svh-5rem)] w-full overflow-hidden">
+          <div className="absolute inset-0">
+            {carrusel.map((noticia, posicion) => (
+              <Fondo
+                key={noticia.id}
+                noticia={noticia}
+                activa={posicion === indice}
+              />
+            ))}
+          </div>
+
+          {/* Oscurecido lateral + refuerzo inferior para que el texto lea bien */}
+          <div className="absolute inset-0 bg-gradient-to-r from-noche/95 via-noche/45 to-noche/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-noche/95 via-noche/25 to-transparent" />
+
+          <div className="relative flex min-h-[calc(100svh-5rem)] flex-col justify-end gap-space-sm px-margin pb-space-xl pt-space-xl">
+            <div className="flex items-center gap-space-sm">
+              <span className="inline-block h-[3px] w-10 rounded-full bg-primary shadow-brillo" />
+              <Kicker tono="rosa">
+                {principal.destacada ? "Noticia destacada" : "Actualidad SEDEDE"}
+              </Kicker>
+            </div>
+
+            <h1 className="text-balance font-display text-headline-lg font-black uppercase leading-[1.14] tracking-tight text-white">
+              {principal.titulo}
+            </h1>
+
+            <div className="pt-space-xs">
+              <Boton href={`/noticias/${principal.slug}`}>
+                Leer noticia completa
+                <ArrowRight
+                  aria-hidden
+                  className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </Boton>
+            </div>
+
+            <div className="flex items-center gap-space-sm pt-space-sm">
+              {carrusel.map((noticia, posicion) => (
+                <button
+                  key={noticia.id}
+                  type="button"
+                  onClick={() => elegir(posicion)}
+                  aria-label={`Ver noticia: ${noticia.titulo}`}
+                  className={`h-1 rounded-full transition-colors ${
+                    posicion === indice
+                      ? "w-12 bg-primary"
+                      : "w-6 bg-white/20 hover:bg-white/40"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ---------- Escritorio (lg+) ----------
+          Se mantiene el panel flotante con las 3 mini noticias, tal como
+          estaba. No tocar sin pedir confirmación: el usuario lo aprobó así. */}
+      <div className="mx-auto hidden w-full max-w-contenido px-margin lg:block">
         <div className="relative overflow-hidden rounded-[2rem] bg-noche text-white shadow-flotante ring-1 ring-black/5">
           <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-primary/25 blur-[120px]" />
           <div className="pointer-events-none absolute -right-20 top-1/2 h-[26rem] w-[26rem] rounded-full bg-gold/10 blur-[130px]" />
@@ -208,9 +273,9 @@ export default function Noticias() {
           <div className="absolute inset-0 bg-gradient-to-r from-noche via-noche/80 to-noche/35" />
           <div className="absolute inset-0 bg-gradient-to-t from-noche/90 via-transparent to-noche/20" />
 
-          <div className="relative flex min-h-[560px] flex-col justify-center px-space-md py-space-lg lg:px-space-xl lg:py-space-xl 2xl:min-h-[680px] 2xl:px-14 2xl:py-16">
-            <div className="grid grid-cols-1 items-center gap-gutter-lg lg:grid-cols-12">
-              <div className="z-10 flex flex-col gap-space-sm lg:col-span-8 lg:gap-space-md">
+          <div className="relative flex min-h-[560px] flex-col justify-center px-space-xl py-space-xl 2xl:min-h-[680px] 2xl:px-14 2xl:py-16">
+            <div className="grid grid-cols-12 items-center gap-gutter-lg">
+              <div className="z-10 flex flex-col gap-space-md lg:col-span-8">
                 <div className="flex items-center gap-space-sm">
                   <span className="inline-block h-[3px] w-10 rounded-full bg-primary shadow-brillo" />
                   <Kicker tono="rosa">
@@ -226,7 +291,7 @@ export default function Noticias() {
                   <span>{formatearFecha(principal.fecha_publicacion)}</span>
                 </div>
 
-                <h1 className="text-balance font-display text-headline-lg font-black uppercase leading-[1.12] tracking-tight text-white lg:text-[40px] lg:leading-[46px] 2xl:text-[52px] 2xl:leading-[58px]">
+                <h1 className="text-balance font-display font-black uppercase leading-[1.12] tracking-tight text-white lg:text-[40px] lg:leading-[46px] 2xl:text-[52px] 2xl:leading-[58px]">
                   {principal.titulo}
                 </h1>
 
@@ -281,7 +346,7 @@ export default function Noticias() {
                 </div>
               </div>
 
-              <aside className="z-10 mt-space-md flex flex-col gap-space-xs lg:col-span-4 lg:mt-0">
+              <aside className="z-10 flex flex-col gap-space-xs lg:col-span-4">
                 <div className="flex items-center justify-between pb-space-xs">
                   <div className="flex items-center gap-2">
                     <span className="h-2 w-2 rounded-full bg-gold-soft" />
