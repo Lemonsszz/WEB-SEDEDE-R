@@ -3,6 +3,14 @@ import { sede, direccion } from "@/content/sedede";
 import Banner from "@/components/ui/Banner";
 import Kicker from "@/components/ui/Kicker";
 import Boton from "@/components/ui/Boton";
+import { metadatos } from "@/lib/seo";
+
+export const metadata = metadatos({
+  titulo: "Contacto",
+  descripcion:
+    "Dirección, teléfono, WhatsApp, correo y horario de atención de SEDEDE Oruro, y sus redes sociales oficiales.",
+  ruta: "/contacto",
+});
 
 export default function ContactoPage() {
   return (

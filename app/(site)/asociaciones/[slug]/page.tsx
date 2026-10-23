@@ -9,6 +9,7 @@ import {
 } from "@/content/asociaciones";
 import { getDeportistas } from "@/content/deportistas";
 import Kicker from "@/components/ui/Kicker";
+import { metadatos, resumenTexto } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -21,13 +22,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const asociacion = getAsociacionBySlug(slug);
 
   if (!asociacion) {
-    return { title: "Asociación no encontrada — SEDEDE" };
+    return metadatos({
+      titulo: "Asociación no encontrada",
+      descripcion: "La asociación que buscás no está disponible.",
+      ruta: `/asociaciones/${slug}`,
+      noIndexar: true,
+    });
   }
 
-  return {
-    title: `${asociacion.nombre} — SEDEDE`,
-    description: asociacion.descripcion,
-  };
+  return metadatos({
+    titulo: asociacion.nombre,
+    descripcion:
+      resumenTexto(asociacion.descripcion) ??
+      `Asociación departamental de ${asociacion.nombre} en Oruro.`,
+    ruta: `/asociaciones/${asociacion.slug}`,
+  });
 }
 
 export default async function DetalleAsociacion({ params }: Props) {

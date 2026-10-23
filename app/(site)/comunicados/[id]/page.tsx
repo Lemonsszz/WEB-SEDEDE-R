@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, CalendarDays, Download } from "lucide-react";
@@ -9,9 +10,43 @@ import {
 } from "@/lib/api";
 import Banner from "@/components/ui/Banner";
 import Badge from "@/components/ui/Badge";
+import { metadatos, resumenTexto } from "@/lib/seo";
 
 // El detalle se genera en el servidor y se revalida cada minuto.
 export const revalidate = 60; // = REVALIDACION_DATOS (debe ser un literal)
+
+/**
+ * Título y descripción propios de cada comunicado. Si el comunicado no existe
+ * (o el API falla) se marca la página como `noindex` y la página responde 404.
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+
+  try {
+    const comunicado = await getComunicado(id);
+
+    return metadatos({
+      titulo: comunicado.titulo,
+      descripcion:
+        resumenTexto(comunicado.resumen || comunicado.contenido) ??
+        "Comunicado oficial del Servicio Departamental de Deportes de Oruro.",
+      ruta: `/comunicados/${comunicado.id}`,
+      tipo: "article",
+      publicadoEn: comunicado.fecha_publicacion,
+    });
+  } catch {
+    return metadatos({
+      titulo: "Comunicado no encontrado",
+      descripcion: "El comunicado que buscás no está disponible.",
+      ruta: `/comunicados/${id}`,
+      noIndexar: true,
+    });
+  }
+}
 
 // Prerenderiza los comunicados existentes; los nuevos se generan bajo demanda.
 export async function generateStaticParams() {

@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { getDeportistas } from "@/content/deportistas";
 import TarjetaDeportista from "@/components/deportistas/TarjetaDeportista";
 import Banner from "@/components/ui/Banner";
+import { metadatos } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Deportistas de élite — SEDEDE",
-  description:
-    "Deportistas que representan y destacan en el deporte departamental de Oruro.",
-};
+export const metadata = metadatos({
+  titulo: "Deportistas de élite",
+  descripcion:
+    "Atletas que representan y destacan en el deporte departamental de Oruro, con sus disciplinas y logros.",
+  ruta: "/deportistas",
+});
 
 export default function DeportistasPage() {
   const deportistas = getDeportistas();
