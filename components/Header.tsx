@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import Boton from "@/components/ui/Boton";
@@ -30,11 +31,16 @@ export default function Header() {
     <header className="fixed inset-x-0 top-0 z-50 w-full bg-surface/90 shadow-header backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-contenido items-center justify-between gap-space-md px-margin">
         <Link href="/" className="group flex items-center gap-space-sm focus:outline-none">
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary shadow-[0_4px_12px_rgba(155,11,36,0.2)] transition-transform duration-300 group-hover:scale-105">
-            <span className="font-display text-headline-md font-black leading-none text-white">
-              S
-            </span>
-          </div>
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-hueso ring-1 ring-hueso-5 shadow-[0_4px_12px_rgba(155,11,36,0.12)] transition-transform duration-300 group-hover:scale-105">
+            <Image
+              src="/img/logo-sedede-2-emblema.png"
+              alt="Escudo del Servicio Departamental de Deportes Oruro"
+              width={48}
+              height={48}
+              priority
+              className="h-full w-full object-contain"
+            />
+          </span>
 
           <div className="flex flex-col">
             <span className="font-display text-headline-sm font-extrabold uppercase leading-tight tracking-tight text-tinta">

@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import LoginForm from "./LoginForm";
+
+// Página de acceso: fuera de los buscadores.
+export const metadata: Metadata = {
+  title: "Iniciar sesión",
+  robots: { index: false, follow: false },
+};
 
 export default function LoginPage() {
   return (

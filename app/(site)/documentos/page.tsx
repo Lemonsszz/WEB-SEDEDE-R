@@ -2,6 +2,14 @@ import { FileText, Info } from "lucide-react";
 import { normativa, type Norma } from "@/content/sedede";
 import Banner from "@/components/ui/Banner";
 import Kicker from "@/components/ui/Kicker";
+import { metadatos } from "@/lib/seo";
+
+export const metadata = metadatos({
+  titulo: "Documentos oficiales",
+  descripcion:
+    "Resoluciones, reglamentos, convocatorias y memorias de gestión del Servicio Departamental de Deportes de Oruro.",
+  ruta: "/documentos",
+});
 
 const TONOS: Record<Norma["tono"], string> = {
   primario: "bg-primary-soft text-primary",
@@ -67,7 +75,7 @@ export default function DocumentosPage() {
               ¿Solicitas un documento que no aparece aquí?
             </span>
             <p className="text-body-sm text-tinta-2">
-              Escribe a la ventanilla de atención de SEDEDE indicando la unidad
+              Escribe a SEDEDE indicando la unidad
               responsable y el tipo de información requerida.
             </p>
           </div>

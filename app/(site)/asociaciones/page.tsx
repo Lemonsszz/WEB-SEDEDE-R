@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { getAsociaciones } from "@/content/asociaciones";
 import ListadoAsociaciones from "@/components/ListadoAsociaciones";
 import Banner from "@/components/ui/Banner";
+import { metadatos } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Asociaciones deportivas — SEDEDE",
-  description:
-    "Asociaciones departamentales que agrupan y organizan cada disciplina deportiva en Oruro.",
-};
+export const metadata = metadatos({
+  titulo: "Asociaciones deportivas",
+  descripcion:
+    "Directorio de las asociaciones departamentales que agrupan y organizan cada disciplina deportiva en Oruro.",
+  ruta: "/asociaciones",
+});
 
 export default function AsociacionesPage() {
   const asociaciones = getAsociaciones();

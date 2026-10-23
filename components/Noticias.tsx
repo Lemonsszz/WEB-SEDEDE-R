@@ -155,6 +155,9 @@ export default function Noticias({
         <div className="mx-auto w-full max-w-contenido px-margin">
           <div className="flex min-h-[320px] items-center justify-center rounded-[2rem] bg-white/5 px-space-lg text-center text-white shadow-flotante ring-1 ring-white/10">
             <div className="flex flex-col items-center gap-space-sm">
+              <h1 className="sr-only">
+                SEDEDE Oruro — Servicio Departamental de Deportes
+              </h1>
               <Kicker tono="rosa">Actualidad SEDEDE</Kicker>
               <h2 className="font-display text-headline-lg font-bold text-white">
                 No se pudieron cargar las noticias
@@ -178,6 +181,9 @@ export default function Noticias({
         <div className="mx-auto w-full max-w-contenido px-margin">
           <div className="flex min-h-[320px] items-center justify-center rounded-[2rem] bg-white/5 px-space-lg text-center shadow-flotante ring-1 ring-white/10">
             <div className="flex flex-col items-center gap-space-sm">
+              <h1 className="sr-only">
+                SEDEDE Oruro — Servicio Departamental de Deportes
+              </h1>
               <Kicker tono="rosa">Actualidad SEDEDE</Kicker>
               <h2 className="font-display text-headline-lg font-bold text-white">
                 No hay noticias publicadas
@@ -236,9 +242,9 @@ export default function Noticias({
               </Kicker>
             </div>
 
-            <h1 className="text-balance font-display text-headline-lg font-black uppercase leading-[1.14] tracking-tight text-white">
+            <h2 className="text-balance font-display text-headline-lg font-black uppercase leading-[1.14] tracking-tight text-white">
               {principal.titulo}
-            </h1>
+            </h2>
 
             <div className="pt-space-xs">
               <Boton href={`/noticias/${principal.slug}`}>

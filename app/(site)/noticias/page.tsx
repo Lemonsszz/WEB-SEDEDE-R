@@ -1,9 +1,17 @@
 import ListadoNoticias from "@/components/ListadoNoticias";
 import Banner from "@/components/ui/Banner";
 import { getNoticias, type Noticia } from "@/lib/api";
+import { metadatos } from "@/lib/seo";
 
 // El listado se arma en el servidor y se revalida cada minuto (ver lib/api.ts).
 export const revalidate = 60; // = REVALIDACION_DATOS (debe ser un literal)
+
+export const metadata = metadatos({
+  titulo: "Noticias",
+  descripcion:
+    "Últimas noticias del deporte orureño: competencias, convocatorias, resultados, actividades y disposiciones de SEDEDE.",
+  ruta: "/noticias",
+});
 
 export default async function NoticiasPage() {
   let noticias: Noticia[] = [];

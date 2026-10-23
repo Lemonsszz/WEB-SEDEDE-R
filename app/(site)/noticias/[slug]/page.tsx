@@ -1,12 +1,51 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, CalendarDays } from "lucide-react";
 import { getNoticia, getNoticias, formatearFecha } from "@/lib/api";
 import Badge from "@/components/ui/Badge";
+import { IMAGEN_SOCIAL, SITIO_URL, fechaIso, metadatos, resumenTexto } from "@/lib/seo";
 
 // El detalle se genera en el servidor y se revalida cada minuto.
 export const revalidate = 60; // = REVALIDACION_DATOS (debe ser un literal)
+
+/**
+ * Título, descripción y Open Graph propios de cada noticia: cuando alguien
+ * comparte el enlace en WhatsApp o Facebook aparece el titular real con su
+ * foto, no el título genérico del sitio.
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  try {
+    const noticia = await getNoticia(slug);
+
+    return metadatos({
+      titulo: noticia.titulo,
+      descripcion:
+        resumenTexto(noticia.resumen || noticia.contenido) ??
+        `Noticia publicada por el Servicio Departamental de Deportes de Oruro${
+          noticia.categoria ? ` — ${noticia.categoria}` : ""
+        }.`,
+      ruta: `/noticias/${noticia.slug}`,
+      imagen: noticia.imagen_url,
+      tipo: "article",
+      publicadoEn: noticia.fecha_publicacion,
+    });
+  } catch {
+    return metadatos({
+      titulo: "Noticia no encontrada",
+      descripcion: "La noticia que buscás no está disponible.",
+      ruta: `/noticias/${slug}`,
+      noIndexar: true,
+    });
+  }
+}
 
 // Prerenderiza las noticias que ya existen al compilar. Los slugs nuevos se
 // generan bajo demanda y quedan cacheados igual (ISR).
@@ -29,8 +68,50 @@ export default async function DetalleNoticia({
 
   const noticia = await getNoticia(slug).catch(() => notFound());
 
+  /**
+   * Datos estructurados de la noticia (schema.org/NewsArticle). Google los usa
+   * para mostrar fecha, medio y foto en los resultados y en Google Noticias.
+   */
+  const datosNoticia = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: noticia.titulo,
+    description:
+      resumenTexto(noticia.resumen || noticia.contenido) ?? noticia.titulo,
+    image: noticia.imagen_url ? [noticia.imagen_url] : [`${SITIO_URL}${IMAGEN_SOCIAL}`],
+    datePublished: fechaIso(noticia.fecha_publicacion),
+    dateModified: fechaIso(noticia.fecha_publicacion),
+    articleSection: noticia.categoria ?? undefined,
+    inLanguage: "es-BO",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITIO_URL}/noticias/${noticia.slug}`,
+    },
+    author: {
+      "@type": "Organization",
+      name: "Servicio Departamental de Deportes Oruro",
+      url: SITIO_URL,
+    },
+    publisher: {
+      "@type": "GovernmentOrganization",
+      name: "Servicio Departamental de Deportes Oruro",
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITIO_URL}${IMAGEN_SOCIAL}`,
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen bg-hueso">
+      <script
+        type="application/ld+json"
+        // Contenido generado en el servidor a partir de los datos del API. Se
+        // escapa `<` porque el titular podría contenerlo (recomendación de Next).
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(datosNoticia).replace(/</g, "\\u003c"),
+        }}
+      />
       <article className="mx-auto flex max-w-3xl flex-col gap-space-md px-margin py-space-xl">
         <div className="flex flex-wrap items-center gap-4">
           <Badge tono="primario">{noticia.categoria || "Institucional"}</Badge>

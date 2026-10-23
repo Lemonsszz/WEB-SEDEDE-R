@@ -3,6 +3,15 @@ import { sede, direccion } from "@/content/sedede";
 import Banner from "@/components/ui/Banner";
 import Kicker from "@/components/ui/Kicker";
 import Boton from "@/components/ui/Boton";
+import RedesSociales from "@/components/RedesSociales";
+import { metadatos } from "@/lib/seo";
+
+export const metadata = metadatos({
+  titulo: "Contacto",
+  descripcion:
+    "Dirección, teléfono, WhatsApp, correo y horario de atención de SEDEDE Oruro, y sus redes sociales oficiales.",
+  ruta: "/contacto",
+});
 
 export default function ContactoPage() {
   return (
@@ -79,6 +88,19 @@ export default function ContactoPage() {
                 {sede.horario}
               </p>
             </article>
+          </div>
+
+          <div className="flex flex-col gap-space-sm rounded-2xl bg-white p-space-md shadow-tarjeta sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-1">
+              <h3 className="font-display text-headline-sm font-bold text-tinta">
+                Redes oficiales
+              </h3>
+              <p className="text-body-sm leading-relaxed text-tinta-2">
+                Seguinos para enterarte de convocatorias, resultados y
+                actividades del deporte orureño.
+              </p>
+            </div>
+            <RedesSociales className="shrink-0" />
           </div>
 
           <div className="flex flex-col items-start justify-between gap-space-md rounded-3xl bg-primary p-space-lg text-white lg:flex-row lg:items-center">

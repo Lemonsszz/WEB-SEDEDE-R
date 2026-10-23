@@ -10,6 +10,7 @@ import {
 import { getAsociacionBySlug } from "@/content/asociaciones";
 import Kicker from "@/components/ui/Kicker";
 import Badge from "@/components/ui/Badge";
+import { metadatos } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -22,13 +23,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const deportista = getDeportistaBySlug(slug);
 
   if (!deportista) {
-    return { title: "Deportista no encontrado — SEDEDE" };
+    return metadatos({
+      titulo: "Deportista no encontrado",
+      descripcion: "El perfil que buscás no está disponible.",
+      ruta: `/deportistas/${slug}`,
+      noIndexar: true,
+    });
   }
 
-  return {
-    title: `${deportista.nombre} — SEDEDE`,
-    description: `${deportista.disciplina} · ${deportista.logro}`,
-  };
+  return metadatos({
+    titulo: deportista.nombre,
+    descripcion: `${deportista.disciplina} · ${deportista.logro}`,
+    ruta: `/deportistas/${deportista.slug}`,
+  });
 }
 
 export default async function DetalleDeportista({ params }: Props) {
