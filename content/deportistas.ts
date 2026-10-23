@@ -129,6 +129,16 @@ export const deportistas: Deportista[] = [
       "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80",
     asociacionSlug: "gimnasia",
   },
+  {
+    slug: "axel-colque",
+    nombre: "Axel Colque",
+    disciplina: "Fútbol",
+    logro: "Medallista nacional",
+    bio: "FUTBOLISTA PROFESIONALespecializado en pruebas de velocidad. Integra el equipo de relevos de la selección departamental.",
+    imagen:
+      "https://images.unsplash.com/photo-1530549387789-4c1017266635?auto=format&fit=crop&w=1200&q=80",
+    asociacionSlug: "futbol",
+  },
 ];
 
 export function getDeportistas(): Deportista[] {

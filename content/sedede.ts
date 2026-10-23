@@ -36,14 +36,14 @@ export const institucion = {
 export const mision = {
   titulo: "Misión Institucional",
   texto:
-    "Fomentar, articular y garantizar la práctica del deporte formativo, recreativo y de alto rendimiento en todo el departamento de Oruro, gestionando eficientemente la infraestructura pública y fortaleciendo a nuestras asociaciones de base.",
+    "Promover y facilitar la práctica del deporte y la actividad física en el Departamento de Oruro así mismo fomentar a través de un conjunto de actividades y procesos que garanticen el derecho a una formación integral apoyando al deporte: recreativo, formativo, competitivo y de alto rendimiento en las diferentes disciplinas deportivas.",
   fundamento: "Art. 104 Constitución Política del Estado",
 };
 
 export const vision = {
   titulo: "Visión Institucional",
   texto:
-    "Ser reconocidos como el motor del deporte orureño y referente nacional en formación básica, infraestructura y alto rendimiento, con atletas de élite que representen al departamento en cada competencia.",
+    "Ser una Institución eficiente y eficaz, con un alto compromiso social y humano orientado al desarrollo integral del deporte recreativo, formativo, competitivo y de alto rendimiento implementando acciones para la práctica deportiva de máximo rendimiento logrando altos niveles de competencia, para mejorar la participación en eventos de carácter local, nacional e internacional, así apoya y garantiza la participación en eventos deportivos.",
 };
 
 export const valores: Valor[] = [
@@ -61,7 +61,7 @@ export const valores: Valor[] = [
     descripcion: "Rendición de cuentas de cada recurso invertido.",
   },
   {
-    titulo: "Identidad Oruroña",
+    titulo: "Identidad Orureña",
     descripcion: "Raíces culturales que impulsan la pasión deportiva.",
   },
 ];
@@ -94,11 +94,11 @@ export const metricas: Metrica[] = [
 ];
 
 export const sede = {
-  direccion: "Estadio Departamental, Tribuna Preferencia, Puerta 4",
+  direccion: "Palacio de los Deportes",
   ciudad: "Oruro, Bolivia",
-  telefono: "+591 (4) 425-6700",
-  horario: "Lunes a viernes: 08:00 - 16:30",
-  email: "contacto@sedede.gob.bo",
+  telefono: "+52 47568",
+  horario: "Lunes a viernes: 08:30 - 16:30",
+  email: "sededeoruro2026@gmail.com",
   provisional: true,
 };
 
@@ -164,7 +164,7 @@ export type Norma = {
 
 export const normativa: Norma[] = [
   {
-    titulo: "Ley de Fomento Deportivo del Departamento",
+    titulo: "Ley de fomento Deportivo del Departamento",
     etiqueta: "Ley departamental",
     descripcion:
       "Establece el régimen de asignación de recursos, viajes a torneos nacionales y becas para deportistas de élite.",
