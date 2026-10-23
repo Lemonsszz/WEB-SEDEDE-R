@@ -16,7 +16,7 @@ export const SITIO_URL = (
 export const NOMBRE_SITIO = "SEDEDE Oruro";
 
 /** Imagen por defecto para Open Graph y Twitter (el escudo institucional). */
-export const IMAGEN_SOCIAL = "/img/logo-sedede.png";
+export const IMAGEN_SOCIAL = "/img/logo-sedede-2.png";
 
 type Entrada = {
   /** Título de la página. El sufijo " | SEDEDE Oruro" lo agrega el layout. */
