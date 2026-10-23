@@ -1,12 +1,14 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { institucion, sede } from "@/content/sedede";
+import RedesSociales from "@/components/RedesSociales";
 
 const navegacion = [
   { href: "/sedede", texto: "Misión y organización" },
   { href: "/asociaciones", texto: "Directorio de asociaciones" },
-  { href: "/deportistas", texto: "Programa atletas de élite" },
-  { href: "/eventos", texto: "Calendario de competencias" },
+  { href: "/deportistas", texto: "Atletas de élite" },
+  { href: "/eventos", texto: "Calendario de Eventos y Competencias" },
   { href: "/documentos", texto: "Normativas y reglamentos" },
   { href: "/contacto", texto: "Contacto institucional" },
 ];
@@ -18,11 +20,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-gutter-lg md:grid-cols-2 lg:grid-cols-3">
           <div className="flex flex-col gap-space-sm">
             <div className="flex items-center gap-space-sm">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary">
-                <span className="font-display text-headline-sm font-black text-white">
-                  S
-                </span>
-              </div>
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-hueso ring-1 ring-white/20">
+                <Image
+                  src="/img/logo-sedede.png"
+                  alt="Escudo del Servicio Departamental de Deportes Oruro"
+                  width={40}
+                  height={40}
+                  className="h-full w-full object-contain"
+                />
+              </span>
               <div className="flex flex-col">
                 <span className="font-display text-label-md font-extrabold uppercase text-white">
                   {institucion.nombre}
@@ -83,6 +89,13 @@ export default function Footer() {
                   {sede.email}
                 </a>
               </div>
+            </div>
+
+            <div className="mt-space-xs flex flex-col gap-2 border-t border-white/10 pt-space-sm">
+              <span className="font-display text-foot-xs font-bold uppercase tracking-wider text-white/70">
+                Redes oficiales
+              </span>
+              <RedesSociales />
             </div>
           </div>
         </div>
