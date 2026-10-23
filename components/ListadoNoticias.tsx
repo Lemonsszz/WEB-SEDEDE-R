@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, CalendarDays, Newspaper } from "lucide-react";
 import { getNoticias, formatearFecha, type Noticia } from "@/lib/api";
@@ -26,36 +26,45 @@ function claveFechaBolivia(fecha: string | null): string {
   }).format(valor);
 }
 
-export default function ListadoNoticias() {
-  const [noticias, setNoticias] = useState<Noticia[]>([]);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState(false);
+type Props = {
+  /** Noticias resueltas en el servidor: se pintan ya en el primer HTML. */
+  noticiasIniciales?: Noticia[];
+  /** `true` si el servidor no pudo consultar el API. */
+  errorInicial?: boolean;
+};
+
+export default function ListadoNoticias({
+  noticiasIniciales = [],
+  errorInicial = false,
+}: Props) {
+  // El estado local solo se usa al reintentar una carga que falló en el
+  // servidor; el resto del tiempo el listado viene resuelto en el HTML.
+  const [noticiasRecargadas, setNoticiasRecargadas] = useState<
+    Noticia[] | null
+  >(null);
+  const [errorRecarga, setErrorRecarga] = useState<boolean | null>(null);
+  const [cargando, setCargando] = useState(false);
   const [fecha, setFecha] = useState("");
 
-  const cargarNoticias = useCallback(() => {
+  const noticias = noticiasRecargadas ?? noticiasIniciales;
+  const error = errorRecarga ?? errorInicial;
+
+  function reintentar() {
+    setCargando(true);
+    setErrorRecarga(false);
+
     getNoticias()
       .then((datos) => {
-        setNoticias(datos);
-        setError(false);
+        setNoticiasRecargadas(datos);
       })
       .catch((err) => {
         console.error("Error al cargar noticias:", err);
-        setError(true);
+        setErrorRecarga(true);
       })
       .finally(() => {
         setCargando(false);
       });
-  }, []);
-
-  function reintentar() {
-    setCargando(true);
-    setError(false);
-    cargarNoticias();
   }
-
-  useEffect(() => {
-    void cargarNoticias();
-  }, [cargarNoticias]);
 
   const filtradas = useMemo(() => {
     if (!fecha) {
@@ -175,6 +184,7 @@ export default function ListadoNoticias() {
                   <ImagenNoticia
                     src={noticia.imagen_url}
                     alt={noticia.titulo}
+                    ancho={900}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
 

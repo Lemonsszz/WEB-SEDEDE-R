@@ -4,10 +4,27 @@ import { ArrowLeft, CalendarDays, Download } from "lucide-react";
 import {
   formatearFecha,
   getComunicado,
+  getComunicados,
   type Comunicado,
 } from "@/lib/api";
 import Banner from "@/components/ui/Banner";
 import Badge from "@/components/ui/Badge";
+
+// El detalle se genera en el servidor y se revalida cada minuto.
+export const revalidate = 60; // = REVALIDACION_DATOS (debe ser un literal)
+
+// Prerenderiza los comunicados existentes; los nuevos se generan bajo demanda.
+export async function generateStaticParams() {
+  try {
+    const comunicados = await getComunicados();
+    return comunicados.map((comunicado) => ({
+      id: String(comunicado.id),
+    }));
+  } catch (error) {
+    console.error("No se pudieron prerenderizar los comunicados:", error);
+    return [];
+  }
+}
 
 export default async function DetalleComunicado({
   params,

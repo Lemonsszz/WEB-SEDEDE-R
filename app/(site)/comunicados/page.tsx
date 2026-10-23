@@ -1,6 +1,9 @@
 import Comunicados from "@/components/Comunicados";
 import Banner from "@/components/ui/Banner";
 
+// Los comunicados se consultan en el servidor y se revalidan cada minuto.
+export const revalidate = 60; // = REVALIDACION_DATOS (debe ser un literal)
+
 export default function ComunicadosPage() {
   return (
     <>

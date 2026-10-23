@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, CalendarDays, ChevronRight, Clock } from "lucide-react";
 import { getNoticias, formatearFecha, type Noticia } from "@/lib/api";
@@ -16,13 +16,20 @@ function minutosLectura(noticia: Noticia) {
   return Math.max(1, Math.round(palabras / 200));
 }
 
-function Fondo({ noticia, activa }: { noticia: Noticia; activa: boolean }) {
+function Fondo({
+  noticia,
+  activa,
+}: {
+  noticia: Noticia;
+  activa: boolean;
+}) {
   return (
     <ImagenNoticia
       src={noticia.imagen_url}
       alt={noticia.titulo}
       decorativa
       eager={activa}
+      ancho={1600}
       className={`absolute inset-0 h-full w-full scale-105 object-cover transition-opacity duration-700 ${
         activa ? "opacity-100" : "opacity-0"
       }`}
@@ -48,6 +55,7 @@ function TarjetaSecundaria({
         <ImagenNoticia
           src={noticia.imagen_url}
           alt={noticia.titulo}
+          ancho={240}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -69,12 +77,29 @@ function TarjetaSecundaria({
   );
 }
 
-export default function Noticias() {
-  const [noticias, setNoticias] = useState<Noticia[]>([]);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState(false);
+type Props = {
+  /** Noticias resueltas en el servidor: se pintan ya en el primer HTML. */
+  noticiasIniciales?: Noticia[];
+  /** `true` si el servidor no pudo consultar el API. */
+  errorInicial?: boolean;
+};
+
+export default function Noticias({
+  noticiasIniciales = [],
+  errorInicial = false,
+}: Props) {
+  // Los datos del servidor son la fuente principal. El estado local solo entra
+  // en juego al usar "Reintentar" cuando la carga del servidor falló.
+  const [noticiasRecargadas, setNoticiasRecargadas] = useState<
+    Noticia[] | null
+  >(null);
+  const [errorRecarga, setErrorRecarga] = useState<boolean | null>(null);
+  const [cargando, setCargando] = useState(false);
   const [activo, setActivo] = useState(0);
   const [reinicio, setReinicio] = useState(0);
+
+  const noticias = noticiasRecargadas ?? noticiasIniciales;
+  const error = errorRecarga ?? errorInicial;
 
   const totalCarrusel = Math.min(4, noticias.length);
 
@@ -88,35 +113,27 @@ export default function Noticias() {
     return () => window.clearInterval(id);
   }, [totalCarrusel, reinicio]);
 
-  const cargarNoticias = useCallback(() => {
+  function reintentar() {
+    setCargando(true);
+    setErrorRecarga(false);
+
     getNoticias()
       .then((datos) => {
-        setNoticias(datos);
-        setError(false);
+        setNoticiasRecargadas(datos);
       })
       .catch((err) => {
         console.error("Error al cargar noticias:", err);
-        setError(true);
+        setErrorRecarga(true);
       })
       .finally(() => {
         setCargando(false);
       });
-  }, []);
-
-  function reintentar() {
-    setCargando(true);
-    setError(false);
-    cargarNoticias();
   }
 
   function elegir(indice: number) {
     setActivo(indice);
     setReinicio((valor) => valor + 1);
   }
-
-  useEffect(() => {
-    void cargarNoticias();
-  }, [cargarNoticias]);
 
   if (cargando) {
     return (

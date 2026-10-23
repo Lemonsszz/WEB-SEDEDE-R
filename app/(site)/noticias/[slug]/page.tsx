@@ -2,8 +2,23 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, CalendarDays } from "lucide-react";
-import { getNoticia, formatearFecha } from "@/lib/api";
+import { getNoticia, getNoticias, formatearFecha } from "@/lib/api";
 import Badge from "@/components/ui/Badge";
+
+// El detalle se genera en el servidor y se revalida cada minuto.
+export const revalidate = 60; // = REVALIDACION_DATOS (debe ser un literal)
+
+// Prerenderiza las noticias que ya existen al compilar. Los slugs nuevos se
+// generan bajo demanda y quedan cacheados igual (ISR).
+export async function generateStaticParams() {
+  try {
+    const noticias = await getNoticias();
+    return noticias.map((noticia) => ({ slug: noticia.slug }));
+  } catch (error) {
+    console.error("No se pudieron prerenderizar las noticias:", error);
+    return [];
+  }
+}
 
 export default async function DetalleNoticia({
   params,

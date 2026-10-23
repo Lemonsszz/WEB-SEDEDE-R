@@ -7,14 +7,36 @@ const API_URL = (
     : process.env.NEXT_PUBLIC_API_URL
 )?.replace(/\/+$/, "");
 
+/**
+ * Cada cuántos segundos se regeneran las páginas con datos del API.
+ *
+ * Es el mismo TTL que el caché del backend (`Cache::remember(..., 60)` en
+ * `NoticiaController`, `ComunicadoController` y `EventoController`), que a su
+ * vez se invalida con `Cache::forget` en cada alta/edición/baja del panel.
+ * Con esto la página se arma una vez por minuto y el resto de las visitas las
+ * sirve el CDN de Vercel, en vez de consultar Render + Supabase en cada carga.
+ */
+export const REVALIDACION_DATOS = 60;
+
+type OpcionesFetch = RequestInit & { next?: { revalidate: number } };
+
+/**
+ * En el servidor se pide a Next que cachee la respuesta (`next.revalidate`);
+ * en el navegador ese campo no existe y el fetch va directo al API, que ya
+ * responde desde su propio caché de 60 s.
+ */
+function opcionesFetch(): OpcionesFetch {
+  return typeof window === "undefined"
+    ? { next: { revalidate: REVALIDACION_DATOS } }
+    : {};
+}
+
 async function consultarAPI<T>(recurso: string): Promise<T[]> {
   if (!API_URL) {
     throw new Error("Falta configurar API_URL en .env.local");
   }
 
-  const respuesta = await fetch(`${API_URL}/${recurso}`, {
-    cache: "no-store",
-  });
+  const respuesta = await fetch(`${API_URL}/${recurso}`, opcionesFetch());
 
   if (!respuesta.ok) {
     throw new Error(`Error al consultar ${recurso}: ${respuesta.status}`);
@@ -70,7 +92,7 @@ export async function getNoticia(slug: string): Promise<Noticia> {
 
   const respuesta = await fetch(
     `${API_URL}/noticias/${encodeURIComponent(slug)}`,
-    { cache: "no-store" }
+    opcionesFetch()
   );
 
   if (!respuesta.ok) {
@@ -130,9 +152,7 @@ export async function getComunicado(
     throw new Error("Falta configurar API_URL en .env.local");
   }
 
-  const respuesta = await fetch(`${API_URL}/comunicados/${id}`, {
-    cache: "no-store",
-  });
+  const respuesta = await fetch(`${API_URL}/comunicados/${id}`, opcionesFetch());
 
   if (!respuesta.ok) {
     throw new Error(`Error al consultar el comunicado: ${respuesta.status}`);
