@@ -95,11 +95,11 @@ export default function ExpedienteHectorGaribay() {
           </div>
 
           <div className="flex flex-wrap items-center gap-space-md pt-space-xs">
-            <div className="inline-flex items-baseline gap-space-xs rounded-2xl border border-white/10 bg-white/5 px-space-md py-space-sm">
+            <div className="inline-flex max-w-full flex-wrap items-baseline gap-x-space-xs gap-y-1 rounded-2xl border border-white/10 bg-white/5 px-space-md py-space-sm">
               <span className="font-display text-headline-xl font-black leading-none text-gold tabular-nums">
                 {hector.record.tiempo}
               </span>
-              <span className="text-label-sm uppercase text-white/60">
+              <span className="text-label-sm uppercase leading-tight text-white/60">
                 Récord nacional 42K
               </span>
             </div>
@@ -118,7 +118,7 @@ export default function ExpedienteHectorGaribay() {
       </section>
 
       {/* Marcas y récords oficiales */}
-      <section className="w-full py-space-xl">
+      <section data-reveal="" className="w-full py-space-xl">
         <div className="mx-auto flex max-w-contenido flex-col gap-space-lg px-margin">
           <div className="flex flex-col gap-space-xs">
             <Kicker tono="primario">Historial cronológico de competencia</Kicker>
@@ -139,7 +139,7 @@ export default function ExpedienteHectorGaribay() {
                 className="flex flex-col gap-space-xs rounded-2xl bg-white p-space-md shadow-tarjeta"
               >
                 <div className="flex items-center justify-between gap-space-xs">
-                  <span className="rounded bg-primary px-2 py-0.5 font-display text-kicker text-white">
+                  <span className="shrink-0 rounded bg-primary px-2 py-0.5 font-display text-kicker text-white">
                     {marca.distancia}
                   </span>
                   <span className="font-display text-label-sm text-tinta-3">
@@ -147,24 +147,26 @@ export default function ExpedienteHectorGaribay() {
                   </span>
                 </div>
 
-                <div className="flex items-baseline justify-between gap-space-xs">
-                  <span className="font-display text-label-md font-bold text-tinta">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-space-xs gap-y-1">
+                  <span className="min-w-0 break-words font-display text-label-md font-bold text-tinta">
                     {marca.prueba}
                   </span>
-                  <span className="font-display text-headline-md font-black text-primary tabular-nums">
+                  <span className="shrink-0 font-display text-headline-md font-black text-primary tabular-nums">
                     {marca.tiempo}
                   </span>
                 </div>
 
-                <div>
-                  <span className="block font-display text-body-sm font-semibold text-tinta">
+                <div className="min-w-0">
+                  <span className="block break-words font-display text-body-sm font-semibold text-tinta">
                     {marca.evento}
                   </span>
-                  <span className="text-body-sm text-tinta-2">{marca.sede}</span>
+                  <span className="block break-words text-body-sm text-tinta-2">
+                    {marca.sede}
+                  </span>
                 </div>
 
                 <span
-                  className={`mt-1 w-fit rounded-full px-space-sm py-1 font-display text-label-sm font-bold uppercase ${
+                  className={`mt-1 w-fit max-w-full break-words rounded-full px-space-sm py-1 font-display text-label-sm font-bold uppercase leading-tight ${
                     marca.record
                       ? "bg-gold text-gold-deep"
                       : "bg-hueso-2 text-tinta-2"
@@ -244,7 +246,7 @@ export default function ExpedienteHectorGaribay() {
       </section>
 
       {/* Trayectoria y raíces */}
-      <section className="w-full pb-space-xl">
+      <section data-reveal="" className="w-full pb-space-xl">
         <div className="mx-auto max-w-contenido px-margin">
           <div className="grid grid-cols-1 gap-gutter-lg lg:grid-cols-12">
             <div className="flex flex-col gap-space-md lg:col-span-7">
