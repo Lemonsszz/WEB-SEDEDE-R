@@ -24,7 +24,7 @@ export default function DeportistasPage() {
 
       <HectorGaribay />
 
-      <section data-reveal="" className="w-full pb-space-xl">
+      <section data-reveal="" className="w-full pb-space-xl pt-space-md">
         <div className="mx-auto flex max-w-contenido flex-col gap-space-lg px-margin">
           <div className="flex flex-col justify-between gap-space-md md:flex-row md:items-end">
             <div className="flex flex-col gap-space-xs">
