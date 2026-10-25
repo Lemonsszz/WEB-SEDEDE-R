@@ -36,6 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       resumenTexto(asociacion.descripcion) ??
       `Asociación departamental de ${asociacion.nombre} en Oruro.`,
     ruta: `/asociaciones/${asociacion.slug}`,
+    imagen: asociacion.imagen,
   });
 }
 
@@ -53,35 +54,37 @@ export default async function DetalleAsociacion({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-hueso">
-      <section className="relative flex min-h-[380px] items-end overflow-hidden bg-noche">
-        <Image
-          src={asociacion.imagen}
-          alt={asociacion.nombre}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-60"
-        />
+      <section className="w-full pt-space-xl">
+        <div className="mx-auto max-w-4xl px-margin">
+          <article className="overflow-hidden rounded-3xl bg-white shadow-tarjeta">
+            <div className="relative h-64 w-full bg-hueso-3 sm:h-80">
+              <Image
+                src={asociacion.imagen}
+                alt={asociacion.nombre}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 900px"
+                className="object-cover"
+              />
+            </div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-noche via-noche/60 to-noche/20" />
+            <div className="flex flex-col gap-space-sm p-space-lg">
+              <Kicker tono="primario">{asociacion.disciplina}</Kicker>
 
-        <div className="relative mx-auto w-full max-w-contenido px-margin py-space-lg">
-          <Kicker tono="rosa">{asociacion.disciplina}</Kicker>
+              <h1 className="text-balance break-words font-display text-headline-xl font-black leading-tight tracking-tight text-tinta">
+                {asociacion.nombre}
+              </h1>
 
-          <h1 className="mt-2 max-w-4xl font-display text-headline-xl font-black leading-tight tracking-tight text-white">
-            {asociacion.nombre}
-          </h1>
+              <p className="text-body-md leading-relaxed text-tinta-2">
+                {asociacion.descripcion}
+              </p>
+            </div>
+          </article>
         </div>
       </section>
 
       <section className="w-full py-space-xl">
         <div className="mx-auto flex max-w-4xl flex-col gap-space-md px-margin">
-          <article className="rounded-2xl bg-white p-space-lg shadow-tarjeta">
-            <p className="text-body-md leading-relaxed text-tinta-2">
-              {asociacion.descripcion}
-            </p>
-          </article>
-
           {deportistas.length > 0 ? (
             <section className="flex flex-col gap-space-md">
               <h2 className="font-display text-headline-md font-extrabold tracking-tight text-tinta">

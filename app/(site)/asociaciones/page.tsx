@@ -14,7 +14,7 @@ export default function AsociacionesPage() {
   const asociaciones = getAsociaciones();
 
   return (
-    <div className="min-h-screen bg-noche-2">
+    <div className="min-h-screen bg-hueso">
       <Banner
         kicker="Deporte departamental"
         titulo="Asociaciones deportivas"

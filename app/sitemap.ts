@@ -26,6 +26,7 @@ const ESTATICAS: Array<{
   { ruta: "/sedede", prioridad: 0.7, frecuencia: "monthly" },
   { ruta: "/asociaciones", prioridad: 0.7, frecuencia: "monthly" },
   { ruta: "/deportistas", prioridad: 0.7, frecuencia: "monthly" },
+  { ruta: "/deportistas/hector-garibay", prioridad: 0.8, frecuencia: "monthly" },
   { ruta: "/documentos", prioridad: 0.6, frecuencia: "monthly" },
   { ruta: "/contacto", prioridad: 0.5, frecuencia: "yearly" },
 ];
