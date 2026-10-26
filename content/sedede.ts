@@ -96,7 +96,7 @@ export const metricas: Metrica[] = [
 export const sede = {
   direccion: "Palacio de los Deportes",
   ciudad: "Oruro, Bolivia",
-  telefono: "+52 47568",
+  telefono: "+591 70413403 - 52 47568",
   horario: "Lunes a viernes: 08:30 - 16:30",
   email: "sededeoruro2026@gmail.com",
   provisional: true,
