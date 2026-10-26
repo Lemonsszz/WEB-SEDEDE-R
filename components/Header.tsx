@@ -110,7 +110,12 @@ export default function Header() {
             </Link>
           ))}
 
-          <Boton href="/contacto" tamano="sm" className="mt-space-md w-full">
+          <Boton
+            href="/contacto"
+            tamano="sm"
+            onClick={() => setAbierto(false)}
+            className="mt-space-md w-full"
+          >
             Contacto
           </Boton>
         </nav>

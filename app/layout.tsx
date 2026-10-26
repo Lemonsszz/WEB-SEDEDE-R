@@ -93,9 +93,15 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  // `data-scroll-behavior="smooth"`: Next 16 ya no fuerza el salto instantáneo
+  // al cambiar de ruta, así que con `scroll-behavior: smooth` (globals.css) el
+  // navegador animaba el scroll y la página nueva quedaba a medio camino. Con
+  // el atributo, Next desactiva `smooth` solo durante la transición
+  // (comportamiento previo a la v16) y se entra siempre al tope.
   return (
     <html
       lang="es"
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">

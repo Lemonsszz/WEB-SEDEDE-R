@@ -10,15 +10,32 @@ import { useEffect } from "react";
  */
 export default function RevelarGlobal() {
   useEffect(() => {
+    const mostrar = (elemento: Element) =>
+      elemento.setAttribute("data-visible", "true");
+
+    // Navegadores sin IntersectionObserver: sin esto el contenido con
+    // `data-reveal` se quedaría invisible para siempre (opacity 0).
+    if (typeof IntersectionObserver === "undefined") {
+      document
+        .querySelectorAll<HTMLElement>("[data-reveal]")
+        .forEach(mostrar);
+      return;
+    }
+
+    // `threshold: 0` a propósito. Con un valor alto (antes 0.12) los bloques
+    // más altos que la pantalla nunca lo alcanzaban: en el celular el listado
+    // de asociaciones mide ~7000 px contra una pantalla de ~700 px, así que la
+    // proporción visible jamás llegaba al 12 % y el listado se quedaba en
+    // opacity 0 (solo se veía el banner). Basta con que asome un píxel.
     const observador = new IntersectionObserver(
       (entradas) => {
         for (const entrada of entradas) {
           if (!entrada.isIntersecting) continue;
-          entrada.target.setAttribute("data-visible", "true");
+          mostrar(entrada.target);
           observador.unobserve(entrada.target);
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+      { threshold: 0, rootMargin: "0px 0px -6% 0px" }
     );
 
     const observar = (raiz: ParentNode) => {
