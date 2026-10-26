@@ -16,6 +16,11 @@ function minutosLectura(noticia: Noticia) {
   return Math.max(1, Math.round(palabras / 200));
 }
 
+/** Retardo (ms) para escalonar `.aparicion-carrusel`. */
+function retardo(ms: number) {
+  return { animationDelay: `${ms}ms` };
+}
+
 function Fondo({
   noticia,
   activa,
@@ -234,19 +239,25 @@ export default function Noticias({
           <div className="absolute inset-0 bg-gradient-to-r from-noche/95 via-noche/45 to-noche/20" />
           <div className="absolute inset-0 bg-gradient-to-t from-noche/95 via-noche/25 to-transparent" />
 
-          <div className="relative flex min-h-[calc(100svh-5rem)] flex-col justify-end gap-space-sm px-margin pb-space-xl pt-space-xl">
-            <div className="flex items-center gap-space-sm">
+          <div
+            key={indice}
+            className="relative flex min-h-[calc(100svh-5rem)] flex-col justify-end gap-space-sm px-margin pb-space-xl pt-space-xl"
+          >
+            <div className="aparicion-carrusel flex items-center gap-space-sm">
               <span className="inline-block h-[3px] w-10 rounded-full bg-primary shadow-brillo" />
               <Kicker tono="rosa">
                 {principal.destacada ? "Noticia destacada" : "Actualidad SEDEDE"}
               </Kicker>
             </div>
 
-            <h2 className="text-balance font-display text-headline-lg font-black uppercase leading-[1.14] tracking-tight text-white">
+            <h2
+              className="aparicion-carrusel text-balance font-display text-headline-lg font-black uppercase leading-[1.14] tracking-tight text-white"
+              style={retardo(80)}
+            >
               {principal.titulo}
             </h2>
 
-            <div className="pt-space-xs">
+            <div className="aparicion-carrusel pt-space-xs" style={retardo(160)}>
               <Boton href={`/noticias/${principal.slug}`}>
                 Leer noticia completa
                 <ArrowRight
@@ -256,7 +267,10 @@ export default function Noticias({
               </Boton>
             </div>
 
-            <div className="flex items-center gap-space-sm pt-space-sm">
+            <div
+              className="aparicion-carrusel flex items-center gap-space-sm pt-space-sm"
+              style={retardo(240)}
+            >
               {carrusel.map((noticia, posicion) => (
                 <button
                   key={noticia.id}
@@ -277,8 +291,9 @@ export default function Noticias({
 
       {/* ---------- Escritorio (lg+) ----------
           Se mantiene el panel flotante con las 3 mini noticias, tal como
-          estaba. No tocar sin pedir confirmación: el usuario lo aprobó así. */}
-      <div className="mx-auto hidden w-full max-w-contenido px-margin lg:block">
+          estaba. El ancho sale de `max-w-carrusel` (mayor que el contenido:
+          el panel ocupa más y la banda roja queda como marco). */}
+      <div className="mx-auto hidden w-full max-w-carrusel px-margin lg:block">
         <div className="relative overflow-hidden rounded-[2rem] bg-noche text-white shadow-flotante ring-1 ring-black/5">
           <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-primary/25 blur-[120px]" />
           <div className="pointer-events-none absolute -right-20 top-1/2 h-[26rem] w-[26rem] rounded-full bg-gold/10 blur-[130px]" />
@@ -297,16 +312,24 @@ export default function Noticias({
           <div className="absolute inset-0 bg-gradient-to-t from-noche/90 via-transparent to-noche/20" />
 
           <div className="relative flex min-h-[560px] flex-col justify-center px-space-xl py-space-xl 2xl:min-h-[680px] 2xl:px-14 2xl:py-16">
-            <div className="grid grid-cols-12 items-center gap-gutter-lg">
+            {/* La `key` remonta el bloque cada vez que cambia la noticia activa
+                (auto, puntos o mini tarjeta) para que la aparición se repita. */}
+            <div
+              key={indice}
+              className="grid grid-cols-12 items-center gap-gutter-lg"
+            >
               <div className="z-10 flex flex-col gap-space-md lg:col-span-8">
-                <div className="flex items-center gap-space-sm">
+                <div className="aparicion-carrusel flex items-center gap-space-sm">
                   <span className="inline-block h-[3px] w-10 rounded-full bg-primary shadow-brillo" />
                   <Kicker tono="rosa">
                     {principal.destacada ? "Noticia destacada" : "Actualidad SEDEDE"}
                   </Kicker>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-space-xs font-display text-label-sm uppercase tracking-wider text-white/70">
+                <div
+                  className="aparicion-carrusel flex flex-wrap items-center gap-space-xs font-display text-label-sm uppercase tracking-wider text-white/70"
+                  style={retardo(60)}
+                >
                   <span className="rounded-full bg-white/10 px-space-xs py-0.5 text-white backdrop-blur-sm">
                     {principal.categoria || "Institucional"}
                   </span>
@@ -314,17 +337,26 @@ export default function Noticias({
                   <span>{formatearFecha(principal.fecha_publicacion)}</span>
                 </div>
 
-                <h1 className="text-balance font-display font-black uppercase leading-[1.12] tracking-tight text-white lg:text-[40px] lg:leading-[46px] 2xl:text-[52px] 2xl:leading-[58px]">
+                <h1
+                  className="aparicion-carrusel text-balance font-display font-black uppercase leading-[1.12] tracking-tight text-white lg:text-[40px] lg:leading-[46px] 2xl:text-[52px] 2xl:leading-[58px]"
+                  style={retardo(120)}
+                >
                   {principal.titulo}
                 </h1>
 
                 {principal.resumen && (
-                  <p className="max-w-2xl text-body-lg leading-relaxed text-white/75 2xl:max-w-3xl">
+                  <p
+                    className="aparicion-carrusel max-w-2xl text-body-lg leading-relaxed text-white/75 2xl:max-w-3xl"
+                    style={retardo(180)}
+                  >
                     {principal.resumen}
                   </p>
                 )}
 
-                <div className="flex flex-wrap items-center gap-space-md pt-space-xs">
+                <div
+                  className="aparicion-carrusel flex flex-wrap items-center gap-space-md pt-space-xs"
+                  style={retardo(240)}
+                >
                   <Boton href={`/noticias/${principal.slug}`}>
                     Leer noticia completa
                     <ArrowRight
@@ -348,7 +380,10 @@ export default function Noticias({
                   </div>
                 </div>
 
-                <div className="flex items-center gap-space-sm pt-space-sm">
+                <div
+                  className="aparicion-carrusel flex items-center gap-space-sm pt-space-sm"
+                  style={retardo(300)}
+                >
                   {carrusel.map((noticia, posicion) => (
                     <button
                       key={noticia.id}
@@ -370,7 +405,10 @@ export default function Noticias({
               </div>
 
               <aside className="z-10 flex flex-col gap-space-xs lg:col-span-4">
-                <div className="flex items-center justify-between pb-space-xs">
+                <div
+                  className="aparicion-carrusel flex items-center justify-between pb-space-xs"
+                  style={retardo(120)}
+                >
                   <div className="flex items-center gap-2">
                     <span className="h-2 w-2 rounded-full bg-gold-soft" />
                     <span className="font-display text-label-sm font-bold uppercase tracking-[0.16em] text-white/70">
@@ -386,12 +424,17 @@ export default function Noticias({
                   </Link>
                 </div>
 
-                {secundarias.map(({ noticia, posicion }) => (
-                  <TarjetaSecundaria
+                {secundarias.map(({ noticia, posicion }, orden) => (
+                  <div
                     key={noticia.id}
-                    noticia={noticia}
-                    onSelect={() => elegir(posicion)}
-                  />
+                    className="aparicion-carrusel"
+                    style={retardo(180 + orden * 60)}
+                  >
+                    <TarjetaSecundaria
+                      noticia={noticia}
+                      onSelect={() => elegir(posicion)}
+                    />
+                  </div>
                 ))}
               </aside>
             </div>
