@@ -72,7 +72,7 @@ function TarjetaSecundaria({
       type="button"
       onClick={onSelect}
       aria-label={`Ver noticia: ${noticia.titulo}`}
-      className="group flex w-full items-center gap-space-sm rounded-xl bg-noche-3/70 p-space-xs text-left shadow-vidrio backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-noche-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+      className="group flex w-full items-center gap-space-sm rounded-xl bg-noche-3/45 p-space-xs text-left shadow-vidrio backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-noche-3/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
     >
       <div className="relative h-16 w-20 shrink-0 overflow-hidden rounded-lg bg-noche-2 2xl:h-20 2xl:w-24">
         <ImagenNoticia
@@ -260,10 +260,10 @@ export default function Noticias({
           {/* Oscurecido lateral + refuerzo inferior para que el texto lea bien */}
           <div className="absolute inset-0 bg-gradient-to-r from-noche/95 via-noche/45 to-noche/20" />
           <div className="absolute inset-0 bg-gradient-to-t from-noche/95 via-noche/25 to-transparent" />
-          {/* `key` para que el reflejo se repita en cada cambio */}
+          {/* `key` para que el brillo se repita en cada cambio */}
           <div
             key={indice}
-            className="barrido-carrusel pointer-events-none absolute inset-0"
+            className="brillo-carrusel pointer-events-none absolute inset-y-0 left-0 w-2/5"
           />
 
           <div
@@ -337,10 +337,10 @@ export default function Noticias({
 
           <div className="absolute inset-0 bg-gradient-to-r from-noche via-noche/80 to-noche/35" />
           <div className="absolute inset-0 bg-gradient-to-t from-noche/90 via-transparent to-noche/20" />
-          {/* `key` para que el reflejo se repita en cada cambio */}
+          {/* `key` para que el brillo se repita en cada cambio */}
           <div
             key={indice}
-            className="barrido-carrusel pointer-events-none absolute inset-0"
+            className="brillo-carrusel pointer-events-none absolute inset-y-0 left-0 w-2/5"
           />
 
           <div className="relative flex min-h-[560px] flex-col justify-center px-space-xl py-space-xl 2xl:min-h-[680px] 2xl:px-14 2xl:py-16">
