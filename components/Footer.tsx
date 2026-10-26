@@ -110,10 +110,10 @@ export default function Footer() {
               Términos de uso
             </Link>
             <span className="hidden text-white/25 md:inline">|</span>
-            <Link href="/transparencia-institucional" className="transition-colors hover:text-white">
+            {/* <Link href="/transparencia-institucional" className="transition-colors hover:text-white">
               Transparencia institucional
             </Link>
-            <span className="hidden text-white/25 md:inline">|</span>
+            <span className="hidden text-white/25 md:inline">|</span> */}
             <Link href="/contacto" className="transition-colors hover:text-white">
               Contacto directo
             </Link>
