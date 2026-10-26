@@ -218,6 +218,71 @@ body {
   animation: aparicion-carrusel 0.62s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
+/* Deslizamiento del bloque completo al cambiar de noticia. El sentido lo pone
+   el componente (`deslizar-siguiente` / `deslizar-anterior`), así el contenido
+   entra desde la derecha al avanzar y desde la izquierda al retroceder. */
+@keyframes deslizar-carrusel {
+  from {
+    transform: translateX(var(--desde-carrusel, 32px));
+  }
+  to {
+    transform: none;
+  }
+}
+
+.deslizar-carrusel {
+  animation: deslizar-carrusel 0.62s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.deslizar-siguiente {
+  --desde-carrusel: 36px;
+}
+
+.deslizar-anterior {
+  --desde-carrusel: -36px;
+}
+
+/* Zoom-out muy lento de la foto de fondo mientras la noticia está activa.
+   Arranca en 1.12 y termina en 1.02 (nunca en 1 para no dejar ver bordes).
+   La clase se aplica solo a la noticia activa, así que la animación se
+   reinicia en cada cambio (auto-rotación, puntos o mini tarjeta). */
+@keyframes zoom-fondo-carrusel {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1.02);
+  }
+}
+
+.zoom-fondo-carrusel {
+  animation: zoom-fondo-carrusel 8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  will-change: transform;
+}
+
+/* Reflejo tenue que cruza el panel en cada cambio de noticia: refuerza la
+   sensación de "pasó algo" sin tapar la foto. */
+@keyframes barrido-carrusel {
+  from {
+    background-position: -70% 0;
+  }
+  to {
+    background-position: 170% 0;
+  }
+}
+
+.barrido-carrusel {
+  background-image: linear-gradient(
+    100deg,
+    transparent 42%,
+    rgb(255 255 255 / 0.1) 50%,
+    transparent 58%
+  );
+  background-size: 60% 100%;
+  background-repeat: no-repeat;
+  animation: barrido-carrusel 1.1s ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -231,5 +296,15 @@ body {
 
   .aparicion-carrusel {
     animation: none;
+  }
+
+  .deslizar-carrusel,
+  .zoom-fondo-carrusel,
+  .barrido-carrusel {
+    animation: none;
+  }
+
+  .barrido-carrusel {
+    background-image: none;
   }
 }

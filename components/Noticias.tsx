@@ -21,6 +21,15 @@ function retardo(ms: number) {
   return { animationDelay: `${ms}ms` };
 }
 
+type Sentido = "siguiente" | "anterior";
+
+/** Clases del bloque completo: entra desde la derecha o desde la izquierda. */
+function claseDesliz(sentido: Sentido) {
+  return `deslizar-carrusel ${
+    sentido === "anterior" ? "deslizar-anterior" : "deslizar-siguiente"
+  }`;
+}
+
 function Fondo({
   noticia,
   activa,
@@ -29,16 +38,25 @@ function Fondo({
   activa: boolean;
 }) {
   return (
-    <ImagenNoticia
-      src={noticia.imagen_url}
-      alt={noticia.titulo}
-      decorativa
-      eager={activa}
-      ancho={1600}
-      className={`absolute inset-0 h-full w-full scale-105 object-cover transition-opacity duration-700 ${
+    // Dos capas con propósitos distintos: el contenedor hace el fundido entre
+    // noticias y la imagen hace el zoom-out lento (si ambos compartieran el
+    // `transform` se pisarían).
+    <div
+      className={`absolute inset-0 overflow-hidden transition-opacity duration-700 ${
         activa ? "opacity-100" : "opacity-0"
       }`}
-    />
+    >
+      <ImagenNoticia
+        src={noticia.imagen_url}
+        alt={noticia.titulo}
+        decorativa
+        eager={activa}
+        ancho={1600}
+        className={`h-full w-full object-cover ${
+          activa ? "zoom-fondo-carrusel" : ""
+        }`}
+      />
+    </div>
   );
 }
 
@@ -102,6 +120,8 @@ export default function Noticias({
   const [cargando, setCargando] = useState(false);
   const [activo, setActivo] = useState(0);
   const [reinicio, setReinicio] = useState(0);
+  // Sentido del último cambio: decide de qué lado entra el bloque animado.
+  const [sentido, setSentido] = useState<Sentido>("siguiente");
 
   const noticias = noticiasRecargadas ?? noticiasIniciales;
   const error = errorRecarga ?? errorInicial;
@@ -112,6 +132,7 @@ export default function Noticias({
     if (totalCarrusel < 2) return;
 
     const id = window.setInterval(() => {
+      setSentido("siguiente");
       setActivo((indice) => (indice + 1) % totalCarrusel);
     }, INTERVALO_ROTACION);
 
@@ -135,8 +156,9 @@ export default function Noticias({
       });
   }
 
-  function elegir(indice: number) {
-    setActivo(indice);
+  function elegir(destino: number) {
+    setSentido(destino < activo ? "anterior" : "siguiente");
+    setActivo(destino);
     setReinicio((valor) => valor + 1);
   }
 
@@ -238,10 +260,15 @@ export default function Noticias({
           {/* Oscurecido lateral + refuerzo inferior para que el texto lea bien */}
           <div className="absolute inset-0 bg-gradient-to-r from-noche/95 via-noche/45 to-noche/20" />
           <div className="absolute inset-0 bg-gradient-to-t from-noche/95 via-noche/25 to-transparent" />
+          {/* `key` para que el reflejo se repita en cada cambio */}
+          <div
+            key={indice}
+            className="barrido-carrusel pointer-events-none absolute inset-0"
+          />
 
           <div
             key={indice}
-            className="relative flex min-h-[calc(100svh-5rem)] flex-col justify-end gap-space-sm px-margin pb-space-xl pt-space-xl"
+            className={`${claseDesliz(sentido)} relative flex min-h-[calc(100svh-5rem)] flex-col justify-end gap-space-sm px-margin pb-space-xl pt-space-xl`}
           >
             <div className="aparicion-carrusel flex items-center gap-space-sm">
               <span className="inline-block h-[3px] w-10 rounded-full bg-primary shadow-brillo" />
@@ -310,13 +337,18 @@ export default function Noticias({
 
           <div className="absolute inset-0 bg-gradient-to-r from-noche via-noche/80 to-noche/35" />
           <div className="absolute inset-0 bg-gradient-to-t from-noche/90 via-transparent to-noche/20" />
+          {/* `key` para que el reflejo se repita en cada cambio */}
+          <div
+            key={indice}
+            className="barrido-carrusel pointer-events-none absolute inset-0"
+          />
 
           <div className="relative flex min-h-[560px] flex-col justify-center px-space-xl py-space-xl 2xl:min-h-[680px] 2xl:px-14 2xl:py-16">
             {/* La `key` remonta el bloque cada vez que cambia la noticia activa
                 (auto, puntos o mini tarjeta) para que la aparición se repita. */}
             <div
               key={indice}
-              className="grid grid-cols-12 items-center gap-gutter-lg"
+              className={`${claseDesliz(sentido)} grid grid-cols-12 items-center gap-gutter-lg`}
             >
               <div className="z-10 flex flex-col gap-space-md lg:col-span-8">
                 <div className="aparicion-carrusel flex items-center gap-space-sm">
