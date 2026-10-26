@@ -46,7 +46,7 @@ export default function Boton({
 
   if (href) {
     return (
-      <Link href={href} className={clases} aria-label={ariaLabel}>
+      <Link href={href} onClick={onClick} className={clases} aria-label={ariaLabel}>
         {children}
       </Link>
     );

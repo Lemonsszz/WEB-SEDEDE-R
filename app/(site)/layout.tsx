@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import RevelarGlobal from "@/components/ui/RevelarGlobal";
+import ScrollAlTope from "@/components/ui/ScrollAlTope";
 import { institucion, sede } from "@/content/sedede";
 import { redes, whatsapp } from "@/content/redes";
 import { IMAGEN_SOCIAL, NOMBRE_SITIO, SITIO_URL } from "@/lib/seo";
@@ -52,6 +53,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
         }}
       />
       <RevelarGlobal />
+      <ScrollAlTope />
       <Header />
       <main className="flex-1 pt-20">{children}</main>
       <Footer />
