@@ -123,6 +123,10 @@
 
   /* Contenedor y radios */
   --container-contenido: 1320px;
+  /* El carrusel del home es un panel flotante sobre la banda roja: se le
+     permite más ancho que el contenido para que el rojo se vea solo como un
+     marco (ver el bloque de media queries más abajo). */
+  --container-carrusel: 1400px;
 
   /* Sombras */
   --shadow-header: 0 1px 8px rgb(0 0 0 / 0.04);
@@ -152,6 +156,7 @@
 @media (min-width: 1536px) {
   :root {
     --container-contenido: 1480px;
+    --container-carrusel: 1540px;
     --spacing-margin: 2rem;
   }
 }
@@ -159,6 +164,7 @@
 @media (min-width: 1920px) {
   :root {
     --container-contenido: 1680px;
+    --container-carrusel: 1800px;
     --spacing-margin: 2.5rem;
   }
 }
@@ -192,6 +198,26 @@ body {
   transform: none;
 }
 
+/* Aparición escalonada de los bloques del carrusel de noticias (portada).
+   El componente remonta el bloque en cada cambio de noticia, así que la
+   animación se repite al entrar a la web y al pasar a la anterior/siguiente.
+   `backwards` (y no `both`) para que al terminar se libere el `transform` y
+   sigan funcionando los `hover:-translate-y-*` de botones y tarjetas. */
+@keyframes aparicion-carrusel {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.aparicion-carrusel {
+  animation: aparicion-carrusel 0.62s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -201,5 +227,9 @@ body {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .aparicion-carrusel {
+    animation: none;
   }
 }
