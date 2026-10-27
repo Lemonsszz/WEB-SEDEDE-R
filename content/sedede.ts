@@ -124,33 +124,51 @@ export const direccion = {
 export type Unidad = {
   titulo: string;
   descripcion: string;
-  icono: "altoRendimiento" | "infraestructura" | "asociaciones" | "juridica";
+  icono:
+    | "administrativa"
+    | "infraestructura"
+    | "deportiva"
+    | "legal"
+    | "salud"
+    | "piscina";
 };
 
 export const unidades: Unidad[] = [
   {
-    titulo: "Unidad de Alto Rendimiento",
+    titulo: "Área Administrativa",
     descripcion:
-      "Monitoreo biomecánico, nutricional y técnico de seleccionados orureños rumbo a Juegos Plurinacionales y torneos federativos.",
-    icono: "altoRendimiento",
+      "Contrataciones, presupuesto, personal y correspondencia de la Dirección Departamental; nexo administrativo con la Gobernación y las asociaciones.",
+    icono: "administrativa",
   },
   {
-    titulo: "Infraestructura y Mantenimiento",
+    titulo: "Área de Infraestructura",
     descripcion:
-      "Supervisión de césped natural, sistemas de iluminación LED, calderas para natación y mantenimiento correctivo de coliseos.",
+      "Supervisión de escenarios deportivos: césped, iluminación, calderas, vestuarios y mantenimiento correctivo de coliseos y piscinas.",
     icono: "infraestructura",
   },
   {
-    titulo: "Asociaciones y Fomento",
+    titulo: "Área Deportiva",
     descripcion:
-      "Asistencia para la personería jurídica de asociaciones departamentales, asignación horaria de escenarios y gestión de pasajes de delegación.",
-    icono: "asociaciones",
+      "Calendarios de competencia, seguimiento técnico de las selecciones departamentales y coordinación de torneos y Juegos Plurinacionales.",
+    icono: "deportiva",
   },
   {
-    titulo: "Unidad Jurídica y Convenios",
+    titulo: "Área Legal",
     descripcion:
-      "Fiscalización reglamentaria, formalización de comodatos y convenios de cooperación interinstitucional con universidades e institutos.",
-    icono: "juridica",
+      "Fiscalización reglamentaria, personería jurídica de las asociaciones, comodatos y convenios de cooperación interinstitucional.",
+    icono: "legal",
+  },
+  {
+    titulo: "Área de Salud",
+    descripcion:
+      "Evaluación médica, kinesiología, nutrición y control antidopaje de los deportistas que representan al departamento.",
+    icono: "salud",
+  },
+  {
+    titulo: "Área de Piscina",
+    descripcion:
+      "Administración exclusiva de la Piscina Olímpica Capachos: horarios, tratamiento del agua, seguridad, escuelas de natación y eventos.",
+    icono: "piscina",
   },
 ];
 
