@@ -39,6 +39,7 @@ export const asociaciones: Asociacion[] = [
       "Promueve el bádminton en Oruro, con escuelas de formación, torneos departamentales y deportistas en el circuito nacional.",
     presidente: "Juan Sixto Colque López",
     telefono: "71856669",
+    imagen: "/img/asociaciones/badminton.jpg",
   },
   {
     slug: "bicicross",
