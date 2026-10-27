@@ -115,6 +115,11 @@ export const ruda = {
 export const direccion = {
   cargo: "Dirección Departamental de Deportes",
   entidad: "Gobierno Autónomo Departamental de Oruro",
+  director: {
+    nombre: "Vladimir Cáceres",
+    cargo: "Director Departamental de Deportes",
+    foto: "/img/vladimir.jpg",
+  },
   descripcion:
     "Entidad rectora del desarrollo deportivo departamental, custodia de la infraestructura atlética histórica y promotora del talento competitivo de Oruro hacia los escenarios nacionales e internacionales.",
   etiquetas: ["Gestión departamental", "Alta competencia", "Medicina deportiva"],
@@ -239,7 +244,7 @@ export const complejos: Complejo[] = [
     dato: "12.000 espectadores",
     datoLabel: "Capacidad",
     disciplinas: "Básquetbol / Voleibol / Futsal",
-    imagen: "/img/complejo-palacio.jpg",
+    imagen: "/img/palacio-deportes.jpg",
   },
   {
     slug: "pista-de-atletismo",
@@ -250,17 +255,17 @@ export const complejos: Complejo[] = [
     dato: "Tartán Clase 1",
     datoLabel: "Superficie",
     disciplinas: "Velocidad / Fondo / Saltos",
-    imagen: "/img/complejo-pista.jpg",
+    imagen: "/img/pista-atletica.jpg",
   },
   {
     slug: "piscina-capachos",
-    nombre: "Piscina Olímpica Capachos",
+    nombre: "Piscina Olímpica de Oruro",
     etiqueta: "Acuático",
     descripcion:
       "Vaso reglamentario de 50 m climatizado, apto para pruebas cronometradas de natación y polo acuático.",
     dato: "50 metros · 8 carriles",
     datoLabel: "Longitud",
     disciplinas: "Natación / Triatlón",
-    imagen: "/img/complejo-piscina.jpg",
+    imagen: "/img/piscina-olimpica.jpg",
   },
 ];

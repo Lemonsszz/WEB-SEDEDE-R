@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   Briefcase,
   Building,
@@ -38,14 +39,32 @@ export default function Organigrama() {
 
         <div className="grid grid-cols-1 items-start gap-gutter lg:grid-cols-12">
           <div className="flex flex-col gap-space-md rounded-2xl bg-white p-space-lg shadow-tarjeta lg:col-span-5">
-            <div className="flex aspect-[4/3] w-full flex-col justify-end overflow-hidden rounded-xl bg-gradient-to-br from-primary to-primary-dark p-space-md text-white">
-              <span className="font-display text-kicker uppercase tracking-wider text-gold-soft">
-                Dirección departamental
-              </span>
-              <h3 className="font-display text-headline-md font-bold leading-tight text-white">
-                {direccion.cargo}
-              </h3>
-              <p className="text-body-sm text-white/80">{direccion.entidad}</p>
+            <div className="relative flex aspect-[4/3] w-full flex-col justify-end overflow-hidden rounded-xl bg-gradient-to-br from-primary to-primary-dark p-space-md text-white">
+              <Image
+                src={direccion.director.foto}
+                alt={`Retrato de ${direccion.director.nombre}`}
+                fill
+                sizes="(max-width: 1023px) 100vw, 42vw"
+                className="object-cover object-[center_30%]"
+              />
+
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-gradient-to-t from-primary-deep/95 via-primary-deep/35 to-transparent"
+              />
+
+              <div className="relative z-10">
+                <span className="font-display text-kicker uppercase tracking-wider text-gold-soft">
+                  Dirección departamental
+                </span>
+                <h3 className="font-display text-headline-md font-bold leading-tight text-white">
+                  {direccion.director.nombre}
+                </h3>
+                <p className="text-body-sm text-white/90">
+                  {direccion.director.cargo}
+                </p>
+                <p className="text-label-sm text-white/75">{direccion.entidad}</p>
+              </div>
             </div>
 
             <p className="text-body-sm leading-relaxed text-tinta-2">

@@ -8,7 +8,7 @@ export default function Hero() {
     <section className="relative w-full overflow-hidden bg-noche">
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/img/hero-deportes.jpg')" }}
+        style={{ backgroundImage: "url('/img/home-definitive.jpg')" }}
       />
       <div className="absolute inset-0 bg-gradient-to-r from-noche via-noche/75 to-noche/10" />
       <div className="absolute inset-0 bg-gradient-to-t from-noche/90 via-transparent to-noche/20" />

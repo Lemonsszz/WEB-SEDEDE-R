@@ -23,13 +23,14 @@ export type Asociacion = {
 
 export const asociaciones: Asociacion[] = [
   {
-    slug: "automovilismo",
-    nombre: "Asociación Departamental de Automovilismo Oruro",
-    disciplina: "Automovilismo",
+    slug: "karate",
+    nombre: "Asociación Departamental de Karate Do Oruro",
+    disciplina: "Karate Do",
     descripcion:
-      "Reúne a los pilotos y clubes de automovilismo del departamento, organiza las fechas del calendario local y representa a Oruro en las competencias nacionales de la disciplina.",
-    presidente: "Josué Roberto Vidal Blass",
-    telefono: "71881177",
+      "Desarrolla el karate do en las modalidades de kata y kumite, con dojos afiliados en todo el departamento y participación en campeonatos nacionales.",
+    presidente: "Marcelo Taborga Flores",
+    telefono: "72339939",
+    imagen: "/img/asociaciones/karate.jpg",
   },
   {
     slug: "badminton",
@@ -39,7 +40,7 @@ export const asociaciones: Asociacion[] = [
       "Promueve el bádminton en Oruro, con escuelas de formación, torneos departamentales y deportistas en el circuito nacional.",
     presidente: "Juan Sixto Colque López",
     telefono: "71856669",
-    imagen: "/img/asociaciones/badminton.jpg",
+    imagen: "/img/asociaciones/badmintooon.jpg",
   },
   {
     slug: "bicicross",
@@ -58,7 +59,7 @@ export const asociaciones: Asociacion[] = [
       "Fomenta el ciclismo de ruta, montaña y pista en Oruro, con escuelas de formación, carreras departamentales y presencia en las pruebas nacionales.",
     presidente: "Mary Gladys Simón Hinojosa",
     telefono: "63642603",
-    imagen: "/img/asociaciones/ciclismo.jpg",
+    imagen: "/img/asociaciones/ciclismoo.jpg",
   },
   {
     slug: "deporte-integrado",
@@ -77,6 +78,7 @@ export const asociaciones: Asociacion[] = [
       "Trabaja con atletas con discapacidad visual en las disciplinas adaptadas, organiza competencias locales y acompaña a las selecciones departamentales.",
     presidente: "Ariel Espejo Colque",
     telefono: "73841588",
+    imagen: "/img/asociaciones/deporteciegos.jpg",
   },
   {
     slug: "futbol-de-salon",
@@ -86,6 +88,7 @@ export const asociaciones: Asociacion[] = [
       "Regula el fútbol de salón en Oruro, una de las disciplinas con más participación en el departamento, con torneos barriales, juveniles y de mayores.",
     presidente: "Max Fuentes Vinaya",
     telefono: "71853076",
+    imagen: "/img/asociaciones/futsaal.jpg",
   },
   {
     slug: "fisicoculturismo",
@@ -96,15 +99,17 @@ export const asociaciones: Asociacion[] = [
       "Agrupa a los atletas de fisicoculturismo, potencia y fitness del departamento, organiza campeonatos locales y prepara a los competidores para las citas nacionales.",
     presidente: "Roger Simón Cabrera Marca",
     telefono: "75949113",
+    imagen: "/img/asociaciones/fisicoculturismoo.jpg",
   },
-  {
-    slug: "karate",
-    nombre: "Asociación Departamental de Karate Do Oruro",
-    disciplina: "Karate Do",
+    {
+    slug: "automovilismo",
+    nombre: "Asociación Departamental de Automovilismo Oruro",
+    disciplina: "Automovilismo",
     descripcion:
-      "Desarrolla el karate do en las modalidades de kata y kumite, con dojos afiliados en todo el departamento y participación en campeonatos nacionales.",
-    presidente: "Marcelo Taborga Flores",
-    telefono: "72339939",
+      "Reúne a los pilotos y clubes de automovilismo del departamento, organiza las fechas del calendario local y representa a Oruro en las competencias nacionales de la disciplina.",
+    presidente: "Josué Roberto Vidal Blass",
+    telefono: "71881177",
+    imagen: "/img/asociaciones/automovilismo.jpg",
   },
   {
     slug: "kung-fu-wushu",
@@ -115,6 +120,7 @@ export const asociaciones: Asociacion[] = [
       "Difunde las artes marciales chinas en Oruro, con escuelas de kung fu y wushu, exhibiciones y competencias departamentales y nacionales.",
     presidente: "Cintya Flores Espinoza",
     telefono: "65434877",
+    imagen: "/img/asociaciones/kunfu.jpg",
   },
   {
     slug: "motociclismo",
@@ -124,6 +130,7 @@ export const asociaciones: Asociacion[] = [
       "Reúne a los pilotos y clubes de motociclismo del departamento, organiza las pruebas del calendario local y representa a Oruro en el ámbito nacional.",
     presidente: "Zulma Vásquez Franco",
     telefono: "72471411",
+    imagen: "/img/asociaciones/motociclismo.jpg",
   },
   {
     slug: "pelota-de-mano",
@@ -152,6 +159,7 @@ export const asociaciones: Asociacion[] = [
       "Forma atletas de taekwondo en las modalidades de combate y poomsae, con escuelas afiliadas y participación en los torneos nacionales.",
     presidente: "Lizzeth Carmen Bolívar Pérez",
     telefono: "70425377",
+    imagen: "/img/asociaciones/taekwondo.jpg",
   },
   {
     slug: "deportiva-administracion-publica",
@@ -170,6 +178,7 @@ export const asociaciones: Asociacion[] = [
       "Desarrolla el tenis de mesa en Oruro, con competencias escolares, universitarias y de alto rendimiento, y jugadores en el circuito nacional.",
     presidente: "Mirtha Alina Mérida Balderrama",
     telefono: "69570998",
+    imagen: "/img/asociaciones/tenis-de-mesa.jpg",
   },
   {
     slug: "triatlon",
@@ -179,6 +188,7 @@ export const asociaciones: Asociacion[] = [
       "Coordina el triatlón y las pruebas combinadas en el departamento, con entrenamientos en los escenarios locales y participación en competencias nacionales.",
     presidente: "Ever Christian Oxachoque Gutiérrez",
     telefono: "71880793",
+    imagen: "/img/asociaciones/triatlon.jpg",
   },
   {
     slug: "beisbol",
@@ -188,6 +198,8 @@ export const asociaciones: Asociacion[] = [
       "Agrupa a los equipos de béisbol y sóftbol de Oruro, sostiene las ligas juveniles y femeninas y conforma las selecciones que compiten a nivel nacional.",
     presidente: "Mirtha Vásquez Fernández",
     telefono: "73833448",
+    imagen: "/img/asociaciones/beisbool.jpg",
+
   },
 ];
 
