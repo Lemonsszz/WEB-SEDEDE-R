@@ -57,6 +57,7 @@ export const asociaciones: Asociacion[] = [
       "Fomenta el ciclismo de ruta, montaña y pista en Oruro, con escuelas de formación, carreras departamentales y presencia en las pruebas nacionales.",
     presidente: "Mary Gladys Simón Hinojosa",
     telefono: "63642603",
+    imagen: "/img/asociaciones/ciclismo.jpg",
   },
   {
     slug: "deporte-integrado",
@@ -157,7 +158,7 @@ export const asociaciones: Asociacion[] = [
     disciplina: "Deporte de la Administración Pública",
     descripcion:
       "Agrupa a los servidores públicos que practican deporte, organiza los torneos internos de las instituciones y representa al sector en las citas departamentales.",
-    presidente: "Óscar Arrelano Vargas",
+    presidente: "Óscar Arrellano Vargas",
     telefono: "70423308",
   },
   {
