@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import type { Asociacion } from "@/content/asociaciones";
+import PortadaAsociacion from "@/components/asociaciones/PortadaAsociacion";
 
 type Tono = "oscuro" | "claro";
 
@@ -55,12 +55,9 @@ export default function TarjetaAsociacion({
       className={`group relative flex flex-col overflow-hidden rounded-2xl transition-all duration-300 ${estilos.tarjeta}`}
     >
       <div className={`relative w-full ${compacta ? "h-48" : "h-56"}`}>
-        <Image
-          src={asociacion.imagen}
-          alt={asociacion.nombre}
-          fill
+        <PortadaAsociacion
+          asociacion={asociacion}
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
         <div className={`absolute inset-0 ${estilos.degradado}`} />
 
