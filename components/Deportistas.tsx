@@ -1,14 +1,11 @@
 import Link from "next/link";
 import { Award, Trophy } from "lucide-react";
-import { getDeportistas } from "@/content/deportistas";
 import { ruda } from "@/content/sedede";
 import Kicker from "@/components/ui/Kicker";
 import Boton from "@/components/ui/Boton";
-import TarjetaDeportista from "@/components/deportistas/TarjetaDeportista";
+import HectorGaribayDestacado from "@/components/deportistas/HectorGaribayDestacado";
 
 export default function Deportistas() {
-  const destacados = getDeportistas().slice(0, 3);
-
   return (
     <section className="w-full bg-hueso py-space-xl text-tinta">
       <div className="mx-auto flex max-w-contenido flex-col gap-space-xl px-margin">
@@ -24,8 +21,8 @@ export default function Deportistas() {
               Deportistas de élite
             </h2>
             <p className="max-w-xl text-body-md text-tinta-2">
-              Conoce a los atletas orureños de alto rendimiento que representan
-              y destacan en escenarios nacionales e internacionales.
+              El máximo referente del fondismo boliviano nació en Oruro. Conoce su
+              récord nacional, sus marcas homologadas y su historia.
             </p>
           </div>
 
@@ -33,16 +30,12 @@ export default function Deportistas() {
             href="/deportistas"
             className="inline-flex items-center gap-space-xs self-start rounded-full bg-hueso-4 px-space-md py-space-xs font-display text-label-md text-tinta transition-colors hover:bg-hueso-5 md:self-auto"
           >
-            <span>Ver ranking completo</span>
+            <span>Ver todos los deportistas</span>
             <Trophy aria-hidden className="h-4 w-4" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 gap-gutter-lg md:grid-cols-3">
-          {destacados.map((deportista) => (
-            <TarjetaDeportista key={deportista.slug} deportista={deportista} />
-          ))}
-        </div>
+        <HectorGaribayDestacado />
 
         <div className="relative w-full overflow-hidden rounded-3xl bg-gradient-to-r from-primary-dark to-primary p-space-lg text-white shadow-[0_16px_36px_rgba(116,0,21,0.25)] lg:p-space-xl">
           <div className="pointer-events-none absolute -right-16 -top-16 h-80 w-80 rounded-full bg-gold-soft/15 blur-3xl" />

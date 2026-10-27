@@ -9,7 +9,7 @@ import type { Metadata } from "next";
  * canónicas y las imágenes de Open Graph nunca queden en `localhost`.
  */
 export const SITIO_URL = (
-  process.env.NEXT_PUBLIC_SITIO_URL ?? "https://sededeoruro.vercel.app"
+  process.env.NEXT_PUBLIC_SITIO_URL ?? "https://www.sededeoruro.com"
 ).replace(/\/+$/, "");
 
 /** Nombre corto que se usa en el título de las pestañas. */

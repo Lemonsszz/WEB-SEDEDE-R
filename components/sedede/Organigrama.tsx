@@ -1,12 +1,21 @@
-import { Dumbbell, Building2, Medal, Gavel } from "lucide-react";
+import {
+  Briefcase,
+  Building,
+  Dumbbell,
+  HeartPulse,
+  Scale,
+  WavesLadder,
+} from "lucide-react";
 import { direccion, unidades, type Unidad } from "@/content/sedede";
 import Kicker from "@/components/ui/Kicker";
 
 const ICONOS: Record<Unidad["icono"], typeof Dumbbell> = {
-  altoRendimiento: Dumbbell,
-  infraestructura: Building2,
-  asociaciones: Medal,
-  juridica: Gavel,
+  administrativa: Briefcase,
+  infraestructura: Building,
+  deportiva: Dumbbell,
+  legal: Scale,
+  salud: HeartPulse,
+  piscina: WavesLadder,
 };
 
 export default function Organigrama() {
