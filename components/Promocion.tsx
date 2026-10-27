@@ -45,7 +45,7 @@ export default function Promocion() {
               {promocion.titulo}
             </p>
             <p className="mt-0.5 text-body-sm text-tinta-3">
-              Disponible hasta el {fechaFinLegible(promocion)}
+              Sé parte y compite el {fechaFinLegible(promocion)}
             </p>
           </div>
 

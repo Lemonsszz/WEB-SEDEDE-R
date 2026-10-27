@@ -172,7 +172,7 @@ export const unidades: Unidad[] = [
   {
     titulo: "Área de Piscina",
     descripcion:
-      "Administración exclusiva de la Piscina Olímpica Capachos: horarios, tratamiento del agua, seguridad, escuelas de natación y eventos.",
+      "Administración exclusiva de la Piscina Olímpica Oruro: horarios, tratamiento del agua, seguridad, escuelas de natación y eventos.",
     icono: "piscina",
   },
 ];
@@ -259,7 +259,7 @@ export const complejos: Complejo[] = [
   },
   {
     slug: "piscina-capachos",
-    nombre: "Piscina Olímpica de Oruro",
+    nombre: "Piscina Olímpica Oruro",
     etiqueta: "Acuático",
     descripcion:
       "Vaso reglamentario de 50 m climatizado, apto para pruebas cronometradas de natación y polo acuático.",

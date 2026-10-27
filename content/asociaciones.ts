@@ -50,6 +50,7 @@ export const asociaciones: Asociacion[] = [
       "Organiza las competencias de bicicross en el departamento, forma pilotos desde las categorías infantiles y coordina su participación en los torneos nacionales.",
     presidente: "José Gonzalo Beltrán Buitrago",
     telefono: "73808988",
+    imagen: "/img/asociaciones/bicicross.jpg",
   },
   {
     slug: "ciclismo",
@@ -69,6 +70,7 @@ export const asociaciones: Asociacion[] = [
       "Promueve la práctica deportiva de las personas con discapacidad intelectual, coordina las escuelas de formación y las delegaciones que representan a Oruro.",
     presidente: "Roberto Carlos Auca Martínez",
     telefono: "72466479",
+    imagen: "/img/asociaciones/deportesintegrados.jpg",
   },
   {
     slug: "deporte-para-ciegos",
@@ -141,6 +143,7 @@ export const asociaciones: Asociacion[] = [
       "Promueve las modalidades de pelota vasca —mano, paleta y raqueta— en el departamento, con frontones activos y torneos departamentales.",
     presidente: "Iván Arturo Silez Guzmán",
     telefono: "62777742",
+    imagen: "/img/asociaciones/paleta.jpg",
   },
   {
     slug: "raquetbol",
@@ -150,6 +153,7 @@ export const asociaciones: Asociacion[] = [
       "Fomenta el raquetbol en Oruro, con canchas activas, torneos locales y jugadores que compiten en el circuito nacional.",
     presidente: "Richard Oxachoque Gutiérrez",
     telefono: "63654419",
+    imagen: "/img/asociaciones/raquetbool.jpg",
   },
   {
     slug: "taekwondo",
@@ -169,6 +173,7 @@ export const asociaciones: Asociacion[] = [
       "Agrupa a los servidores públicos que practican deporte, organiza los torneos internos de las instituciones y representa al sector en las citas departamentales.",
     presidente: "Óscar Arrellano Vargas",
     telefono: "70423308",
+    imagen: "/img/asociaciones/manoos.jpg",
   },
   {
     slug: "tenis-de-mesa",

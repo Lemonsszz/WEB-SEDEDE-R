@@ -30,7 +30,7 @@ export type Promocion = {
 export const promociones: Promocion[] = [
   {
     id: "carrera-2026-11-07",
-    titulo: "Carrera deportiva",
+    titulo: "Media Maratón Internacional Oruro - 21k",
     imagen: "/img/flyer.jpeg",
     alt: "Afiche de la carrera deportiva organizada en Oruro",
     enlace: "/img/flyer.jpeg",
