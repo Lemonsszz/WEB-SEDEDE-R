@@ -1,4 +1,5 @@
 import Noticias from "@/components/Noticias";
+import Promocion from "@/components/Promocion";
 import Separador from "@/components/Separador";
 import Hero from "@/components/Hero";
 import Asociaciones from "@/components/Asociaciones";
@@ -32,6 +33,8 @@ export default async function Home() {
   return (
     <>
       <Noticias noticiasIniciales={noticias} errorInicial={errorInicial} />
+
+      <Promocion />
 
       <Separador />
 
