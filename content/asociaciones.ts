@@ -1,173 +1,191 @@
+/**
+ * Asociaciones deportivas departamentales de Oruro.
+ *
+ * La lista, los presidentes y los celulares son los que entregó la institución
+ * el 2026-10-26 (planilla oficial). No inventar ni completar datos: si falta
+ * algo, se deja vacío y se pregunta.
+ *
+ * `imagen` es opcional a propósito: mientras no lleguen las fotos reales, las
+ * tarjetas y el detalle muestran un degradado institucional con la disciplina.
+ * Al recibir la foto, guardarla en `public/img/asociaciones/<slug>.jpg` y
+ * agregar el campo `imagen: "/img/asociaciones/<slug>.jpg"`.
+ */
 export type Asociacion = {
   slug: string;
   nombre: string;
   disciplina: string;
   descripcion: string;
-  imagen: string;
+  presidente: string;
+  /** Celular de 8 dígitos, sin código de país ni espacios. */
+  telefono: string;
+  imagen?: string;
 };
 
 export const asociaciones: Asociacion[] = [
   {
-    slug: "futbol",
-    nombre: "Asociación Departamental de Fútbol Oruro",
-    disciplina: "Fútbol",
+    slug: "automovilismo",
+    nombre: "Asociación Departamental de Automovilismo Oruro",
+    disciplina: "Automovilismo",
     descripcion:
-      "Organiza y promueve el fútbol en el departamento de Oruro, desde las categorías inferiores hasta el fútbol profesional. Regula las ligas locales y representa a la región en competencias nacionales.",
-    imagen:
-      "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1200&q=80",
+      "Reúne a los pilotos y clubes de automovilismo del departamento, organiza las fechas del calendario local y representa a Oruro en las competencias nacionales de la disciplina.",
+    presidente: "Josué Roberto Vidal Blass",
+    telefono: "71881177",
   },
   {
-    slug: "basquetbol",
-    nombre: "Asociación Departamental de Básquetbol Oruro",
-    disciplina: "Básquetbol",
+    slug: "badminton",
+    nombre: "Asociación Departamental de Bádminton Oruro",
+    disciplina: "Bádminton",
     descripcion:
-      "Fomenta la práctica del básquetbol en todas las categorías, organiza torneos departamentales y forma selecciones para los Juegos Nacionales.",
-    imagen:
-      "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1200&q=80",
+      "Promueve el bádminton en Oruro, con escuelas de formación, torneos departamentales y deportistas en el circuito nacional.",
+    presidente: "Juan Sixto Colque López",
+    telefono: "71856669",
   },
   {
-    slug: "voleibol",
-    nombre: "Asociación Departamental de Voleibol Oruro",
-    disciplina: "Voleibol",
+    slug: "bicicross",
+    nombre: "Asociación Departamental de Bicicross Oruro",
+    disciplina: "Bicicross",
     descripcion:
-      "Desarrolla el voleibol indoor y de playa en el departamento, con foco en la formación de atletas y la participación en torneos nacionales.",
-    imagen:
-      "https://images.unsplash.com/photo-1592656670411-92c94f6f3b47?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    slug: "boxeo",
-    nombre: "Asociación Departamental de Boxeo Oruro",
-    disciplina: "Boxeo",
-    descripcion:
-      "Regula e impulsa el boxeo amateur y profesional en Oruro, formando cuadros técnicos y atletas para representar al departamento.",
-    imagen:
-      "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    slug: "taekwondo",
-    nombre: "Asociación Departamental de Taekwondo Oruro",
-    disciplina: "Taekwondo",
-    descripcion:
-      "Promueve la disciplina del taekwondo como arte marcial y deporte de combate, con escuelas en las principales ciudades del departamento.",
-    imagen:
-      "https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    slug: "natacion",
-    nombre: "Asociación Departamental de Natación Oruro",
-    disciplina: "Natación",
-    descripcion:
-      "Desarrolla la natación competitiva y recreativa, organiza campeonatos y forma nadadores para las competencias nacionales e internacionales.",
-    imagen:
-      "https://images.unsplash.com/photo-1530549387789-4c1017266635?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    slug: "atletismo",
-    nombre: "Asociación Departamental de Atletismo Oruro",
-    disciplina: "Atletismo",
-    descripcion:
-      "Organiza las competencias de atletismo del departamento, promoviendo las disciplinas de pista, campo y ruta entre atletas de todas las edades.",
-    imagen:
-      "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1200&q=80",
+      "Organiza las competencias de bicicross en el departamento, forma pilotos desde las categorías infantiles y coordina su participación en los torneos nacionales.",
+    presidente: "José Gonzalo Beltrán Buitrago",
+    telefono: "73808988",
   },
   {
     slug: "ciclismo",
     nombre: "Asociación Departamental de Ciclismo Oruro",
     disciplina: "Ciclismo",
     descripcion:
-      "Fomenta el ciclismo en todas sus modalidades: ruta, montaña y pista. Organiza carreras y promueve el ciclismo como deporte y medio de transporte.",
-    imagen:
-      "https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1200&q=80",
+      "Fomenta el ciclismo de ruta, montaña y pista en Oruro, con escuelas de formación, carreras departamentales y presencia en las pruebas nacionales.",
+    presidente: "Mary Gladys Simón Hinojosa",
+    telefono: "63642603",
   },
   {
-    slug: "lucha",
-    nombre: "Asociación Departamental de Lucha Oruro",
-    disciplina: "Lucha",
+    slug: "deporte-integrado",
+    nombre: "Asociación Departamental del Deporte Integrado Oruro",
+    disciplina: "Deporte Integrado",
     descripcion:
-      "Regula e impulsa la lucha libre y olímpica en el departamento, formando atletas para las competencias nacionales.",
-    imagen:
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80",
+      "Promueve la práctica deportiva de las personas con discapacidad intelectual, coordina las escuelas de formación y las delegaciones que representan a Oruro.",
+    presidente: "Roberto Carlos Auca Martínez",
+    telefono: "72466479",
   },
   {
-    slug: "judo",
-    nombre: "Asociación Departamental de Judo Oruro",
-    disciplina: "Judo",
+    slug: "deporte-para-ciegos",
+    nombre: "Asociación Departamental de Deporte para Ciegos Oruro",
+    disciplina: "Deporte para Ciegos",
     descripcion:
-      "Promueve el judo como deporte olímpico y disciplina de formación integral, con escuelas y competencias en todo el departamento.",
-    imagen:
-      "https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=1200&q=80",
+      "Trabaja con atletas con discapacidad visual en las disciplinas adaptadas, organiza competencias locales y acompaña a las selecciones departamentales.",
+    presidente: "Ariel Espejo Colque",
+    telefono: "73841588",
+  },
+  {
+    slug: "futbol-de-salon",
+    nombre: "Asociación Departamental de Fútbol de Salón Oruro",
+    disciplina: "Fútbol de Salón",
+    descripcion:
+      "Regula el fútbol de salón en Oruro, una de las disciplinas con más participación en el departamento, con torneos barriales, juveniles y de mayores.",
+    presidente: "Max Fuentes Vinaya",
+    telefono: "71853076",
+  },
+  {
+    slug: "fisicoculturismo",
+    nombre:
+      "Asociación Departamental de Fisicoculturismo, Potencia y Fitness Oruro",
+    disciplina: "Fisicoculturismo, Potencia y Fitness",
+    descripcion:
+      "Agrupa a los atletas de fisicoculturismo, potencia y fitness del departamento, organiza campeonatos locales y prepara a los competidores para las citas nacionales.",
+    presidente: "Roger Simón Cabrera Marca",
+    telefono: "75949113",
   },
   {
     slug: "karate",
-    nombre: "Asociación Departamental de Karate Oruro",
-    disciplina: "Karate",
+    nombre: "Asociación Departamental de Karate Do Oruro",
+    disciplina: "Karate Do",
     descripcion:
-      "Desarrolla el karate-do en el departamento, formando atletas en las modalidades de kumite y kata para competencias nacionales.",
-    imagen:
-      "https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=1200&q=80",
+      "Desarrolla el karate do en las modalidades de kata y kumite, con dojos afiliados en todo el departamento y participación en campeonatos nacionales.",
+    presidente: "Marcelo Taborga Flores",
+    telefono: "72339939",
   },
   {
-    slug: "halterofilia",
-    nombre: "Asociación Departamental de Halterofilia Oruro",
-    disciplina: "Halterofilia",
+    slug: "kung-fu-wushu",
+    nombre:
+      "Asociación Deportiva Departamental de Kung Fu - Wushu Orureña",
+    disciplina: "Kung Fu - Wushu",
     descripcion:
-      "Organiza y regula el levantamiento de pesas en el departamento, formando atletas para los Juegos Nacionales y competencias internacionales.",
-    imagen:
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80",
+      "Difunde las artes marciales chinas en Oruro, con escuelas de kung fu y wushu, exhibiciones y competencias departamentales y nacionales.",
+    presidente: "Cintya Flores Espinoza",
+    telefono: "65434877",
   },
   {
-    slug: "ajedrez",
-    nombre: "Asociación Departamental de Ajedrez Oruro",
-    disciplina: "Ajedrez",
+    slug: "motociclismo",
+    nombre: "Asociación Departamental de Motociclismo Oruro",
+    disciplina: "Motociclismo",
     descripcion:
-      "Promueve la práctica del ajedrez como deporte mental, organiza torneos y forma jugadores para las competencias nacionales e internacionales.",
-    imagen:
-      "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=1200&q=80",
+      "Reúne a los pilotos y clubes de motociclismo del departamento, organiza las pruebas del calendario local y representa a Oruro en el ámbito nacional.",
+    presidente: "Zulma Vásquez Franco",
+    telefono: "72471411",
+  },
+  {
+    slug: "pelota-de-mano",
+    nombre:
+      "Asociación Departamental de Pelota de Mano, Paleta y Raqueta Oruro",
+    disciplina: "Pelota de Mano, Paleta y Raqueta",
+    descripcion:
+      "Promueve las modalidades de pelota vasca —mano, paleta y raqueta— en el departamento, con frontones activos y torneos departamentales.",
+    presidente: "Iván Arturo Silez Guzmán",
+    telefono: "62777742",
+  },
+  {
+    slug: "raquetbol",
+    nombre: "Asociación Departamental de Raquetbol Oruro",
+    disciplina: "Raquetbol",
+    descripcion:
+      "Fomenta el raquetbol en Oruro, con canchas activas, torneos locales y jugadores que compiten en el circuito nacional.",
+    presidente: "Richard Oxachoque Gutiérrez",
+    telefono: "63654419",
+  },
+  {
+    slug: "taekwondo",
+    nombre: "Asociación Departamental World Taekwondo Oruro",
+    disciplina: "World Taekwondo",
+    descripcion:
+      "Forma atletas de taekwondo en las modalidades de combate y poomsae, con escuelas afiliadas y participación en los torneos nacionales.",
+    presidente: "Lizzeth Carmen Bolívar Pérez",
+    telefono: "70425377",
+  },
+  {
+    slug: "deportiva-administracion-publica",
+    nombre: "Asociación Deportiva de la Administración Pública Oruro",
+    disciplina: "Deporte de la Administración Pública",
+    descripcion:
+      "Agrupa a los servidores públicos que practican deporte, organiza los torneos internos de las instituciones y representa al sector en las citas departamentales.",
+    presidente: "Óscar Arrelano Vargas",
+    telefono: "70423308",
   },
   {
     slug: "tenis-de-mesa",
     nombre: "Asociación Departamental de Tenis de Mesa Oruro",
-    disciplina: "Tenis de mesa",
+    disciplina: "Tenis de Mesa",
     descripcion:
-      "Desarrolla el tenis de mesa en el departamento, con competencias escolares, universitarias y de alto rendimiento.",
-    imagen:
-      "https://images.unsplash.com/photo-1534158914592-062992fbe900?auto=format&fit=crop&w=1200&q=80",
+      "Desarrolla el tenis de mesa en Oruro, con competencias escolares, universitarias y de alto rendimiento, y jugadores en el circuito nacional.",
+    presidente: "Mirtha Alina Mérida Balderrama",
+    telefono: "69570998",
   },
   {
-    slug: "bolos",
-    nombre: "Asociación Departamental de Bolos Oruro",
-    disciplina: "Bolos",
+    slug: "triatlon",
+    nombre: "Asociación Departamental de Triatlón Oruro",
+    disciplina: "Triatlón",
     descripcion:
-      "Organiza las competencias de bolos del departamento, promoviendo este deporte de precisión en clubes y centros recreativos.",
-    imagen:
-      "https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    slug: "microfutbol",
-    nombre: "Asociación Departamental de Microfútbol Oruro",
-    disciplina: "Microfútbol",
-    descripcion:
-      "Regula el microfútbol (fútbol de salón) en el departamento, una de las disciplinas con mayor participación popular en Oruro.",
-    imagen:
-      "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    slug: "gimnasia",
-    nombre: "Asociación Departamental de Gimnasia Oruro",
-    disciplina: "Gimnasia",
-    descripcion:
-      "Promueve la gimnasia artística, rítmica y recreativa, formando atletas y monitores en las principales ciudades del departamento.",
-    imagen:
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80",
+      "Coordina el triatlón y las pruebas combinadas en el departamento, con entrenamientos en los escenarios locales y participación en competencias nacionales.",
+    presidente: "Ever Christian Oxachoque Gutiérrez",
+    telefono: "71880793",
   },
   {
     slug: "beisbol",
     nombre: "Asociación Departamental de Béisbol y Sóftbol Oruro",
     disciplina: "Béisbol y Sóftbol",
     descripcion:
-      "Desarrolla el béisbol y el sóftbol en el departamento, con ligas juveniles y femeninas en crecimiento.",
-    imagen:
-      "https://images.unsplash.com/photo-1508344928928-7165b67dea11?auto=format&fit=crop&w=1200&q=80",
+      "Agrupa a los equipos de béisbol y sóftbol de Oruro, sostiene las ligas juveniles y femeninas y conforma las selecciones que compiten a nivel nacional.",
+    presidente: "Mirtha Vásquez Fernández",
+    telefono: "73833448",
   },
 ];
 
@@ -183,34 +201,70 @@ export function getAsociacionesDestacadas(cantidad: number): Asociacion[] {
   return asociaciones.slice(0, cantidad);
 }
 
+/** Celular con el código de país de Bolivia, para `tel:` y `wa.me`. */
+export function telefonoConPais(telefono: string): string {
+  return `591${telefono.replace(/\D/g, "")}`;
+}
+
+/** Celular en formato legible: `+591 71881177`. */
+export function telefonoLegible(telefono: string): string {
+  return `+591 ${telefono.replace(/\D/g, "")}`;
+}
+
 export type Familia = {
   slug: string;
   nombre: string;
   disciplinas: string[] | null;
 };
 
-/** Familias de disciplinas usadas para filtrar el listado de asociaciones. */
+/**
+ * Familias de disciplinas usadas para filtrar el listado de asociaciones.
+ * Cada disciplina de `asociaciones` debe estar en **una sola** familia; si
+ * falta, la asociación desaparece al filtrar.
+ */
 export const familias: Familia[] = [
   { slug: "todas", nombre: "Todas", disciplinas: null },
   {
-    slug: "balon-y-cancha",
-    nombre: "Balón y cancha",
-    disciplinas: ["Fútbol", "Básquetbol", "Voleibol", "Béisbol y Sóftbol", "Microfútbol"],
+    slug: "balon-y-raqueta",
+    nombre: "Balón y raqueta",
+    disciplinas: [
+      "Béisbol y Sóftbol",
+      "Fútbol de Salón",
+      "Pelota de Mano, Paleta y Raqueta",
+      "Raquetbol",
+      "Tenis de Mesa",
+      "Bádminton",
+    ],
   },
   {
-    slug: "contacto-y-combate",
-    nombre: "Contacto y combate",
-    disciplinas: ["Boxeo", "Taekwondo", "Lucha", "Judo", "Karate"],
+    slug: "combate-y-artes-marciales",
+    nombre: "Combate y artes marciales",
+    disciplinas: ["Karate Do", "Kung Fu - Wushu", "World Taekwondo"],
   },
   {
-    slug: "acuaticas-y-tiempo",
-    nombre: "Acuáticas y tiempo",
-    disciplinas: ["Natación", "Ciclismo", "Atletismo"],
+    slug: "ruedas-y-resistencia",
+    nombre: "Ruedas y resistencia",
+    disciplinas: [
+      "Automovilismo",
+      "Bicicross",
+      "Ciclismo",
+      "Motociclismo",
+      "Triatlón",
+    ],
   },
   {
-    slug: "fuerza-y-precision",
-    nombre: "Fuerza y precisión",
-    disciplinas: ["Halterofilia", "Gimnasia", "Tenis de mesa", "Bolos", "Ajedrez"],
+    slug: "fuerza-y-acondicionamiento",
+    nombre: "Fuerza y acondicionamiento",
+    disciplinas: ["Fisicoculturismo, Potencia y Fitness"],
+  },
+  {
+    slug: "inclusivo-y-social",
+    nombre: "Inclusivo y social",
+    disciplinas: [
+      "Deporte Integrado",
+      "Deporte para Ciegos",
+      "Deporte de la Administración Pública",
+    ],
   },
 ];
 

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { familias, getAsociacionesPorFamilia } from "@/content/asociaciones";
+import { familias, getAsociaciones, getAsociacionesPorFamilia } from "@/content/asociaciones";
 import Kicker from "@/components/ui/Kicker";
 import Chip from "@/components/ui/Chip";
 import TarjetaAsociacion from "@/components/asociaciones/TarjetaAsociacion";
@@ -31,7 +31,7 @@ export default function Asociaciones() {
             href="/asociaciones"
             className="inline-flex items-center gap-space-xs self-start rounded-full bg-white/5 px-space-md py-space-xs font-display text-label-md text-white transition-all hover:bg-white/10 hover:text-gold-soft md:self-auto"
           >
-            <span>Ver las 18 asociaciones</span>
+            <span>Ver las {getAsociaciones().length} asociaciones</span>
             <ArrowRight aria-hidden className="h-4 w-4" />
           </Link>
         </div>
