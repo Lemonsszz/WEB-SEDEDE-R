@@ -51,7 +51,7 @@ function Fondo({
         alt={noticia.titulo}
         decorativa
         eager={activa}
-        ancho={1600}
+        ancho={1200}
         className={`h-full w-full object-cover ${
           activa ? "zoom-fondo-carrusel" : ""
         }`}
@@ -78,7 +78,7 @@ function TarjetaSecundaria({
         <ImagenNoticia
           src={noticia.imagen_url}
           alt={noticia.titulo}
-          ancho={240}
+          ancho={200}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -131,12 +131,22 @@ export default function Noticias({
   useEffect(() => {
     if (totalCarrusel < 2) return;
 
-    const id = window.setInterval(() => {
-      setSentido("siguiente");
-      setActivo((indice) => (indice + 1) % totalCarrusel);
-    }, INTERVALO_ROTACION);
+    const timeout = window.setTimeout(() => {
+      const id = window.setInterval(() => {
+        setSentido("siguiente");
+        setActivo((indice) => (indice + 1) % totalCarrusel);
+      }, INTERVALO_ROTACION);
+      (window as Window & { __sededeCarruselInterval?: number }).__sededeCarruselInterval = id;
+    }, 200);
 
-    return () => window.clearInterval(id);
+    return () => {
+      window.clearTimeout(timeout);
+      const w = window as Window & { __sededeCarruselInterval?: number };
+      if (w.__sededeCarruselInterval) {
+        window.clearInterval(w.__sededeCarruselInterval);
+        delete w.__sededeCarruselInterval;
+      }
+    };
   }, [totalCarrusel, reinicio]);
 
   function reintentar() {
