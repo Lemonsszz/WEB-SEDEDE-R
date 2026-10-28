@@ -22,6 +22,28 @@ const asociacionesRetiradas = [
   "gimnasia",
 ];
 
+/**
+ * Slugs de deportistas ficticios que se retiraron de la web el 2026-10-28
+ * (ver `content/deportistas.ts`). Se publicaron en el sitemap, así que se
+ * redirigen al listado en vez de devolver 404. `/deportistas/hector-garibay`
+ * no está en esta lista: su ficha es real y sigue activa.
+ */
+const deportistasRetirados = [
+  "maria-lopez",
+  "carlos-mendoza",
+  "diego-fernandez",
+  "jeremy-carlos",
+  "ana-quispe",
+  "luis-choque",
+  "valeria-ramirez",
+  "pedro-condori",
+  "gabriela-mamani",
+  "rodrigo-vargas",
+  "camila-rojas",
+  "sebastian-flores",
+  "axel-colque",
+];
+
 const nextConfig: NextConfig = {
   // Genera `.next/standalone` con el servidor de producción y solo las
   // dependencias necesarias. Se usa para desplegar en un VPS/Docker; en Vercel
@@ -38,11 +60,19 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
-    return asociacionesRetiradas.map((slug) => ({
+    const asociaciones = asociacionesRetiradas.map((slug) => ({
       source: `/asociaciones/${slug}`,
       destination: "/asociaciones",
       permanent: true,
     }));
+
+    const deportistas = deportistasRetirados.map((slug) => ({
+      source: `/deportistas/${slug}`,
+      destination: "/deportistas",
+      permanent: true,
+    }));
+
+    return [...asociaciones, ...deportistas];
   },
 };
 

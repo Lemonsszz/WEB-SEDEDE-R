@@ -101,10 +101,18 @@ export default function Footer() {
         </div>
 
         <div className="mt-space-md flex flex-col items-center justify-between gap-space-xs border-t border-white/10 pt-space-sm md:flex-row">
-          <p className="text-foot-sm text-white/45">
-            © {new Date().getFullYear()} {institucion.nombre} —{" "}
-            {institucion.nombreCompleto}. Todos los derechos reservados.
-          </p>
+          <div className="flex flex-col items-center gap-1 md:items-start">
+            <p className="text-center text-foot-sm text-white/45 md:text-left">
+              © {new Date().getFullYear()} {institucion.nombre} —{" "}
+              {institucion.nombreCompleto}. Todos los derechos reservados.
+            </p>
+            <p className="text-foot-sm text-white/45">
+              Desarrollado por{" "}
+              <span className="font-display font-semibold text-white/70">
+                IT Services
+              </span>
+            </p>
+          </div>
           <nav className="flex flex-wrap items-center gap-space-xs text-foot-sm text-white/45 md:gap-space-sm">
             {/* <Link href="/terminos-de-uso" className="transition-colors hover:text-white">
               Términos de uso
