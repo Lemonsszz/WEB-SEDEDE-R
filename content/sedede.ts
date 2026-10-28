@@ -116,8 +116,8 @@ export const direccion = {
   cargo: "Dirección Departamental de Deportes",
   entidad: "Gobierno Autónomo Departamental de Oruro",
   director: {
-    nombre: "Vladimir Cáceres",
-    cargo: "Director Departamental de Deportes",
+    nombre: "Ing. Vladimir Fernando Cáceres Chinche",
+    cargo: "Director SEDEDE",
     foto: "/img/vladimir2.jpg",
   },
   descripcion:
