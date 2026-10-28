@@ -11,6 +11,11 @@
  */
 export type Promocion = {
   id: string;
+  /**
+   * Gancho corto que aparece arriba del título, en carmesí y mayúsculas.
+   * Si se omite, la franja usa el texto genérico "Promoción".
+   */
+  etiqueta?: string;
   /** Texto de una línea que se ve en la franja. */
   titulo: string;
   /** Flyer cuadrado o apaisado. Debe vivir en `public/`. */
@@ -30,6 +35,7 @@ export type Promocion = {
 export const promociones: Promocion[] = [
   {
     id: "carrera-2026-11-07",
+    etiqueta: "Evento destacado",
     titulo: "Media Maratón Internacional Oruro - 21k",
     imagen: "/img/flyer.jpeg",
     alt: "Afiche de la carrera deportiva organizada en Oruro",

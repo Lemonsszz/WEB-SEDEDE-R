@@ -39,8 +39,12 @@ export default function Promocion() {
           </div>
 
           <div className="min-w-0 flex-1">
-            <p className="font-display text-[10px] font-bold uppercase tracking-[0.18em] text-primary">
-              Promoción
+            <p className="flex items-center gap-1.5 font-display text-[11px] font-extrabold uppercase leading-none tracking-[0.18em] text-primary">
+              <span
+                aria-hidden
+                className="inline-block h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-primary"
+              />
+              {promocion.etiqueta ?? "Promoción"}
             </p>
             <p className="truncate font-display text-body-md font-bold leading-snug text-tinta sm:text-headline-sm">
               {promocion.titulo}
