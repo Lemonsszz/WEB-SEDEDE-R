@@ -194,7 +194,7 @@ export const normativa: Norma[] = [
       "Establece el régimen de asignación de recursos, viajes a torneos nacionales y becas para deportistas de élite.",
     tono: "primario",
     href: "/documentos",
-    archivo: "/documentos/pruebadoc.docx",
+    archivo: "/documentos/ley-deporte.pdf",
   },
   {
     titulo: "Uso y alquiler de escenarios públicos",
