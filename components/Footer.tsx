@@ -22,7 +22,7 @@ export default function Footer() {
             <div className="flex items-center gap-space-sm">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-hueso ring-1 ring-white/20">
                 <Image
-                  src="/img/logo-sedede-2-emblema.png"
+                  src="/img/logo-oficial.png"
                   alt="Escudo del Servicio Departamental de Deportes Oruro"
                   width={40}
                   height={40}

@@ -35,7 +35,7 @@ export default function PortadaAsociacion({
       className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary via-primary to-primary-dark"
     >
       <Image
-        src="/img/logo-sedede-2-emblema.png"
+        src="/img/logo-oficial.png"
         alt=""
         fill
         sizes={sizes}

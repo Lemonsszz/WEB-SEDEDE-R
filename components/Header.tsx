@@ -33,7 +33,7 @@ export default function Header() {
         <Link href="/" className="group flex items-center gap-space-sm focus:outline-none">
           <span className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-hueso ring-1 ring-hueso-5 shadow-[0_4px_12px_rgba(155,11,36,0.12)] transition-transform duration-300 group-hover:scale-105">
             <Image
-              src="/img/logo-sedede-2-emblema.png"
+              src="/img/logo-oficial.png"
               alt="Escudo del Servicio Departamental de Deportes Oruro"
               width={48}
               height={48}
