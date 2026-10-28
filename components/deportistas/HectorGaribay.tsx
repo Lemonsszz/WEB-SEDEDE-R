@@ -271,7 +271,7 @@ export default function HectorGaribay() {
                 </ul>
               </div>
 
-              <div className="grid grid-cols-1 gap-space-sm sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-space-sm">
                 <div className="rounded-2xl bg-white/5 p-space-sm ring-1 ring-white/10">
                   <span className="block font-display text-label-sm font-semibold uppercase text-white/60">
                     Próximo desafío
@@ -281,18 +281,6 @@ export default function HectorGaribay() {
                   </span>
                   <span className="text-body-sm font-semibold text-gold-soft">
                     {hector.proximoDesafio.detalle}
-                  </span>
-                </div>
-
-                <div className="rounded-2xl bg-white/5 p-space-sm ring-1 ring-white/10">
-                  <span className="block font-display text-label-sm font-semibold uppercase text-white/60">
-                    Categoría de beca SEDEDE
-                  </span>
-                  <span className="mt-0.5 block font-display text-headline-sm font-bold text-gold-soft">
-                    {hector.beca.titulo}
-                  </span>
-                  <span className="text-body-sm text-white/60">
-                    {hector.beca.detalle}
                   </span>
                 </div>
               </div>

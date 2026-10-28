@@ -304,17 +304,7 @@ export default function ExpedienteHectorGaribay() {
                 </div>
               </div>
 
-              <div className="rounded-2xl bg-white p-space-md shadow-tarjeta">
-                <span className="block font-display text-label-sm font-semibold uppercase text-tinta-2">
-                  Categoría de beca SEDEDE
-                </span>
-                <span className="mt-0.5 block font-display text-headline-sm font-bold text-gold-deep">
-                  {hector.beca.titulo}
-                </span>
-                <span className="text-body-sm text-tinta-2">
-                  {hector.beca.detalle}
-                </span>
-              </div>
+
 
               <p className="text-body-sm leading-relaxed text-tinta-3">
                 {hector.notaProvisional}
