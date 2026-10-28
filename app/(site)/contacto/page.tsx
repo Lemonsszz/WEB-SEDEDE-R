@@ -103,6 +103,39 @@ export default function ContactoPage() {
             <RedesSociales className="shrink-0" />
           </div>
 
+          <article className="flex flex-col gap-space-md overflow-hidden rounded-2xl bg-white shadow-tarjeta">
+            <div className="flex flex-col gap-space-xs p-space-md pb-0">
+              <div className="flex items-center gap-space-xs">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <MapPin aria-hidden className="h-5 w-5" />
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="font-display text-headline-sm font-bold text-tinta">
+                    Ubicación
+                  </h3>
+                  <p className="text-body-sm text-tinta-2">
+                    {sede.direccion}, {sede.ciudad}
+                  </p>
+                </div>
+              </div>
+              <p className="text-body-sm text-tinta-3">
+                Coordenadas: -17.943964, -67.112306
+              </p>
+            </div>
+            <div className="relative h-[280px] w-full sm:h-[380px] lg:h-[450px]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1300.3768471819956!2d-67.11238473522911!3d-17.94392920586413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sbo!4v1793151274084!5m2!1ses-419!2sbo"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                title="Ubicación de las oficinas del SEDEDE Oruro"
+              />
+            </div>
+          </article>
+
           <div className="flex flex-col items-start justify-between gap-space-md rounded-3xl bg-primary p-space-lg text-white lg:flex-row lg:items-center">
             <div className="flex max-w-xl flex-col gap-2">
               <Kicker tono="dorado">Registro único del deportista</Kicker>
