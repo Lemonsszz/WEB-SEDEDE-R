@@ -118,7 +118,7 @@ export const direccion = {
   director: {
     nombre: "Vladimir Cáceres",
     cargo: "Director Departamental de Deportes",
-    foto: "/img/vladimir.jpg",
+    foto: "/img/vladimir2.jpg",
   },
   descripcion:
     "Entidad rectora del desarrollo deportivo departamental, custodia de la infraestructura atlética histórica y promotora del talento competitivo de Oruro hacia los escenarios nacionales e internacionales.",
@@ -183,6 +183,7 @@ export type Norma = {
   descripcion: string;
   tono: "primario" | "neutro" | "dorado";
   href: string;
+  archivo?: string;
 };
 
 export const normativa: Norma[] = [
@@ -193,6 +194,7 @@ export const normativa: Norma[] = [
       "Establece el régimen de asignación de recursos, viajes a torneos nacionales y becas para deportistas de élite.",
     tono: "primario",
     href: "/documentos",
+    archivo: "/documentos/pruebadoc.docx",
   },
   {
     titulo: "Uso y alquiler de escenarios públicos",

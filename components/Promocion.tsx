@@ -32,7 +32,8 @@ export default function Promocion() {
               src={promocion.imagen}
               alt={promocion.alt}
               fill
-              sizes="80px"
+              sizes="(max-width: 640px) 64px, 80px"
+              quality={60}
               className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             />
           </div>

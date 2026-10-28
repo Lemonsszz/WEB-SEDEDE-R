@@ -1,4 +1,4 @@
-import { FileText, Info } from "lucide-react";
+import { Download, FileText, Info } from "lucide-react";
 import { normativa, type Norma } from "@/content/sedede";
 import Banner from "@/components/ui/Banner";
 import Kicker from "@/components/ui/Kicker";
@@ -36,8 +36,8 @@ export default function DocumentosPage() {
               Documentos oficiales
             </h2>
             <p className="max-w-2xl text-body-md text-tinta-2">
-              Próximamente encontrarás aquí resoluciones, reglamentos, convocatorias y
-              otros documentos institucionales.
+              Consulta y descarga documentación oficial de SEDEDE, incluyendo
+              resoluciones, reglamentos, convocatorias y otros documentos institucionales.
             </p>
           </div>
 
@@ -62,9 +62,20 @@ export default function DocumentosPage() {
                   <p className="text-body-sm text-tinta-2">{norma.descripcion}</p>
                 </div>
 
-                <p className="rounded-full bg-hueso-2 px-space-sm py-1 text-center font-display text-label-sm font-semibold uppercase text-tinta-3">
-              Próximamente
-                </p>
+                {norma.archivo ? (
+                  <a
+                    href={norma.archivo}
+                    download
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-space-md py-space-xs font-display text-label-sm font-semibold text-white transition-colors hover:bg-primary-dark"
+                  >
+                    <Download aria-hidden className="h-4 w-4" />
+                    Descargar documento
+                  </a>
+                ) : (
+                  <p className="rounded-full bg-hueso-2 px-space-sm py-1 text-center font-display text-label-sm font-semibold uppercase text-tinta-3">
+                    Próximamente
+                  </p>
+                )}
               </article>
             ))}
           </div>

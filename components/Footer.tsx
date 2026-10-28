@@ -106,10 +106,10 @@ export default function Footer() {
             {institucion.nombreCompleto}. Todos los derechos reservados.
           </p>
           <nav className="flex flex-wrap items-center gap-space-xs text-foot-sm text-white/45 md:gap-space-sm">
-            <Link href="/terminos-de-uso" className="transition-colors hover:text-white">
+            {/* <Link href="/terminos-de-uso" className="transition-colors hover:text-white">
               Términos de uso
-            </Link>
-            <span className="hidden text-white/25 md:inline">|</span>
+            </Link> */}
+            <span className="hidden text-white/25 md:inline"></span>
             {/* <Link href="/transparencia-institucional" className="transition-colors hover:text-white">
               Transparencia institucional
             </Link>

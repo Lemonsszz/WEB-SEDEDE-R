@@ -16,9 +16,9 @@ export type RedSocial = {
 
 /** Número de WhatsApp en formato local (Bolivia: 591 + 8 dígitos). */
 export const whatsapp = {
-  numero: "68337573",
+  numero: "70413403",
   /** Solo dígitos, con código de país, para el enlace `wa.me`. */
-  url: "https://wa.me/59168337573",
+  url: "https://wa.me/59170413403",
 } as const;
 
 export const redes: RedSocial[] = [

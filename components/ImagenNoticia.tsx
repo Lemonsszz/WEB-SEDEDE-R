@@ -34,7 +34,7 @@ export function urlImagenOptimizada(url: string, ancho: number): string {
     ) {
       destino.pathname = destino.pathname.replace(
         "/image/upload/",
-        `/image/upload/f_auto,q_auto,c_limit,w_${Math.round(ancho)}/`
+        `/image/upload/f_auto,q_auto:good,c_limit,w_${Math.round(ancho)},dpr_auto/`
       );
       return destino.toString();
     }
@@ -43,7 +43,7 @@ export function urlImagenOptimizada(url: string, ancho: number): string {
       destino.searchParams.set("auto", "format");
       destino.searchParams.set("fit", "crop");
       destino.searchParams.set("w", String(Math.round(ancho)));
-      destino.searchParams.set("q", "75");
+      destino.searchParams.set("q", "70");
       return destino.toString();
     }
   } catch {

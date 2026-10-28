@@ -49,13 +49,24 @@ export default function Normativa() {
               </div>
 
               <div className="pt-space-md">
-                <Link
-                  href={norma.href}
-                  className="inline-flex items-center gap-1.5 font-display text-label-sm font-bold text-primary transition-colors hover:text-primary-dark"
-                >
-                  <span>Ver en el centro de documentos</span>
-                  <Download aria-hidden className="h-4 w-4" />
-                </Link>
+                {norma.archivo ? (
+                  <a
+                    href={norma.archivo}
+                    download
+                    className="inline-flex items-center gap-1.5 font-display text-label-sm font-bold text-primary transition-colors hover:text-primary-dark"
+                  >
+                    <span>Descargar documento</span>
+                    <Download aria-hidden className="h-4 w-4" />
+                  </a>
+                ) : (
+                  <Link
+                    href={norma.href}
+                    className="inline-flex items-center gap-1.5 font-display text-label-sm font-bold text-primary transition-colors hover:text-primary-dark"
+                  >
+                    <span>Ver en el centro de documentos</span>
+                    <Download aria-hidden className="h-4 w-4" />
+                  </Link>
+                )}
               </div>
             </article>
           ))}
