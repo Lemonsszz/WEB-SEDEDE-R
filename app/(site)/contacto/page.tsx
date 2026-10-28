@@ -38,20 +38,7 @@ export default function ContactoPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-gutter md:grid-cols-2 lg:grid-cols-4">
-            <article className="flex flex-col gap-space-sm rounded-2xl bg-white p-space-md shadow-tarjeta">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                <MapPin aria-hidden className="h-5 w-5" />
-              </div>
-              <h3 className="font-display text-headline-sm font-bold text-tinta">
-                Dirección
-              </h3>
-              <p className="text-body-sm leading-relaxed text-tinta-2">
-                {sede.direccion}
-                <br />
-                {sede.ciudad}
-              </p>
-            </article>
+          <div className="grid grid-cols-1 gap-gutter md:grid-cols-2 lg:grid-cols-3">
 
             <article className="flex flex-col gap-space-sm rounded-2xl bg-white p-space-md shadow-tarjeta">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
