@@ -1,5 +1,6 @@
 import HeroInstitucional from "@/components/sedede/HeroInstitucional";
 import AudioInstitucional from "@/components/sedede/AudioInstitucional";
+import VideoInstitucional from "@/components/sedede/VideoInstitucional";
 import Pilares from "@/components/sedede/Pilares";
 import Organigrama from "@/components/sedede/Organigrama";
 import Complejos from "@/components/sedede/Complejos";
@@ -23,6 +24,11 @@ export default function SededePage() {
           import cuando la institución pida retirarlo. */}
       <div data-reveal="">
         <AudioInstitucional />
+      </div>
+
+      {/* Video institucional definitivo: se carga solo cuando se abre el modal. */}
+      <div data-reveal="">
+        <VideoInstitucional />
       </div>
 
       <div data-reveal="">
