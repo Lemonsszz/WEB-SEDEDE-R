@@ -1,4 +1,5 @@
 import HeroInstitucional from "@/components/sedede/HeroInstitucional";
+import AudioInstitucional from "@/components/sedede/AudioInstitucional";
 import Pilares from "@/components/sedede/Pilares";
 import Organigrama from "@/components/sedede/Organigrama";
 import Complejos from "@/components/sedede/Complejos";
@@ -17,6 +18,12 @@ export default function SededePage() {
   return (
     <div className="min-h-screen bg-surface">
       <HeroInstitucional />
+
+      {/* TEMPORAL (2026-11-20): audio institucional. Quitar este bloque y su
+          import cuando la institución pida retirarlo. */}
+      <div data-reveal="">
+        <AudioInstitucional />
+      </div>
 
       <div data-reveal="">
         <Pilares />
